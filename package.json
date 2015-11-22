@@ -1,0 +1,23 @@
+{
+  "name": "blogofolio-pkg",
+  "version": "1.0.0",
+  "description": "A personal portfolio blog.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeFuex/Blogolio.git"
+  },
+  "keywords": [
+    "personal",
+    "blog"
+  ],
+  "author": "Timo Obereder <timo.obereder@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DeFuex/Blogolio/issues"
+  },
+  "homepage": "https://github.com/DeFuex/Blogolio#readme"
+}
