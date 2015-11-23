@@ -53,6 +53,29 @@ $(function() {
         }
     });
 
+    var loginView = new LoginView();
+	loginView.render();
+	$('.main-container').html(loginView.el);
+
+	var Blog = Parse.Object.extend('Blog', {
+	    create: function(title, content) {
+	        this.save({
+	            'title': title,
+	            'content': content,
+	            'author': Parse.User.current()
+	        }, {
+	            success: function(blog) {
+	                alert('You added a new blog: ' + blog.get('title'));
+	            },
+	            error: function(blog, error) {
+	                console.log(blog);
+	                console.log(error);
+	            }
+	        });
+	    }
+	 
+	});
+
     var AddBlogView = Parse.View.extend({
     	template: Handlebars.compile($('#add-tpl').html()),
     	events: {
@@ -74,22 +97,4 @@ $(function() {
     	}
     });
 
-	var Blog = Parse.Object.extend('Blog', {
-	    create: function(title, content) {
-	        this.save({
-	            'title': title,
-	            'content': content,
-	            'author': Parse.User.current()
-	        }, {
-	            success: function(blog) {
-	                alert('You added a new blog: ' + blog.get('title'));
-	            },
-	            error: function(blog, error) {
-	                console.log(blog);
-	                console.log(error);
-	            }
-	        });
-	    }
-	 
-	});
 });
