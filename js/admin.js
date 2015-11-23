@@ -44,24 +44,22 @@ $(function() {
         	'click .add-blog': 'add'
         },
         add: function(){
-        	var addBlogView = new AddBlogView();
-		    addBlogView.render();
-		    $('.main-container').html(addBlogView.el);
+			blogRouter.navigate('add', { trigger: true });
         },
         render: function(){
             var attributes = this.model.toJSON();
             this.$el.html(this.template(attributes));
-			var blogs = new Blogs();
-			blogs.fetch({
-				success: function(blogs) {
-					var blogsAdminView = new BlogsAdminView({collection: blogs });
-					blogsAdminView.render();
-					$('.main-container').append(blogsAdminView.el);
-				},
-				error: function(blogs, error){
-					console.log(error);
-				}
-			});
+			// var blogs = new Blogs();
+			// blogs.fetch({
+				// success: function(blogs) {
+					// var blogsAdminView = new BlogsAdminView({collection: blogs });
+					// blogsAdminView.render();
+					// $('.main-container').append(blogsAdminView.el);
+				// },
+				// error: function(blogs, error){
+					// console.log(error);
+				// }
+			// });
         }
     });
 
@@ -82,9 +80,25 @@ $(function() {
 	                console.log(blog);
 	                console.log(error);
 	            }
-	        });
-	    }
-	 
+	        }); 
+			// 'url': title.toLowerCase()
+            // .replace(/[^\w ]+/g,'')
+            // .replace(/ +/g,'-')
+	    },
+		update: function(title, content) {
+			this.set({
+				'title': title,
+				'content': content
+			}).save(null, {
+				success: function(blog) {
+					alert('Your changes on blog ' + blog.get('title') + ' have been saved!');
+				},
+				error: function(blog, error) {
+					console.log(blog);
+					console.log(error);
+				}
+			});
+		}
 	});
 
     var AddBlogView = Parse.View.extend({
@@ -93,7 +107,7 @@ $(function() {
     		'submit .form-add': 'submit'
     	},
     	submit: function(e){
-    		//submit functionality goes here.
+    		// Submit functionality goes here.
     		// Prevent Default Submit Event     
 		    e.preventDefault();
 		    // Take the form and put it into a data object
@@ -108,11 +122,35 @@ $(function() {
     	}
     });
 	
+	var EditBlogView = Parse.View.extend({
+		template: Handlebars.compile($('#edit-tpl').html()),
+		events: {
+			'submit .form-edit': 'submit'
+		},
+		submit: function(e){
+			e.preventDefault();
+			var data = $(e.target).serializeArray();
+			this.model.update(data[0].value, $('textarea').val());
+		},
+		render: function(){
+			var attributes = this.model.toJSON();
+			this.$el.html(this.template(attributes));
+		}
+	})
+	
 	var Blogs = Parse.Collection.extend({
 		model: Blog
 	}),
 	BlogsAdminView = Parse.View.extend({
 		template: Handlebars.compile($('#blogs-admin-tpl').html()),
+		events: {
+			'click .app-edit': 'edit'
+		},
+		edit: function(e){
+			e.preventDefault();
+			var href = $(e.target).attr('href');
+			blogRouter.navigate(href, { trigger: true });
+		},
 		render: function() {
 			var collection = { blog: this.collection.toJSON() };
 			this.$el.html(this.template(collection));
@@ -120,33 +158,31 @@ $(function() {
 	});
 	
 	var BlogRouter = Parse.Router.extend({  
-        // Here you can define some shared variables
+        // Shared variables can be defined here.
         initialize: function(options){
             this.blogs = new Blogs();
         },
-        // This runs when we start the router. Just leave it for now.
+        // Router start point.
         start: function(){
             Parse.history.start({pushState: true});
 			this.navigate('admin', { trigger: true});
 		},			
-        // This is where you map functions to urls.
-        // Just add '{{URL pattern}}': '{{function name}}'
+        // Map functions to urls.
+        // '{{URL pattern}}': '{{function name}}'
         routes: {
             'admin': 'admin',
             'login': 'login',
             'add': 'add',
-            'edit/:url': 'edit'
+            'edit/:id': 'edit'
         },
         admin: function() {
-			// This is how you can current user in Parse
+			// Call current user from Parse.
 			var currentUser = Parse.User.current();
 		 
 			if ( !currentUser ) {
-				// This is how you can do url redirect in JS
+				// URL redirect.
 				blogRouter.navigate('login', { trigger: true });
-		 
 			} else {
-		 
 				var welcomeView = new WelcomeView({ model: currentUser });
 				welcomeView.render();
 				$('.main-container').html(welcomeView.el);
@@ -170,8 +206,28 @@ $(function() {
 			loginView.render();
 			$('.main-container').html(loginView.el);
 		},
-        add: function() {},
-        edit: function(url) {}      
+        add: function() {
+			var addBlogView = new AddBlogView();
+			addBlogView.render();
+			$('.main-container').html(addBlogView.el);
+		},
+        edit: function(id) {
+			// Define a new query and tell it which table should it go for
+			var query = new Parse.Query(Blog);
+			// Pass the id as the first parameter in .get() function to look up an object.
+			query.get(id, {
+				success: function(blog) {
+					// If the blog was retrieved successfully.
+					var editBlogView = new EditBlogView({ model: blog });
+					editBlogView.render();
+					$('.main-container').html(editBlogView.el);
+				},
+				error: function(blog, error) {
+					// If the blog was not retrieved successfully.
+					console.log(error);
+				}
+			});
+		}      
     }),
     blogRouter = new BlogRouter();
  
