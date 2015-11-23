@@ -62,8 +62,10 @@ $(function() {
 	        this.save({
 	            'title': title,
 	            'content': content,
-	            'author': Parse.User.current()
-	        }, {
+	            'author': Parse.User.current(),
+	            'authorName': Parse.User.current().get('username'),
+	            'time': new Date().toDateString()
+	        },{
 	            success: function(blog) {
 	                alert('You added a new blog: ' + blog.get('title'));
 	            },
