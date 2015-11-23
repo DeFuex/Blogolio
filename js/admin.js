@@ -91,7 +91,7 @@ $(function() {
 		        blog = new Blog();
 		    // Call .create()
 		    blog.create(data[0].value, data[1].value);
-    	}
+    	},
     	render: function(){
     		this.$el.html(this.template());
     	}
