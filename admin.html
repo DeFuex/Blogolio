@@ -23,7 +23,7 @@
         <nav class="blog-nav">
           <a class="blog-nav-item active" href="index.html">Home</a>
           <a class="blog-nav-item" href="#">Projects</a>
-          <a class="blog-nav-item active" href="admin.html">Admin</a>
+          <a class="blog-nav-item active" href="admin.html" style="float: right">Admin</a>
         </nav>
       </div>
     </div>
@@ -103,8 +103,25 @@
         </form>
     </script>
      
-    <script id="welcome-tpl" type="text/x-handlebars-template">
-        <h2>Welcome, {{username}}!</h2>
+    <script type="text/template" id="welcome-tpl" type="text/x-handlebars-template">
+        <h2>Welcome, <%=username%>!</h2>
+        <button class="add-blog btn btn-lg btn-primary">Add a New Blog</button>
+    </script>
+
+    <script type="text/template" id="add-tpl">
+      <h2>Adding a New Blog</h2>
+     
+      <form class="form-add" role="form">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" name="title" class="form-control" id="title" placeholder="Enter Your Blog Title">
+        </div>
+        <div class="form-group">
+          <label for="content">Content</label>
+          <textarea name="content" class="form-control" rows="20"></textarea>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      </form>
     </script>
 
     <!-- Bootstrap core JavaScript

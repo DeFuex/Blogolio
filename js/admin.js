@@ -23,7 +23,9 @@ $(function() {
 		    Parse.User.logIn(username, password, {
 		        // If the username and password matches
 		        success: function(user) {
-		            alert('Welcome!');
+		        	var welcomeView = new WelcomeView({model: user});
+		        	welcomeView.render();
+		        	$('.main-container').html(welcomeView.el);
 		        },
 		        // If there is an error
 		        error: function(user, error) {
@@ -37,14 +39,57 @@ $(function() {
     }),
     WelcomeView = Parse.View.extend({
         template: Handlebars.compile($('#welcome-tpl').html()),
+        events: {
+        	'click .add-blog': 'add'
+        },
+        add: function(){
+        	var addBlogView = new AddBlogView();
+		    addBlogView.render();
+		    $('.main-container').html(addBlogView.el);
+        },
         render: function(){
             var attributes = this.model.toJSON();
             this.$el.html(this.template(attributes));
         }
     });
 
-    var loginView = new LoginView();
-	loginView.render();
-	$('.main-container').html(loginView.el);
+    var AddBlogView = Parse.View.extend({
+    	template: Handlebars.compile($('#add-tpl').html()),
+    	events: {
+    		'submit .form-add': 'submit'
+    	},
+    	submit: function(e){
+    		//submit functionality goes here.
+    		// Prevent Default Submit Event     
+		    e.preventDefault();
+		    // Take the form and put it into a data object
+		    var data = $(e.target).serializeArray(),
+		    // Create a new instance of Blog
+		        blog = new Blog();
+		    // Call .create()
+		    blog.create(data[0].value, data[1].value);
+    	}
+    	render: function(){
+    		this.$el.html(this.template());
+    	}
+    });
 
+	var Blog = Parse.Object.extend('Blog', {
+	    create: function(title, content) {
+	        this.save({
+	            'title': title,
+	            'content': content,
+	            'author': Parse.User.current()
+	        }, {
+	            success: function(blog) {
+	                alert('You added a new blog: ' + blog.get('title'));
+	            },
+	            error: function(blog, error) {
+	                console.log(blog);
+	                console.log(error);
+	            }
+	        });
+	    }
+	 
+	});
 });
