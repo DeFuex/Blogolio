@@ -126,7 +126,8 @@ $(function() {
         },
         // This runs when we start the router. Just leave it for now.
         start: function(){
-            Parse.history.start({pushState: true});     
+            Parse.history.start({pushState: true});
+			this.navigate('admin', { trigger: true});
 		},			
         // This is where you map functions to urls.
         // Just add '{{URL pattern}}': '{{function name}}'
