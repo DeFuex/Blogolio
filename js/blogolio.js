@@ -20,13 +20,13 @@ $(function() {
 					this.setACL(blogACL);
 				}
 
-				var category = new Category();
-				category.id = data.category;
+				// var category = new Category();
+				// category.id = data.category;
 
 				this.set({
 					'title': data.title,
-					'category': category,
-					'summary': data.summary,
+					// 'category': category,
+					// 'summary': data.summary,
 					'content': data.content,
 					// Set author to the existing blog author if editing, use current user if creating
 					// The same logic goes into the following three fields
