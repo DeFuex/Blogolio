@@ -23,7 +23,7 @@
         <nav class="blog-nav">
           <a class="blog-nav-item active" href="index.html">Home</a>
           <a class="blog-nav-item" href="#">Projects</a>
-          <a class="blog-nav-item" href="admin.html">Admin</a>
+          <a class="blog-nav-item active" href="admin.html">Admin</a>
         </nav>
       </div>
     </div>
@@ -38,7 +38,7 @@
       <div class="row">
 
         <div class="col-sm-8 blog-main">
-            <div class="main-container"></div>
+          <div class="main-container"></div>
         </div><!-- /.blog-main -->
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
@@ -94,6 +94,19 @@
         {{/each}}
     </script>
 
+    <script id="login-tpl" type="text/x-handlebars-template">
+        <form class="form-signin" role="form">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <input type="text" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+            <input type="password" name="password" class="form-control" placeholder="Password" required="">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+    </script>
+     
+    <script id="welcome-tpl" type="text/x-handlebars-template">
+        <h2>Welcome, {{username}}!</h2>
+    </script>
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
 	  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -106,7 +119,7 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-  	<script src="js/blogolio-bundled.js"></script>
+  	<script src="js/admin.js"></script>
 
 	
   </body>
