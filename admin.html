@@ -124,6 +124,33 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
       </form>
     </script>
+	
+	<script id="blogs-admin-tpl" type="text/x-handlebars-template">
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each blog}}
+            <tr>
+                <td><a class="app-link" href="#">{{title}}</a></td>
+                <td>{{authorName}}</td>
+                <td>{{time}}</td>
+                <td>
+                    <a class="app-link" href="#">Edit</a> | 
+                    <a class="app-link" href="#">Delete</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</script><b>
+</b>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

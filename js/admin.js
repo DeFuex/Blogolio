@@ -50,6 +50,17 @@ $(function() {
         render: function(){
             var attributes = this.model.toJSON();
             this.$el.html(this.template(attributes));
+			var blogs = new Blogs();
+			blogs.fetch({
+				success: function(blogs) {
+					var blogsAdminView = new BlogsAdminView({collection: blogs });
+					blogsAdminView.render();
+					$('.main-container').append(blogsAdminView.el);
+				},
+				error: function(blogs, error){
+					console.log(error);
+				}
+			});
         }
     });
 
@@ -98,5 +109,16 @@ $(function() {
     		this.$el.html(this.template()).find('textarea').wysihtml5();
     	}
     });
+	
+	var Blogs = Parse.Collection.extend({
+		model: Blog
+	}),
+	BlogsAdminView = Parse.View.extend({
+		template: Handlebars.compile($('#blogs-admin-tpl').html()),
+		render: function() {
+			var collection = { blog: this.collection.toJSON() };
+			this.$el.html(this.template(collection));
+		}
+	});
 
 });
