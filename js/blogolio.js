@@ -236,7 +236,8 @@ $(function() {
 				if (!Parse.User.current()) {
 					this.navigate('#/login', { trigger: true });
 				} else {
-					var query = new Parse.Query(Blog);
+					var self = this,
+					query = new Parse.Query(Blog);
 					query.get(id).then(function(blog){
 						blog.destroy().then(function(blog){
 							alert('Deleted');
