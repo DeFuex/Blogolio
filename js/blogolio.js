@@ -156,7 +156,7 @@ $(function() {
 				'login': 'login',
 				'logout': 'logout',
 				'add': 'add',
-				'edit/:id': 'edit'
+				'edit/:id': 'edit',
 				'del/:id': 'del'
 			},
 			index: function() {
