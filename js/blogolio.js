@@ -154,7 +154,7 @@ $(function() {
 				'': 'index',
 				'admin': 'admin',
 				'login': 'login',
-				'logout': 'logout'
+				'logout': 'logout',
 				'add': 'add',
 				'edit/:id': 'edit'
 				'del/:id': 'del'
