@@ -240,7 +240,6 @@ $(function() {
 					query = new Parse.Query(Blog);
 					query.get(id).then(function(blog){
 						blog.destroy().then(function(blog){
-							alert('Deleted');
 							self.navigate('admin', { trigger: true });
 						})
 					});
