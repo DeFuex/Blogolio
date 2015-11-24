@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+          version="2.2">
+
+    <!-- reordering the age groups if ordering message defined -->
+    <spring:message code="search-results.images.filter.agegroup.ordering" var="orderingString" text=""/>
+    <c:if test="${not empty orderingString}">
+        <c:set var="orderingItems" value="${fn:split(orderingString, ',')}" />
+        <c:forEach var="orderingItem" items="${orderingItems}" >
+            <c:set var="orderingItem" value="${fn:trim(orderingItem)}" />
+            <c:if test="${imageFacets.ageGroup.entryList.remove(orderingItem) and imageFacets.ageGroup.entryList.add(orderingItem)}" />
+        </c:forEach>
+    </c:if>
+
+    <div class="mobileDropdowns visible-xs">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapseOne">
+                    <h4 class="panel-title">
+                        <i class="fa arrow fa-rotate-270"><jsp:text/></i><spring:message code="mobile-dropdowns.show.all" />
+                    </h4>
+                </a>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <!-- dropdown containers -->
+                    <form autocomplete="off">
+                        <div class="dropdownContainer all-image-types col-xs-12">
+                            <label for="allImageTypes"><spring:message code="mobile-dropdowns.image-type-filter.label"/></label>
+                            <select id="allImageTypes" class="form-control" data-filtername="facet_image_type">
+                                <option value=""><spring:message code="mobile-dropdowns.image-type-filter.all" /></option>
+                                <c:forEach var="imageType" items="${imageFacets.imageType.entryList}">
+                                    <c:choose>
+                                        <c:when test="${filter.facet_image_type.contains(imageType)}">
+                                            <option value="${imageType}" selected="selected"><spring:message code="search-results.images.filter.image-type.${imageType}" /></option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${imageType}"><spring:message code="search-results.images.filter.image-type.${imageType}" /></option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="dropdownContainer all-modalities col-xs-12">
+                            <label for="allModalities"><spring:message code="mobile-dropdowns.modality-filter.label"/></label>
+                            <select id="allModalities" class="form-control" data-filtername="facet_modality">
+                                <option value=""><spring:message code="mobile-dropdowns.modality-filter.all" /></option>
+                                <c:forEach var="modality" items="${imageFacets.modalities.entryList}">
+                                    <c:choose>
+                                        <c:when test="${filter.facet_modality.contains(modality)}">
+                                            <option value="${modality}" selected="selected"><c:out value="${modality}" /></option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${modality}"><c:out value="${modality}" /></option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="dropdownContainer all-genders col-xs-12">
+                            <label for="allGenders"><spring:message code="mobile-dropdowns.gender-filter.label"/></label>
+                            <select id="allGenders" class="form-control" data-filtername="facet_image_gender">
+                                <option value=""><spring:message code="mobile-dropdowns.gender-filter.all" /></option>
+                                <c:forEach var="gender" items="${imageFacets.gender.entryList}">
+                                    <c:choose>
+                                        <c:when test="${filter.facet_image_gender.contains(gender)}">
+                                            <option value="${gender}" selected="selected"><spring:message code="search-results.images.filter.gender.${gender}" /></option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${gender}"><spring:message code="search-results.images.filter.gender.${gender}" /></option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="dropdownContainer all-agegroups col-xs-12">
+                            <label for="allAgeGroups"><spring:message code="mobile-dropdowns.agegroup-filter.label"/></label>
+                            <select id="allAgeGroups" class="form-control" data-filtername="facet_image_agegroup">
+                                <option value=""><spring:message code="mobile-dropdowns.agegroup-filter.all" /></option>
+                                <c:forEach var="ageGroup" items="${imageFacets.ageGroup.entryList}">
+                                    <c:choose>
+                                        <c:when test="${filter.facet_image_agegroup.contains(ageGroup)}">
+                                            <option value="${ageGroup}" selected="selected"><spring:message code="search-results.images.filter.agegroup.${ageGroup}" /></option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${ageGroup}"><spring:message code="search-results.images.filter.agegroup.${ageGroup}" /></option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <spring:url value="/webresources/js/dropdown-filters-mobile.js?v=${applicationVersion}" var="url_dropdown_filters_mobile_js"/>
+    <script language="javascript" type="text/javascript" src="${url_dropdown_filters_mobile_js}">
+        <!--<![CDATA[]]>-->
+    </script>
+
+</jsp:root>

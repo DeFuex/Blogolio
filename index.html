@@ -122,6 +122,7 @@
 	<script id="admin-tpl" type="text/x-handlebars-template">
 		<h2>Welcome, {{username}}!</h2>
 		<a href="#/add" class="add-blog btn btn-lg btn-primary">Add a New Blog</a>
+    <a href="#/logout" class="add-blog btn btn-lg">Logout</a>
 		<table>
 			<thead>
 				<tr>
@@ -139,7 +140,7 @@
 					<td>{{time}}</td>
 					<td>
 						<a class="app-link app-edit" href="#/edit/{{objectId}}">Edit</a> | 
-						<a class="app-link" href="#">Delete</a>
+						<a class="app-link" href="#/del/{{objectId}}">Delete</a>
 					</td>
 				</tr>
 				{{/each}}

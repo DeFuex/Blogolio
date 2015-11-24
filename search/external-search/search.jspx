@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:ref="http://ebcont.com/gtv/referenz/webapp/tags"
+          version="2.2" >
+
+    <spring:url value="/external/search" var="url_external_search"/>
+
+    <!-- CONTENT WRAPPER BEGIN-->
+    <div class="wrapper">
+
+        <c:set var="matrixPathRoot" value="${url_external_search}" scope="request"/>
+        <spring:message code="external.search.info.link" var="infoLink" />
+        <spring:url value="${infoLink}" var="infoUrl" scope="request" />
+        <jsp:include page="/WEB-INF/view/body/filter-row.jspx"/>
+        <jsp:include page="/WEB-INF/view/body/newsletter.jspx" />
+
+        <!-- Content BEGIN -->
+        <div id="content-container" class="container" role="main">
+            <div class="row">
+
+                <aside>
+                    <div id="sidebar" class="col-sm-3 col-md-3 sidebar-offcanvas leftContent" role="navigation">
+                        <jsp:include page="/WEB-INF/view/layout/navbar.jspx"/>
+                        <jsp:include page="/WEB-INF/view/body/facetmenu/facetmenu.jspx" >
+                            <jsp:param name="rootUrl" value="${url_external_search}" />
+                        </jsp:include>
+                    </div>
+                </aside>
+
+                <!-- mainContent BEGIN -->
+                <div class="col-md-6 col-sm-12 col-xs-12 mainContent externalSearch">
+                    <div class="navigationBox hidden-xs">
+                        <ul class="nav nav-tabs">
+                            <li class="visible-sm">
+                                <jsp:include page="/WEB-INF/view/body/left-content-toggle.jspx"/>
+                            </li>
+                            <li>
+                                <c:if test="${selectedCategory != null}">
+                                    <c:set var="allTypesClass" value="filtered" />
+                                </c:if>
+                                <a class="btn-select ${allTypesClass}" data-toggle="megadropdown" data-target=".overlay.all-types">
+                                    <div>
+                                        <c:choose>
+                                            <c:when test="${selectedCategory != null}">
+                                                <spring:message code="external.search.filter.category.${selectedCategory.title}" />
+                                            </c:when>
+                                            <c:otherwise>
+                                                <spring:message code="external.search.filter.category" />
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <c:out value="&#160;" />
+                                    </div>
+                                    <i class="fa fa-caret-down ">
+                                        <jsp:text/>
+                                    </i>
+                                </a>
+                            </li>
+                            <c:if test="${not empty sites}">
+                                <li>
+                                    <c:if test="${selectedSite != null}">
+                                        <c:set var="allSourcesClass" value="filtered" />
+                                    </c:if>
+                                    <a class="btn-select ${allSourcesClass}" data-toggle="megadropdown" data-target=".overlay.all-sources">
+                                        <div>
+                                            <c:choose>
+                                                <c:when test="${selectedSite != null}">
+                                                    <c:out value="${selectedSite.title}" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <spring:message code="external.search.filter.sources.all" />
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <c:out value="&#160;" />
+                                        </div>
+                                        <i class="fa fa-caret-down ">
+                                            <jsp:text/>
+                                        </i>
+                                    </a>
+                                </li>
+                            </c:if>
+                            <c:choose>
+                                <c:when test="${filter['ext_sort'][0] == 'date'}">
+                                    <c:set var="dateClass" value="active" />
+                                </c:when>
+                                <c:otherwise>
+                                    <c:set var="relevanceClass" value="active" />
+                                </c:otherwise>
+                            </c:choose>
+
+                            <ref:filterParam var="filterParam" filterValues="${filter}" excludeFilterTypes="ext_sort" />
+                            <li class="pull-right">
+                                <a class="${relevanceClass}" href="${url_external_search}${filterParam};ext_sort=relevance">
+                                    <spring:message code="external.search.sort.relevance" />
+                                </a>
+                            </li>
+                            <li class="pull-right">
+                                <a class="${dateClass}" href="${url_external_search}${filterParam};ext_sort=date">
+                                    <spring:message code="external.search.sort.date" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- begin overlay all-types -->
+                    <div class="overlay all-types no-footer no-heading">
+                        <div class="overlay-content">
+                            <ul class="checkboxList twocolumn list-unstyled filtered">
+                                <c:forEach var="category" items="${categories}">
+                                    <c:set var="selectedClass" value=""/>
+                                    <c:if test="${category.id == selectedCategory.id}">
+                                        <c:set var="selectedClass" value="active"/>
+                                    </c:if>
+                                    <li class="checkbox">
+                                        <ref:filterParam var="filterParam" filterValues="${filter}" excludeFilterTypes="ext_category_id,ext_site_id" />
+                                        <a class="${selectedClass}" href="${url_external_search}${filterParam};ext_category_id=${category.id}">
+                                            <c:out value="${category.title}" />
+                                        </a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end overlay all-types -->
+
+                    <!-- begin overlay all-sources -->
+                    <div class="overlay all-sources no-footer no-heading">
+                        <div class="overlay-content">
+                            <ul class="checkboxList twocolumn list-unstyled">
+                                <c:if test="${selectedSite == null}">
+                                    <c:set var="selectedClass" value="active"/>
+                                </c:if>
+                                <li class="checkbox">
+                                    <a class="${selectedClass}" href="${url_external_search}${filterParam};">
+                                        <spring:message code="external.search.filter.sources.all" />
+                                    </a>
+                                </li>
+                                <c:forEach var="site" items="${sites}">
+                                    <c:set var="selectedClass" value=""/>
+                                    <c:if test="${site.id == selectedSite.id}">
+                                        <c:set var="selectedClass" value="active"/>
+                                    </c:if>
+                                    <li class="checkbox">
+                                        <ref:filterParam var="filterParam" filterValues="${filter}" excludeFilterTypes="ext_site_id" />
+                                        <a class="${selectedClass}" href="${url_external_search}${filterParam};ext_site_id=${site.id}">
+                                            <c:out value="${site.title}" />
+                                        </a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end overlay all-sources -->
+
+                    <div class="content externalsearchdropdowns col-md-12 col-xs-12">
+                        <div class="dropdownContainer category col-xs-12 visible-xs">
+                            <label for="type"><spring:message code="external.search.filter.category" /></label>
+                            <select id="type" class="form-control">
+                                <c:forEach var="category" items="${categories}">
+                                    <c:choose>
+                                        <c:when test="${category.id == selectedCategory.id}">
+                                            <option value="${category.id}" selected="selected"><c:out value="${category.title}" /></option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${category.id}"><c:out value="${category.title}" /></option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+                        <div class="dropdownContainer site col-xs-12 visible-xs">
+                            <label for="quelle"><spring:message code="external.search.filter.source" /></label>
+                            <select id="quelle" class="form-control">
+                                <option value="all"><spring:message code="external.search.filter.sources.all" /></option>
+                                <c:forEach var="site" items="${sites}">
+                                    <c:choose>
+                                        <c:when test="${site.id == selectedSite.id}">
+                                            <option value="${site.id}" selected="selected"><c:out value="${site.title}" /></option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${site.id}"><c:out value="${site.title}" /></option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+                        <div class="dropdownContainer labels col-md-6 col-xs-12">
+                            <c:if test="${filter.ext_label_groups.contains('modality')}">
+                                <c:set var="modalityClass" value="active" />
+                            </c:if>
+                            <label for="modality"><spring:message code="external.search.labels.modality" /></label>
+                            <select id="modality" class="form-control ${modalityClass}">
+                                <option value="all"><spring:message code="external.search.labels.all" /></option>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="ct" />
+                                    <jsp:param name="optionLabel" value="CT" />
+                                </jsp:include>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="mri" />
+                                    <jsp:param name="optionLabel" value="MRI" />
+                                </jsp:include>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="nucmed" />
+                                    <jsp:param name="optionLabel" value="NucMed" />
+                                </jsp:include>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="x-ray" />
+                                    <jsp:param name="optionLabel" value="X-Ray" />
+                                </jsp:include>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="us" />
+                                    <jsp:param name="optionLabel" value="US" />
+                                </jsp:include>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="angiography" />
+                                    <jsp:param name="optionLabel" value="Angiography" />
+                                </jsp:include>
+                            </select>
+                        </div>
+                        <div class="dropdownContainer labels col-md-6 col-xs-12">
+                            <c:if test="${filter.ext_label_groups.contains('age')}">
+                                <c:set var="ageClass" value="active" />
+                            </c:if>
+                            <label for="age"><spring:message code="external.search.labels.age" /></label>
+                            <select id="age" class="form-control ${ageClass}">
+                                <option value="all"><spring:message code="external.search.labels.all" /></option>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="infant" />
+                                    <jsp:param name="optionLabel" value="infant" />
+                                </jsp:include>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="child" />
+                                    <jsp:param name="optionLabel" value="child" />
+                                </jsp:include>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="adult" />
+                                    <jsp:param name="optionLabel" value="adult" />
+                                </jsp:include>
+                            </select>
+                        </div>
+                        <div class="dropdownContainer labels col-md-6 col-xs-12">
+                            <c:if test="${filter.ext_label_groups.contains('gender')}">
+                                <c:set var="genderClass" value="active" />
+                            </c:if>
+                            <label for="gender"><spring:message code="external.search.labels.gender" /></label>
+                            <select id="gender" class="form-control ${genderClass}">
+                                <option value="all" selected="selected"><spring:message code="external.search.labels.all" /></option>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="male" />
+                                    <jsp:param name="optionLabel" value="male" />
+                                </jsp:include>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="female" />
+                                    <jsp:param name="optionLabel" value="female" />
+                                </jsp:include>
+                            </select>
+                        </div>
+                        <div class="dropdownContainer labels col-md-6 col-xs-12">
+                            <c:if test="${filter.ext_label_groups.contains('articleType')}">
+                                <c:set var="articleTypeClass" value="active" />
+                            </c:if>
+                            <label for="articleType"><spring:message code="external.search.labels.type" /></label>
+                            <select id="articleType" class="form-control ${articleTypeClass}">
+                                <option value="all" selected="selected"><spring:message code="external.search.labels.all" /></option>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="review_article" />
+                                    <jsp:param name="optionLabel" value="review article" />
+                                </jsp:include>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="case_report" />
+                                    <jsp:param name="optionLabel" value="case report" />
+                                </jsp:include>
+                            </select>
+                        </div>
+                        <div class="dropdownContainer labels col-md-6 col-xs-12">
+                            <c:if test="${filter.ext_label_groups.contains('protocol')}">
+                                <c:set var="protocolClass" value="active" />
+                            </c:if>
+                            <label for="protocol"><spring:message code="external.search.labels.protocol" /></label>
+                            <select id="protocol" class="form-control ${protocolClass}">
+                                <option value="all" selected="selected"><spring:message code="external.search.labels.all" /></option>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="siemens" />
+                                    <jsp:param name="optionLabel" value="Siemens" />
+                                </jsp:include>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="philips" />
+                                    <jsp:param name="optionLabel" value="Philips" />
+                                </jsp:include>
+                                <jsp:include page="label-option.jspx" >
+                                    <jsp:param name="optionValue" value="general_electric" />
+                                    <jsp:param name="optionLabel" value="General Electric" />
+                                </jsp:include>
+                            </select>
+                        </div>
+                    </div>
+
+                    <c:choose>
+                        <c:when test="${empty filter['searchterm']}">
+                            <div class="loading none">
+                                <i class="fa fa-warning"><jsp:text/></i>
+                                <div class="text-left">
+                                    <spring:message code="external.search.no-search-term" />
+                                </div>
+                            </div>
+                            <div class="loading none">
+                                <div class="text-left text-light">
+                                    <spring:message code="external.search.no-search-term.add-info" />
+                                </div>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="content search col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                                <c:choose>
+                                    <c:when test="${not empty searchResults.results}">
+                                        <div class="searchheadline col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-md-12 col-sm-11 col-xs-12 col-lg-12 text">
+                                                <jsp:include page="result-headline.jspx"/>
+                                            </div>
+                                        </div>
+
+                                        <ul class="searchEntries fa-ul">
+                                            <jsp:include page="search-results-page.jspx" />
+                                        </ul>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="loading none">
+                                            <i class="fa fa-warning"><jsp:text/></i>
+                                            <spring:message code="external.search.no-entries" />
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                </div>
+                <aside>
+                    <div class="col-md-3 col-sm-12 col-xs-12 hidden-xs hidden-sm rightContent no-image-comparism">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading blue">
+                                <a href="#" onclick="return false;">
+                                    <i class="ti ct-images"><jsp:text/></i>
+                                    <c:out value="&#160;" />
+                                    <spring:message code="external.search.images.header" />
+                                </a>
+                            </div>
+                            <div class="panel-body">
+
+                                <div class="thumbBox">
+                                    <c:forEach var="result" items="${imageSearchResults.results}" >
+                                       <c:set var="result" value="${result}" scope="request" />
+                                       <jsp:include page="thumbnail.jspx" />
+                                    </c:forEach>
+
+                                </div>
+
+                                <c:if test="${not empty filter['searchterm'] and empty imageSearchResults.results}">
+                                    <div class="loading none">
+                                        <i class="fa fa-warning"><jsp:text/></i>
+                                        <spring:message code="external.search.images.no-entries" />
+                                    </div>
+                                </c:if>
+                            </div>
+                        </div>
+
+                    </div>
+                </aside>
+
+
+            </div>
+            <!-- mainContent END -->
+
+        </div>
+    </div>
+
+    <ref:filterParam var="filterParam" filterValues="${filter}" excludeFilterTypes="ext_category_id,ext_site_id,ext_labels,ext_label_groups"/>
+    <form name="filterForm" method="get" action="${url_external_search}${filterParam}">
+        <jsp:text/>
+    </form>
+
+    <spring:url value="/webresources/js/external-search.js?v=${applicationVersion}" var="url_external_search_js"/>
+
+    <script language="javascript" type="text/javascript" src="${url_external_search_js}">
+        <!--<![CDATA[]]>-->
+    </script>
+
+</jsp:root>

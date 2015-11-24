@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:ref="http://ebcont.com/gtv/referenz/webapp/tags"
+          version="2.2">
+
+    <spring:url value="/search" var="url_search"/>
+    <spring:url value="/stat/images" var="url_atypon_stat" />
+
+    <jsp:include page="mobile-dropdowns.jspx" />
+
+    <!-- CONTENT WRAPPER BEGIN-->
+    <div class="wrapper">
+
+        <!-- Filter BEGIN -->
+        <c:set var="matrixPathRoot" value="search" scope="request" />
+        <ref:filterParam var="filterParams" filterValues="${filter}" excludeFilterTypes="sort" sort="true" />
+        <spring:url value="${filterParams}" var="noteUrl" scope="request"/>
+        <spring:message code="search-results.images.info.link" var="infoLink" />
+        <spring:url value="${infoLink}" var="infoUrl" scope="request" />
+        <jsp:include page="/WEB-INF/view/body/filter-row.jspx"/>
+        <jsp:include page="/WEB-INF/view/body/newsletter.jspx" />
+        <!-- Filter END -->
+
+        <!-- Content BEGIN -->
+        <div id="content-container" class="container" role="main">
+
+            <div class="row">
+
+                <!-- Left Sidebar BEGIN -->
+                <aside>
+                    <div id="sidebar" class="col-sm-3 col-md-3 sidebar-offcanvas leftContent" role="navigation">
+                        <jsp:include page="/WEB-INF/view/layout/navbar.jspx"/>
+                        <spring:url value="/search" var="url_image_search"/>
+                        <jsp:include page="/WEB-INF/view/body/facetmenu/facetmenu.jspx">
+                            <jsp:param name="isSearchView" value="true"/>
+                            <jsp:param name="rootUrl" value="${url_image_search}"/>
+                        </jsp:include>
+                    </div>
+                </aside>
+                <!-- Left Sidebar END -->
+
+                <!-- mainContent BEGIN -->
+
+                <div class="col-md-9 col-sm-12 col-xs-12 mainContent search-images">
+                    <div class="navigationBox hidden-xs">
+                        <ul class="nav nav-tabs">
+                            <li class="visible-sm">
+                                <jsp:include page="/WEB-INF/view/body/left-content-toggle.jspx"/>
+                            </li>
+
+                            <jsp:include page="/WEB-INF/view/body/dropdowns/toggle-button.jspx" >
+                                <jsp:param name="target" value=".all-image-type" />
+                                <jsp:param name="isHighlighted" value="${not empty filter['facet_image_type']}" />
+                                <jsp:param name="itemsCount" value="${filter['facet_image_type'].size()}" />
+                                <jsp:param name="messagesPrefix" value="search-results.images.filter.image-type" />
+                                <jsp:param name="oneSelectedItemMessage" value="${filter['facet_image_type'].size() eq 1? filter['facet_image_type'][0] : ''}" />
+                            </jsp:include>
+
+                            <jsp:include page="/WEB-INF/view/body/dropdowns/toggle-button.jspx" >
+                                <jsp:param name="target" value=".all-modality" />
+                                <jsp:param name="isHighlighted" value="${not empty filter['facet_modality']}" />
+                                <jsp:param name="itemsCount" value="${filter['facet_modality'].size()}" />
+                                <jsp:param name="messagesPrefix" value="search-results.images.filter.modality" />
+                                <jsp:param name="oneSelectedItemText" value="${filter['facet_modality'].size() eq 1? filter['facet_modality'][0] : ''}" />
+                            </jsp:include>
+
+                            <jsp:include page="/WEB-INF/view/body/dropdowns/toggle-button.jspx" >
+                                <jsp:param name="target" value=".all-gender" />
+                                <jsp:param name="isHighlighted" value="${not empty filter['facet_image_gender']}" />
+                                <jsp:param name="itemsCount" value="${filter['facet_image_gender'].size()}" />
+                                <jsp:param name="messagesPrefix" value="search-results.images.filter.gender" />
+                                <jsp:param name="oneSelectedItemMessage" value="${filter['facet_image_gender'].size() eq 1? filter['facet_image_gender'][0] : ''}" />
+                            </jsp:include>
+
+                            <jsp:include page="/WEB-INF/view/body/dropdowns/toggle-button.jspx" >
+                                <jsp:param name="target" value=".all-agegroup" />
+                                <jsp:param name="isHighlighted" value="${not empty filter['facet_image_agegroup']}" />
+                                <jsp:param name="itemsCount" value="${filter['facet_image_agegroup'].size()}" />
+                                <jsp:param name="messagesPrefix" value="search-results.images.filter.agegroup" />
+                                <jsp:param name="oneSelectedItemMessage" value="${filter['facet_image_agegroup'].size() eq 1? filter['facet_image_agegroup'][0] : ''}" />
+                            </jsp:include>
+
+                            <c:if test="${not isAnonymous}">
+                                <li class="pull-right">
+                                    <spring:message code="search-results.images.switch2thumbs.tooltip" var="switch2thumbsTooltip" />
+                                    <a class="btn btn-default switch2thumbs active" data-stat-url="${url_atypon_stat}" title="${switch2thumbsTooltip}" >
+                                        <i class="ti grid-view">
+                                            <jsp:text/>
+                                        </i>
+                                    </a>
+                                </li>
+                                <li class="pull-right">
+                                    <spring:message code="search-results.images.switch2list.tooltip" var="switch2listTooltip" />
+                                    <a class="btn btn-default switch2list" data-stat-url="${url_atypon_stat}" title="${switch2listTooltip}">
+                                        <i class="ti list-view">
+                                            <jsp:text/>
+                                        </i>
+                                    </a>
+                                </li>
+                            </c:if>
+
+                            <ref:filterParam var="filterParams" filterValues="${filter}" />
+                            <c:if test="${sortType eq 'RELEVANCE'}">
+                                <c:set var="relevanceActive" value="active"/>
+                            </c:if>
+                            <c:if test="${sortType eq 'DATE_PUBLISHED'}">
+                                <c:set var="dateActive" value="active"/>
+                            </c:if>
+                            <li class="pull-right sort">
+                                <spring:message code="search-results.sort.relevance.tooltip" var="sortRelevanceTooltip"/>
+                                <a class="${relevanceActive}" href="${url_search}${filterParams}" title="${sortRelevanceTooltip}">
+                                    <spring:message code="search-results.sort.relevance"/>
+                                </a>
+                            </li>
+                            <li class="pull-right sort">
+                                <spring:message code="search-results.sort.date.tooltip" var="sortDateTooltip"/>
+                                <a class="${dateActive}" href="${url_search}/date_published/${filterParams}" title="${sortDateTooltip}">
+                                    <spring:message code="search-results.sort.date"/>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <!-- filter dropdowns -->
+                    <form id="resetDropdownsForm">
+                        <div class="overlay all-image-type no-heading">
+                            <c:set var="items" value="${imageFacets.imageType.entryList}" scope="request"/>
+                            <c:set var="selectedItems" value="${filter['facet_image_type']}" scope="request"/>
+                            <jsp:include page="facet-dropdown.jspx">
+                                <jsp:param name="messagesPrefix" value="search-results.images.filter.image-type"/>
+                            </jsp:include>
+                        </div>
+
+                        <div class="overlay all-modality no-heading">
+                            <c:set var="items" value="${imageFacets.modalities.entryList}" scope="request"/>
+                            <c:set var="selectedItems" value="${filter['facet_modality']}" scope="request"/>
+                            <jsp:include page="facet-dropdown.jspx"/>
+                        </div>
+
+                        <div class="overlay all-gender no-heading">
+                            <c:set var="items" value="${imageFacets.gender.entryList}" scope="request"/>
+                            <c:set var="selectedItems" value="${filter['facet_image_gender']}" scope="request"/>
+                            <jsp:include page="facet-dropdown.jspx">
+                                <jsp:param name="messagesPrefix" value="search-results.images.filter.gender"/>
+                            </jsp:include>
+                        </div>
+
+                        <div class="overlay all-agegroup no-heading">
+                            <c:set var="items" value="${imageFacets.ageGroup.entryList}" scope="request"/>
+                            <c:set var="selectedItems" value="${filter['facet_image_agegroup']}" scope="request"/>
+                            <jsp:include page="facet-dropdown.jspx">
+                                <jsp:param name="messagesPrefix" value="search-results.images.filter.agegroup"/>
+                            </jsp:include>
+                        </div>
+                    </form>
+                    <!-- filter dropdowns -->
+
+                    <div class="content hidden-xs">
+                        <jsp:text/>
+                    </div>
+
+                    <jsp:include page="result-lists/search-results-images.jspx"/>
+                </div>
+                <!-- mainContent END -->
+
+                <!-- Content END -->
+                <ref:filterParam var="imageFacetsExcludedFilterParam" filterValues="${filter}" excludeFilterTypes="facet_image_type,facet_modality,facet_image_gender,facet_image_agegroup"/>
+
+                <form id="filterForm" method="get" action="${url_image_search}${imageFacetsExcludedFilterParam}">
+                    <jsp:text/>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="no-colors">
+        <jsp:include page="/WEB-INF/view/body/notes/note-popover.jspx"/>
+    </div>
+    <!-- CONTENT WRAPPER END-->
+
+    <spring:url value="/webresources/js/image-search.js?v=${applicationVersion}" var="url_image_search_js"/>
+    <spring:url value="/webresources/js/dropdown-filters.js?v=${applicationVersion}" var="url_dropdown_filters_js"/>
+    <spring:url value="/webresources/js/dropdown-filters-mobile.js?v=${applicationVersion}" var="url_dropdown_filters_mobile_js"/>
+
+    <script language="javascript" type="text/javascript" src="${url_image_search_js}">
+        <!--<![CDATA[]]>-->
+    </script>
+
+    <script language="javascript" type="text/javascript" src="${url_dropdown_filters_js}">
+        <!--<![CDATA[]]>-->
+    </script>
+
+    <script language="javascript" type="text/javascript" src="${url_dropdown_filters_mobile_js}">
+        <!--<![CDATA[]]>-->
+    </script>
+
+</jsp:root>

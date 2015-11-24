@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+          version="2.2">
+
+    <c:if test="${searchTotalCount == 0 or (filter.content_type[0] eq 'images' and imageSearchTotalCount == 0)}">
+        <!-- text search is performed and no results are returned -->
+        <c:choose>
+            <c:when test="${not empty filter and not (filter.size() == 1 and not empty filter.searchterm)}">
+                <c:forEach items="${filter}" var="entry">
+                    <c:if test="${entry.key != 'searchterm'}">
+                        <c:forEach var="value" items="${entry.value}">
+                            <c:if test="${not empty filterValues}">
+                                <c:set var="filterValues" value="${filterValues}," />
+                            </c:if>
+                            <c:set var="filterValues" value="${filterValues}${value}" />
+                        </c:forEach>
+                    </c:if>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <c:set var="filterValues" value="Ohne Filter" />
+            </c:otherwise>
+        </c:choose>
+
+        <meta name="WT.oss" content="${fn:escapeXml(filter.searchterm[0])}" />
+        <meta name="WT.oss_r" content="0" />
+        <meta name="WT.i_ossFilter" content="${filterValues}" />
+    </c:if>
+
+</jsp:root>

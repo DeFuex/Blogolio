@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:ref="http://ebcont.com/gtv/referenz/webapp/tags"
+          version="2.2">
+
+
+    <c:forEach var="image" items="${imageSearchResult.imageList}">
+        <c:set var="image" value="${image}" scope="request"/>
+        <c:choose>
+            <c:when test="${param.searchType == 'unlicensed' or searchType == 'unlicensed'}">
+                <jsp:include page="image-thumb-unlicensed.jspx"/>
+            </c:when>
+            <c:otherwise>
+                <jsp:include page="image-thumb.jspx"/>
+            </c:otherwise>
+        </c:choose>
+
+    </c:forEach>
+
+    <c:if test="${not empty param.nextImagePagePath or not empty nextImagePagePath}">
+        <spring:url value="${param.nextImagePagePath}${nextImagePagePath}" var="nextPageUrl"/>
+        <ref:filterParam var="filterParam" filterValues="${filter}" correctedSearchTerms="${searchResult.searchRequest.correctedSearchTerms}" />
+        <div id="nav">
+            <a href="${nextPageUrl}${filterParam}">
+                <jsp:text/>
+            </a>
+        </div>
+    </c:if>
+
+</jsp:root>

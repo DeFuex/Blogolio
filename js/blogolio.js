@@ -154,8 +154,10 @@ $(function() {
 				'': 'index',
 				'admin': 'admin',
 				'login': 'login',
+				'logout': 'logout'
 				'add': 'add',
 				'edit/:id': 'edit'
+				'del/:id': 'del'
 			},
 			index: function() {
 				this.blogs.fetch({
@@ -198,6 +200,10 @@ $(function() {
 				loginView.render();
 				$container.html(loginView.el);
 			},
+			logout: function(){
+				Parse.User.logOut();
+				this.navigate('#/login', {trigger: true });
+			},
 			add: function() {
 				// Check login
 				if (!Parse.User.current()) {
@@ -223,6 +229,19 @@ $(function() {
 						error: function(blog, error) {
 							console.log(error);
 						}
+					});
+				}
+			},
+			del: function(id){
+				if (!Parse.User.current()) {
+					this.navigate('#/login', { trigger: true });
+				} else {
+					var query = new Parse.Query(Blog);
+					query.get(id).then(function(blog){
+						blog.destroy().then(function(blog){
+							alert('Deleted');
+							self.navigate('admin', { trigger: true });
+						})
 					});
 				}
 			}     

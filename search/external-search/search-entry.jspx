@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:sec="http://www.springframework.org/security/tags"
+          xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+          version="2.2">
+
+    <spring:url value="/stat/ext_detail" var="url_atypon_stat"/>
+
+    <li>
+        <div class="icons hidden-xs pull-right">
+            <c:if test="${not empty searchEntry.meta.pdfURL}">
+                <a href="${searchEntry.meta.pdfURL}" target="_blank" onclick="$.get('${url_atypon_stat}')"><i class="ti fa-fw pdf"><jsp:text/></i></a>
+            </c:if>
+            <sec:authorize url="/editor/*">
+                <c:if test="${not empty searchEntry.meta.abstractURL}">
+                    <a href="${searchEntry.meta.abstractURL}" target="_blank"><i class="fa fa-fw fa-file-code-o"><jsp:text/></i></a>
+                </c:if>
+            </sec:authorize>
+        </div>
+        <a class="title" href="${searchEntry.url}" target="_blank" onclick="$.get('${url_atypon_stat}')" >
+            <i class="fa-li fa-lg ti ct-external"><jsp:text/></i>
+            <c:out value="${searchEntry.title}" escapeXml="false"/>
+            <span class="info excerpt">
+                <c:out value="${searchEntry.resultExcerpt}" escapeXml="false"/>
+            </span>
+
+            <span class="info">
+                <c:if test="${not empty searchEntry.meta.author}">
+                    <c:out value="${searchEntry.meta.author}: " />
+                </c:if>
+                <span class="journal"><c:out value="${searchEntry.meta.journal}" /></span>
+                <span class="year"><c:out value=" ${fn:split(searchEntry.meta.date, '.')[2]}" /></span>
+                <c:if test="${not empty searchEntry.meta.journal or not empty searchEntry.meta.date}">
+                    <span class="semicolon"><c:out value="; " /></span>
+                </c:if>
+                <span class="issue"><c:out value="${searchEntry.meta.issue}" /></span>
+                <c:if test="${not empty searchEntry.meta.volume}">
+                    <span class="volume"><c:out value="(${searchEntry.meta.volume}): " /></span>
+                </c:if>
+                <span class="pagestart"><c:out value="${searchEntry.meta.pageStart}" /></span>
+                <c:if test="${not empty searchEntry.meta.pageStart and not empty searchEntry.meta.pageEnd}">
+                    <span class="minus"><c:out value="-" /></span>
+                </c:if>
+                <span class="pageend"><c:out value="${searchEntry.meta.pageEnd}" /></span>
+            </span>
+
+        </a>
+    </li>
+
+</jsp:root>

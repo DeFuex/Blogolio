@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:ref="http://ebcont.com/gtv/referenz/webapp/tags"
+          version="2.2">
+
+
+    <spring:url value="/search" var="url_search" />
+    <spring:url value="/cockpits" var="url_cockpits" />
+    <spring:url value="/ebooks" var="url_ebooks" />
+    <spring:url value="/ejournals" var="url_ejournals" />
+    <spring:url value="/p/author/profile" var="url_author_profile" />
+
+    <ref:filterParam var="filterParam" filterValues="${filter}" excludeFilterTypes="searchterm" />
+
+
+    <div class="col-md-3 col-xs-12">
+        <h2><i class="ti ct-external"><jsp:text/></i><spring:message code="autocomplete.overall.column.title" /></h2>
+        <ul>
+            <c:forEach var="lexicon" items="${lexicons}" >
+                <li>
+                    <a href="${url_search};searchterm=${lexicon}${filterParam}">
+                        <c:out value="${lexicon}" />
+                    </a>
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+    <div class="col-md-3 col-xs-12">
+        <h2><i class="ti ct-cockpit"><jsp:text/></i><spring:message code="autocomplete.cockpits.column.title" /></h2>
+        <ul>
+            <c:forEach var="cockpit" items="${cockpits}">
+                <li>
+                    <a href="${url_cockpits}/${cockpit.collectionId}/${cockpit.contentId}/${cockpit.sectionId}">
+                        <span class="title">
+                            <c:if test="${not empty cockpit.faculty}">
+                                <spring:message code="faculty.class.${cockpit.faculty}" var="facultyClass"/>
+                                <span class="label subject label-${facultyClass}">
+                                    <spring:message code="faculty.abb.${cockpit.faculty}"/>
+                                </span>
+                                <c:out value="&#160;" />
+                            </c:if>
+                            <c:out value="${cockpit.contentTitle}" />
+                        </span>
+
+                        <span class="info">
+                            <c:out value="${cockpit.collectionTitle}" />
+                        </span>
+
+                    </a>
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+    <div class="col-md-3 col-xs-12">
+        <h2><i class="ti ct-ebook"><jsp:text/></i><spring:message code="autocomplete.ebooks-ejournals.column.title" /></h2>
+        <ul>
+            <c:forEach var="ebook_ejournal" items="${ebooks_ejournals}"> <!-- list with ebook and ejournal contents -->
+                <li>
+                    <c:choose>
+                        <c:when test="${ebook_ejournal.contentType eq 'EBOOK'}">
+                            <c:set var="url_content" value="${url_ebooks}"/>
+                        </c:when>
+                        <c:when test="${ebook_ejournal.contentType eq 'EJOURNAL'}">
+                            <c:set var="url_content" value="${url_ejournals}"/>
+                        </c:when>
+                    </c:choose>
+
+                    <a href="${url_content}/${ebook_ejournal.contentId}#/${ebook_ejournal.sectionId}" class="searchLink">
+                        <span class="title">
+                            <c:if test="${not empty ebook_ejournal.faculty}">
+                                <spring:message code="faculty.class.${ebook_ejournal.faculty}" var="facultyClass"/>
+                                <span class="label subject label-${facultyClass}">
+                                    <spring:message code="faculty.abb.${ebook_ejournal.faculty}"/>
+                                </span>
+                                <c:out value="&#160;" />
+                            </c:if>
+                            <c:out value="${ebook_ejournal.title}" />
+                        </span>
+
+                        <span class="info">
+                            <c:out value="${ebook_ejournal.source}" />
+                        </span>
+                    </a>
+
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+    <div class="col-md-3 col-xs-12">
+        <h2><i class="ti ct-ejournal"><jsp:text/></i><spring:message code="autocomplete.authors.column.title" /></h2>
+        <ul>
+            <c:forEach var="author" items="${authors}">
+                <li>
+                    <a href="${url_author_profile}/${author.authorId}">
+                        <c:out value="${author.displayName}" />
+                    </a>
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+
+
+</jsp:root>

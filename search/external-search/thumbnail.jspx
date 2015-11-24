@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          version="2.2">
+
+    <div class=" thumb col-lg-4 col-md-4 col-sm-2 col-xs-4">
+        <div class="thumbcontainer" data-original-title="" title="">
+            <c:choose>
+                <c:when test="${not empty result.containingURL}">
+                    <a title="Bild auf externer Seite öffnen" href="${result.containingURL}" target="_blank">
+                        <img src="${result.imagePreview.url}" alt="${result.title}" class="img-thumbnail" />
+                    </a>
+                </c:when>
+                <c:when test="${not empty result.meta.htmlURL}">
+                    <a title="Bild auf externer Seite öffnen" href="${result.meta.htmlURL}" target="_blank">
+                        <img src="${result.imagePreview.url}" alt="${result.title}" class="img-thumbnail" />
+                    </a>
+                </c:when>
+                <c:when test="${not empty result.meta.abstractURL}">
+                    <a title="Bild auf externer Seite öffnen" href="${result.meta.abstractURL}" target="_blank">
+                        <img src="${result.imagePreview.url}" alt="${result.title}" class="img-thumbnail" />
+                    </a>
+                </c:when>
+                <c:when test="${not empty result.meta.pdfURL}">
+                    <a title="Bild auf externer Seite öffnen" href="${result.meta.pdfURL}" target="_blank">
+                        <img src="${result.imagePreview.url}" alt="${result.title}" class="img-thumbnail"  />
+                    </a>
+                </c:when>
+                <c:when test="${not empty result.url}">
+                    <a title="Bild auf externer Seite öffnen" href="${result.url}" target="_blank">
+                        <img src="${result.imagePreview.url}" alt="${result.title}" class="img-thumbnail" />
+                    </a>
+                </c:when>
+                <c:otherwise>
+                    <img src="${result.imagePreview.url}" alt="${result.title}" />
+                </c:otherwise>
+            </c:choose>
+        </div>
+
+        <jsp:include page="image-popover.jspx" />
+    </div>
+</jsp:root>

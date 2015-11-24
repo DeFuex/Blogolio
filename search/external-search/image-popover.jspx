@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+          version="2.2">
+
+    <div class="thumbPopover">
+        <h3 class="title">
+            <c:out value="${result.title}" escapeXml="false" />
+            <span class="text-muted extra-info">
+                <span class="journal"><c:out value="${result.meta.journal}" /></span>
+                <span class="year"><c:out value=" ${fn:split(result.meta.date,'.')[2]}" /></span>
+                <c:if test="${not empty result.meta.journal or not empty result.meta.date}">
+                    <span class="semicolon"><c:out value="; " /></span>
+                </c:if>
+                <span class="issue"><c:out value="${result.meta.issue}" /></span>
+                <c:if test="${not empty result.meta.volume}">
+                    <span class="volume"><c:out value="(${result.meta.volume}): " /></span>
+                </c:if>
+            </span>
+        </h3>
+
+        <div class="body">
+            <span class="author"><c:out value="${result.meta.author}" /></span>
+
+            <div class="image">
+                <img alt="alt-text" src="${result.imagePreview.url}" />
+            </div>
+
+            <p>
+                <c:out value="${result.resultExcerpt}" escapeXml="false" />
+            </p>
+        </div>
+    </div>
+
+</jsp:root>

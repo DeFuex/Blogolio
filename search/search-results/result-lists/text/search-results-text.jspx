@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+          version="2.2">
+
+    <c:set var="hasFilters" value="${(not empty readableFilterMap.SEARCHTERM and fn:length(readableFilterMap) gt 1) or (empty readableFilterMap.SEARCHTERM and fn:length(readableFilterMap) gt 0)}"/>
+    <c:set var="isLicensedVisible" value="${not empty licensedSearchResult and licensedSearchResult.totalCount gt 0}"/>
+    <c:set var="isUnlicensedVisible" value="${not empty unlicensedSearchResult and unlicensedSearchResult.totalCount gt 0}"/>
+    <c:set var="isFilteredVisible" value="${(not empty filteredSearchResult and filteredSearchResult.totalCount gt 0) or (hasFilters and not isAnonymous and (isUnlicensedVisible or isLicensedVisible))}"/>
+
+    <c:if test="${isFilteredVisible}">
+        <jsp:include page="filtered.jspx">
+            <jsp:param name="nextPagePath" value="${filteredNextPagePath}"/>
+        </jsp:include>
+    </c:if>
+
+    <c:if test="${isLicensedVisible}">
+        <jsp:include page="licensed.jspx">
+            <jsp:param name="nextPagePath" value="${licensedNextPagePath}"/>
+        </jsp:include>
+    </c:if>
+
+    <c:if test="${isUnlicensedVisible}">
+        <jsp:include page="unlicensed.jspx">
+            <jsp:param name="nextPagePath" value="${unlicensedNextPagePath}"/>
+        </jsp:include>
+    </c:if>
+
+    <c:if test="${(empty filteredSearchResult or filteredSearchResult.totalCount eq 0) and (empty licensedSearchResult or licensedSearchResult.totalCount eq 0) and (empty unlicensedSearchResult or unlicensedSearchResult.totalCount eq 0)}">
+        <li class="loading none">
+            <i class="fa fa-warning">
+                <jsp:text/>
+            </i>
+            <spring:message code="search-results.no-entries"/>
+        </li>
+    </c:if>
+
+</jsp:root>
