@@ -93,9 +93,8 @@ h6, .h6 {
 .blog-description {
   font-size: 20px;
   color: #999;
-  text-indent: 7.75em; /* indent slightly */
+  text-indent: 3.75em; /* indent slightly */
   text-shadow: 0 1px 0px rgba(0, 0, 0, .15);
-  margin-top: -.2em;
 }
 .blog-content{
   word-break:break-word;
