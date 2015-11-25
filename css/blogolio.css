@@ -95,7 +95,7 @@ h6, .h6 {
   color: #999;
   text-indent: 7.75em; /* indent slightly */
   text-shadow: 0 1px 0px rgba(0, 0, 0, .15);
-  margin-top: 2em;
+  margin-top: 1em;
 }
 .blog-content{
   word-break:break-word;
