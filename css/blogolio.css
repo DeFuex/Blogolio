@@ -30,6 +30,26 @@ h6, .h6 {
   }
 }
 
+/*
+ * Header Styling
+ */
+div h1 {
+  font-family: 'Pacifico', serif;
+  font-size: 3em;
+  text-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
+  margin: 0;
+}
+
+div h1 a {
+  text-decoration: none;
+}
+
+div p {
+  margin-top: -.625em;
+  text-indent: 7.75em; /* indent slightly */
+  text-shadow: 0 1px 0px rgba(0, 0, 0, .15);
+  font-size: .875em; /* 14/16 */
+}
 
 /*
  * Masthead for nav
