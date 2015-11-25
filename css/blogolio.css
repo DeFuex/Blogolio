@@ -33,6 +33,7 @@ h6, .h6 {
 /*
  * Header Styling
  */
+
 div h1 {
   font-family: 'Pacifico', serif;
   font-size: 3em;
@@ -45,10 +46,10 @@ div h1 a {
 }
 
 div p {
-  margin-top: -.625em;
+  margin-top: -.225em;
   text-indent: 7.75em; /* indent slightly */
   text-shadow: 0 1px 0px rgba(0, 0, 0, .15);
-  font-size: .875em; /* 14/16 */
+  font-size: .275em; /* 14/16 */
 }
 
 /*
