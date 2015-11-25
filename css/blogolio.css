@@ -127,6 +127,24 @@ h6, .h6 {
   margin-bottom: 0;
 }
 
+/* Photo Class */
+.widget {
+    border-radius: 5px;
+    padding: 30px;
+    background: none;
+    border: 2px solid #ececec;
+}
+.widget-title {
+    font-family: "ff-tisa-web-pro", Georgia, serif;
+    color: #2b3d51;
+    line-height: 1.1;
+}
+.me {
+    max-width: 75px;
+    border-radius: 50%;
+    float: left;
+    margin: 0 15px 5px 0;
+}
 
 /* Pagination */
 .pager {
