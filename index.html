@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <title>Blogolio</title>
  
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
-	  <link href="css/blogolio.css" rel="stylesheet">
+	<link href="css/blogolio.css" rel="stylesheet">
     <link href="css/bootstrap-wysihtml5-0.0.2.css" rel="stylesheet">
  
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -24,13 +24,13 @@
       <div class="container">
         <nav class="blog-nav">
           <a class="blog-nav-item" href="">Home</a>
-          <a class="blog-nav-item" href="#">Projects</a>
+          <a class="blog-nav-item" href="#/projects">Projects</a>
           <a class="blog-nav-item" href="#/admin" style="float: right">Admin</a>
         </nav>
       </div>
     </div>
 	
-    <div class="container">
+    <div id="blog-home" class="container">
 
       <div class="blog-header">
         <h1><a class="blog-title" href="./">The Very Personal Blogolio</a></h1>
@@ -47,9 +47,9 @@
           <div class="widget sidebar-module sidebar-module-inset">
             <h2 class="widget-title">About Timo Obereder</h2>
             <div>
-              <img class="me" src="assets/avatar.jpeg" alt="Avatar Icon" scale="0" />
+              <img class="me" src="assets/avatar.png" alt="Avatar Icon" scale="0" />
               <div>
-                <p><em>Hi! My name is Timo and im Software Developer with over 4 years of experience designing and developing mobile (mostly Android) applications. Follow me on Twitter </em><a href="./">here</a></p>
+                <p><em>Hi! My name is Timo and i'm Software Developer with over 4 years of experience designing and developing mobile (mostly Android) applications. Follow me on Twitter </em><a href="./">here</a></p>
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
           <div class="sidebar-module">
             <h4>Elsewhere</h4>
             <ol class="list-unstyled">
-              <li><a href="#">GitHub</a></li>
+              <li><a href="https://github.com/DeFuex">GitHub</a></li>
               <li><a href="#">Twitter</a></li>
             </ol>
           </div>
@@ -113,6 +113,34 @@
 		</form>
 	</script>
 	
+	<script id="thumb-gallery-tpl" type="text/x-handlebars-template">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Project Gallery</h1>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#">
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+        </div>
+	</script>
+	
 	<script id="admin-tpl" type="text/x-handlebars-template">
 		<h2>Welcome, {{username}}!</h2>
 		<a href="#/add" class="add-blog btn btn-lg btn-primary">Add a New Blog</a>
@@ -156,7 +184,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   	<script src="js/blogolio.js"></script>
-    
     <script src="js/wysihtml5-0.3.0.min.js"></script>
     <script src="js/bootstrap-wysihtml5-0.0.2.min.js"></script>
 

@@ -55,6 +55,12 @@ $(function() {
 				this.$el.html(this.template(collection));
 			}
 		}),
+		ProjectsView = Parse.View.extend({
+			template: Handlebars.compile($('#thumb-gallery-tpl').html()),
+			render: function(){
+				this.$el.html(this.template());
+			}
+		})
 		LoginView = Parse.View.extend({
 			template: Handlebars.compile($('#login-tpl').html()),
 			events:{
@@ -152,6 +158,7 @@ $(function() {
 			// '{{URL pattern}}': '{{function name}}'
 			routes: {
 				'': 'index',
+				'projects': 'projects',
 				'admin': 'admin',
 				'login': 'login',
 				'logout': 'logout',
@@ -170,6 +177,11 @@ $(function() {
 						console.log(error);
 					}
 				});
+			},
+			projects: function(){
+				var projectsView = new ProjectsView();
+				projectsView.render();
+				$container.html(projectsView.el);
 			},
 			admin: function() {
 				// Call current user from Parse.
