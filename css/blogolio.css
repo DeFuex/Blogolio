@@ -3,7 +3,8 @@
  */
 
 body {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Helvetica, "Times New Roman", Times, serif;
+  /* font-family: Cabin,Helvetica,Arial,sans-serif; */
   color: #555;
 }
 
@@ -26,7 +27,7 @@ h6, .h6 {
 
 @media (min-width: 1200px) {
   .container {
-    width: 1200px;
+    width: 1100px;
   }
 }
 
@@ -36,26 +37,53 @@ h6, .h6 {
 
 .blog-masthead {
 
-  background-color: #428bca;
-  -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
-          box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+  /* background-color: #428bca; */
+  background-color: #fff;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+  /* text-align: center; */
+/*   -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+          box-shadow: inset 0 -2px 5px rgba(0,0,0,.1); */
 }
 
 /* Nav links */
 .blog-nav-item {
-  position: relative;
-  display: inline-block;
-  padding: 10px;
+	font-family: Cabin,Helvetica,Arial,sans-serif;
+	letter-spacing: 0px;
+	/* font-family: "Georgia","serif"; */
+	font-family: "ff-tisa-web-pro", Georgia, serif;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	line-height: 1.8em;
+	font-weight: 500;
+	font-style: normal;  
+	padding: 10px;
+/*    position: relative; */
+ display: inline-block;
+ /* padding: 10px;
   font-weight: 500;
-  color: #cdddeb;
+  color: #cdddeb; */
+  color: #2b3d51;
 }
 .blog-nav-item:hover,
 .blog-nav-item:focus {
-  color: #fff;
+  /* color: #fff; */
+  color: #c9c9c9;
   text-decoration: none;
 }
 
 /* Active state gets a caret at the bottom */
+.nav {
+    width: 80%;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    margin: 0;
+    padding: 28px 0;
+}
+
 .blog-nav .active {
   color: #fff;
 }
@@ -81,6 +109,7 @@ h6, .h6 {
 .blog-header {
   padding-top: 40px;
   padding-bottom: 20px;
+  text-align: center;
 }
 .blog-title {
   margin-top: 0px;
@@ -172,8 +201,22 @@ h6, .h6 {
   font-size: 40px;
 }
 .blog-post-meta {
-  margin-bottom: 20px;
-  color: #999;
+/*   margin-bottom: 20px;
+  color: #999; */
+    font-family: inherit;
+    letter-spacing: 0px;
+    font-family: "Georgia","serif";
+    line-height: 0.5em;
+    text-transform: none;
+    letter-spacing: 1px;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 11px;
+    text-align: center;
+    color: #4a4a4a;
+    margin-top: 15px;
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
 }
 
 

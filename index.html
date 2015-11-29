@@ -20,22 +20,23 @@
     <![endif]-->
   </head>
   <body>
+	<div class="blog-header">
+	  <h1><a class="blog-title" href="./">The Very Personal Blogolio</a></h1>
+	  <p class="lead blog-description">This is a portfolio blog about some projects i did.</p>
+	</div>
+  
     <div class="blog-masthead">
       <div class="container">
-        <nav class="blog-nav">
+        <nav class="nav">
           <a class="blog-nav-item" href="">Home</a>
           <a class="blog-nav-item" href="#/projects">Projects</a>
+		  <a class="blog-nav-item" href="#">About</a>
           <a class="blog-nav-item" href="#/admin" style="float: right">Admin</a>
         </nav>
       </div>
     </div>
 	
     <div id="blog-home" class="container">
-
-      <div class="blog-header">
-        <h1><a class="blog-title" href="./">The Very Personal Blogolio</a></h1>
-        <p class="lead blog-description">This is a portfolio blog about some projects i did.</p>
-      </div>
 
       <div class="row">
 
@@ -83,8 +84,8 @@
         {{#each blog}}
         <div class="blog-post">
             <h2 class="blog-post-title"><a href="#">{{title}}</a></h2>
-            <p class="blog-post-meta">At {{time}} by {{authorName}}</p>
             <div class="blog-content">{{{content}}}</div>
+            <p class="blog-post-meta">At {{time}} by {{authorName}}</p>
         </div>
         {{/each}}
     </script>
