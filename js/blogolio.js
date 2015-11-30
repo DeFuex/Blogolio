@@ -300,7 +300,7 @@ $(function() {
 					this.projects.fetch({
 						success: function(projects) {
 							var projectsAdminView = new ProjectsAdminView({
-								username: currentUser.get('username');
+								username: currentUser.get('username'),
 								collection: projects
 							});
 							projectsAdminView.render();
