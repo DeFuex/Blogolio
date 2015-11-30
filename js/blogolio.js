@@ -44,9 +44,38 @@ $(function() {
 				});
 			}
 		}),
+		Project = Parse.Object.extend('Project', {
+			update: function(data) {
+				if ( !this.get('ACL') ) {
+					var projectACL = new Parse.ACL(Parse.User.current());
+					projectACL.setPublicReadAccess(true);
+					this.setACL(projectACL);
+				}
+
+				this.set({
+					'title': data.title,
+					'content': data.content,
+					'author': this.get('author') || Parse.User.current(),
+					'authorName': this.get('authorName') || Parse.User.current().get('username'),
+					'time': this.get('time') || new Date().toDateString()
+				}).save(null, {
+					success: function(project){
+						blogRouter.navigate('#/admin', { trigger: true });
+					},
+					error: function(project, error){
+						console.log(project);
+						console.log(error);
+					}
+				});
+			}
+		}),
 		Blogs = Parse.Collection.extend({
 			model: Blog,
 			query: (new Parse.Query(Blog)).descending('createdAt')
+		}),
+		Projects = Parse.Collection.extend({
+			model: Project,
+			query: (new Parse.Query(Project)).descending('createdAt')
 		}),
 		BlogsView = Parse.View.extend({
 			template: Handlebars.compile($('#blogs-tpl').html()),
@@ -56,9 +85,17 @@ $(function() {
 			}
 		}),
 		ProjectsView = Parse.View.extend({
+			template: Handlebars.compile($('#projects-tpl').html()),
+			render: function(){
+				var collection = { project: this.collection.toJSON() };
+				this.$el.html(this.template(collection));
+			}
+		}),
+		ProjectsGalleryView = Parse.View.extend({
 			template: Handlebars.compile($('#thumb-gallery-tpl').html()),
 			render: function(){
-				this.$el.html(this.template());
+				var collection = { project: this.collection.toJSON() };
+				this.$el.html(this.template(collection));
 			}
 		})
 		LoginView = Parse.View.extend({
@@ -95,11 +132,21 @@ $(function() {
 			}
 		}),
 		BlogsAdminView = Parse.View.extend({
-			template: Handlebars.compile($('#admin-tpl').html()),
+			template: Handlebars.compile($('#admin-blogs-tpl').html()),
 			render: function() {
 				var collection = { 
 					username: this.options.username,
-					blog: this.collection.toJSON() 
+					blog: this.collection.toJSON()
+				};
+				this.$el.html(this.template(collection));
+			}
+		}),		
+		ProjectsAdminView = Parse.View.extend({
+			template: Handlebars.compile($('#admin-projects-tpl').html()),
+			render: function() {
+				var collection = { 
+					username: this.options.username,
+					project: this.collection.toJSON() 
 				};
 				this.$el.html(this.template(collection));
 			}
@@ -140,11 +187,49 @@ $(function() {
 
 				this.$el.html(this.template(attributes)).find('textarea').wysihtml5();
 			}
+		}),		
+		WriteProjectView = Parse.View.extend({
+			template: Handlebars.compile($('#write-tpl').html()),
+			events: {
+				'submit .form-write': 'submit'
+			},
+			submit: function(e) {
+				e.preventDefault();
+				var data = $(e.target).serializeArray();
+				// If there's no blog data, then create a new blog
+				this.model = this.model || new Project();
+				this.model.update({
+						title: data[0].value, 
+						content: data[1].value
+						// category: data[1].value,
+						// summary: data[2].value,
+						// content: data[3].value
+					});
+			},
+			render: function(){
+				var attributes;
+				// If the user is editing a blog, that means there will be a blog set as this.model
+				// therefore, we use this logic to render different titles and pass in empty strings
+				if (this.model) {
+					attributes = this.model.toJSON();
+					attributes.form_title = 'Edit Project';
+				} else {
+					attributes = {
+						form_title: 'Add a Project',
+						title: '',
+						// summary: '',
+						content: ''
+					}
+				}
+
+				this.$el.html(this.template(attributes)).find('textarea').wysihtml5();
+			}
 		}),
 		BlogRouter = Parse.Router.extend({  
 			// Shared variables can be defined here.
 			initialize: function(options){
 				this.blogs = new Blogs();
+				this.projects = new Projects();
 			},
 			// Router start point.
 			start: function(){
@@ -179,9 +264,16 @@ $(function() {
 				});
 			},
 			projects: function(){
-				var projectsView = new ProjectsView();
-				projectsView.render();
-				$container.html(projectsView.el);
+				this.projects.fetch({
+					success: function(projects) {
+						var projectsGalleryView = new ProjectsGalleryView({ collection: projects });
+						projectsGalleryView.render();
+						$container.html(projectsGalleryView.el);
+					},
+					error: function(projects, error){
+						console.log(error);
+					}
+				})
 			},
 			admin: function() {
 				// Call current user from Parse.
@@ -194,14 +286,27 @@ $(function() {
 					this.blogs.fetch({
 						success: function(blogs) {
 							var blogsAdminView = new BlogsAdminView({ 
-								//Pass current username to be rendered in the #admin-tpl depending html tag.
+								//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
 								username: currentUser.get('username'),
-								collection: blogs 
+								collection: blogs
 							});
 							blogsAdminView.render();
 							$container.html(blogsAdminView.el);
 						},
 						error: function(blogs, error) {
+							console.log(error);
+						}
+					}),
+					this.projects.fetch({
+						success: function(projects) {
+							var projectsAdminView = new ProjectsAdminView({
+								username: currentUser.get('username');
+								collection: projects
+							});
+							projectsAdminView.render();
+							$container.html(projectsAdminView.el);
+						},
+						error: function(projects, error) {
 							console.log(error);
 						}
 					});
@@ -221,9 +326,15 @@ $(function() {
 				if (!Parse.User.current()) {
 					this.navigate('#/login', { trigger: true });
 				} else {
-					var writeBlogView = new WriteBlogView();
-					writeBlogView.render();
-					$container.html(writeBlogView.el);
+					// if (blogs.has) {
+						var writeBlogView = new WriteBlogView();
+						writeBlogView.render();
+						$container.html(writeBlogView.el);
+					// } else if (this.projects) {
+						var writeProjectView = new WriteProjectView();
+						writeProjectView.render();
+						$container.html(writeProjectView.el);
+					// };
 				}
 			},
 			edit: function(id) {
