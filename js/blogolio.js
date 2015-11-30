@@ -286,16 +286,17 @@ $(function() {
 				if (!currentUser) {
 					this.navigate('#/login', { trigger: true });
 				} else {
+					var blogsAdminView;
+					var projectsAdminView;
 					$.when(
 						this.blogs.fetch({
 							success: function(blogs) {
-								var blogsAdminView = new BlogsAdminView({ 
+								blogsAdminView = new BlogsAdminView({ 
 									//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
 									username: currentUser.get('username'),
 									collection: blogs
 								});
-								blogsAdminView.render();
-								$container.html(blogsAdminView.el);
+								
 							},
 							error: function(blogs, error) {
 								console.log(error);
@@ -303,17 +304,21 @@ $(function() {
 						}),
 						this.projects.fetch({
 							success: function(projects) {
-								var projectsAdminView = new ProjectsAdminView({
+								projectsAdminView = new ProjectsAdminView({
 									username: currentUser.get('username'),
 									collection: projects
 								});
-								projectsAdminView.render();
-								$container.html(projectsAdminView.el);
+								
 							},
 							error: function(projects, error) {
 								console.log(error);
 							}
-						})
+						}).then (
+							blogsAdminView.render();
+							$container.html(blogsAdminView.el);
+							projectsAdminView.render();
+							$container.html(projectsAdminView.el);
+						)
 					);
 					// .done(function(blogs, projects) {
      //    					var blogsAdminView = new BlogsAdminView({ 
