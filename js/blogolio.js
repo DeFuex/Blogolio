@@ -345,7 +345,7 @@ $(function() {
 						// 		console.log(error);
 						// 	}
 						// })
-					)
+					// )
 				}
 			},
 			login: function() {
