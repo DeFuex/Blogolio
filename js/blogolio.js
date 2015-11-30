@@ -286,10 +286,27 @@ $(function() {
 				if (!currentUser) {
 					this.navigate('#/login', { trigger: true });
 				} else {
-					var complete = _.invoke([this.blogs, this.projects], 'fetch');
+					// var complete = _.invoke([this.blogs, this.projects], 'fetch');
 
-					$.when.apply($, complete).done(function(){
-						var blogsAdminView = new BlogsAdminView({ 
+					// $.when.apply($, complete).done(function(){
+					// 	var blogsAdminView = new BlogsAdminView({ 
+					// 		//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
+					// 			username: currentUser.get('username'),
+					//  			collection: blogs
+					//  		});
+					// 		blogsAdminView.render();
+					//  		$container.html(blogsAdminView.el);
+
+					// 	var projectsAdminView = new ProjectsAdminView({
+					// 			username: currentUser.get('username'),
+					// 			collection: projects
+					// 		});
+					// 	 	projectsAdminView.render();
+					// 		$container.html(projectsAdminView.el);
+					// });
+					$.when(this.blogs.fetch(), this.projects.fetch()).then
+					(
+							var blogsAdminView = new BlogsAdminView({ 
 							//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
 								username: currentUser.get('username'),
 					 			collection: blogs
@@ -297,17 +314,13 @@ $(function() {
 							blogsAdminView.render();
 					 		$container.html(blogsAdminView.el);
 					 		
-						var projectsAdminView = new ProjectsAdminView({
+							var projectsAdminView = new ProjectsAdminView({
 								username: currentUser.get('username'),
 								collection: projects
 							});
 						 	projectsAdminView.render();
 							$container.html(projectsAdminView.el);
-					});
-					// $.when(this.blogs.fetch(), this.projects.fetch()).then
-					// (
-						
-					// )
+					);
 
 					// this.blogs.fetch({
 					// 	success: function(blogs) {
