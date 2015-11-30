@@ -287,6 +287,8 @@ $(function() {
 				if (!currentUser) {
 					this.navigate('#/login', { trigger: true });
 				} else {
+					var blogsAdminView;
+					var projectsAdminView;
 					// $.when(this.blogs.fetch(), this.projects.fetch())
 					//  .done(function(blogs, projects) {
 					//  	console.log(blogs);
@@ -320,7 +322,7 @@ $(function() {
 					$.when(
 						this.blogs.fetch({
 							success: function(blogs) {
-								var blogsAdminView = new BlogsAdminView({ 
+								blogsAdminView = new BlogsAdminView({ 
 									//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
 									username: currentUser.get('username'),
 									collection: blogs
@@ -335,7 +337,7 @@ $(function() {
 						,
 						this.projects.fetch({
 							success: function(projects) {
-								var projectsAdminView = new ProjectsAdminView({
+								projectsAdminView = new ProjectsAdminView({
 									username: currentUser.get('username'),
 									collection: projects
 								});
@@ -346,7 +348,7 @@ $(function() {
 								console.log(error);
 							}
 						})
-					).then(this.render())
+					).then(blogsAdminView.render(), projectsAdminView.render())
 				}
 			},
 			login: function() {
