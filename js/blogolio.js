@@ -132,7 +132,7 @@ $(function() {
 			}
 		}),
 		BlogsAdminView = Parse.View.extend({
-			template: Handlebars.compile($('#admin-tpl').html()),
+			template: Handlebars.compile($('#admin-blogs-tpl').html()),
 			render: function() {
 				var collection = { 
 					username: this.options.username,
@@ -142,7 +142,7 @@ $(function() {
 			}
 		}),		
 		ProjectsAdminView = Parse.View.extend({
-			template: Handlebars.compile($('#admin-tpl').html()),
+			template: Handlebars.compile($('#admin-projects-tpl').html()),
 			render: function() {
 				var collection = { 
 					username: this.options.username,

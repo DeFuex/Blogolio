@@ -9,7 +9,7 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
-	<link href="css/blogolio.css" rel="stylesheet">
+	  <link href="css/blogolio.css" rel="stylesheet">
     <link href="css/bootstrap-wysihtml5-0.0.2.css" rel="stylesheet">
  
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -145,22 +145,10 @@
                 <h2><a href="#">{{title}}</a></h2>
             </div>
             {{/each}}
-            
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-        </div>
 	</script>
 	
 
-  <script id="admin-tpl" type="text/x-handlebars-template">
+  <script id="admin-blogs-tpl" type="text/x-handlebars-template">
     <h2>Welcome, {{username}}!</h2>
     <a href="#/add" class="add-blog btn btn-lg btn-primary">Add a New Blog</a>
     <a href="#/logout" class="add-blog btn btn-lg">Logout</a>
@@ -187,7 +175,10 @@
         {{/each}}
       </tbody>
     </table>
+  </script><b>
+  </b>	
 
+  <script id="admin-projects-tpl" type="text/x-handlebars-template">
     <a href="#/addp" class="add-blog btn btn-lg btn-primary">Add a New Project</a>
     <table>
       <thead>
@@ -212,37 +203,8 @@
         {{/each}}
       </tbody>
     </table>
-  </script><b>
-  </b>	
-
- <!-- <script id="admin-projects-tpl" type="text/x-handlebars-template">
-		<h2>Welcome, {{username}}!</h2>
-		<a href="#/add" class="add-blog btn btn-lg btn-primary">Add a New Blog</a>
-    <a href="#/logout" class="add-blog btn btn-lg">Logout</a>
-		<table>
-			<thead>
-				<tr>
-					<th>Title</th>
-					<th>Author</th>
-					<th>Time</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				{{#each blog}}
-				<tr>
-					<td><a class="app-link" href="#/edit/{{objectId}}">{{title}}</a></td>
-					<td>{{authorName}}</td>
-					<td>{{time}}</td>
-					<td>
-						<a class="app-link app-edit" href="#/edit/{{objectId}}">Edit</a> | 
-						<a class="app-link" href="#/del/{{objectId}}">Delete</a>
-					</td>
-				</tr>
-				{{/each}}
-			</tbody>
-		</table>
-	</scrip -->
+	</script><b>
+  </b>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
