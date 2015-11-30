@@ -175,6 +175,31 @@
         {{/each}}
       </tbody>
     </table>
+
+    <a href="#/addp" class="add-blog btn btn-lg btn-primary">Add a New Project</a>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Time</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each project}}
+        <tr>
+          <td><a class="app-link" href="#/editp/{{objectId}}">{{title}}</a></td>
+          <td>{{authorName}}</td>
+          <td>{{time}}</td>
+          <td>
+            <a class="app-link app-edit" href="#/editp/{{objectId}}">Edit</a> | 
+            <a class="app-link" href="#/delp/{{objectId}}">Delete</a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
   </script><b>
   </b>	
 

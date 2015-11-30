@@ -142,7 +142,7 @@ $(function() {
 			}
 		}),		
 		ProjectsAdminView = Parse.View.extend({
-			template: Handlebars.compile($('#admin-projects-tpl').html()),
+			template: Handlebars.compile($('#admin-blogs-tpl').html()),
 			render: function() {
 				var collection = { 
 					username: this.options.username,
