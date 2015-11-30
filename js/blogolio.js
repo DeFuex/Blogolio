@@ -304,9 +304,9 @@ $(function() {
 					// 	 	projectsAdminView.render();
 					// 		$container.html(projectsAdminView.el);
 					// });
-					$.when(this.blogs.fetch(), this.projects.fetch()).then
-					(
-							var blogsAdminView = new BlogsAdminView({ 
+					$.when(this.blogs.fetch(), this.projects.fetch())
+					 .done(function(blogs, projects) {
+        					var blogsAdminView = new BlogsAdminView({ 
 							//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
 								username: currentUser.get('username'),
 					 			collection: blogs
@@ -320,7 +320,7 @@ $(function() {
 							});
 						 	projectsAdminView.render();
 							$container.html(projectsAdminView.el);
-					);
+    					})
 
 					// this.blogs.fetch({
 					// 	success: function(blogs) {
