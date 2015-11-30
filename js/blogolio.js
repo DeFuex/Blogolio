@@ -313,7 +313,7 @@ $(function() {
 							error: function(projects, error) {
 								console.log(error);
 							}
-						});
+						})
 					);
 					// .done(function(blogs, projects) {
      //    					var blogsAdminView = new BlogsAdminView({ 
