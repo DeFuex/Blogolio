@@ -348,7 +348,7 @@ $(function() {
 								console.log(error);
 							}
 						})
-					).then(blogsAdminView.render(), projectsAdminView.render())
+					).then(this.blogsAdminView.render(), this.projectsAdminView.render())
 				}
 			},
 			login: function() {
