@@ -317,6 +317,7 @@ $(function() {
 					// 	blogsAdminView.render();
 					// 	$container.html(blogsAdminView.el);
 					// })
+					$.when(
 						this.blogs.fetch({
 							success: function(blogs) {
 								var blogsAdminView = new BlogsAdminView({ 
@@ -345,7 +346,7 @@ $(function() {
 								console.log(error);
 							}
 						})
-					// )
+					).then(this.render())
 				}
 			},
 			login: function() {
