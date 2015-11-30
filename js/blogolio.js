@@ -132,7 +132,7 @@ $(function() {
 			}
 		}),
 		BlogsAdminView = Parse.View.extend({
-			template: Handlebars.compile($('#admin-blogs-tpl').html()),
+			template: Handlebars.compile($('#admin-tpl').html()),
 			render: function() {
 				var collection = { 
 					username: this.options.username,
@@ -142,7 +142,7 @@ $(function() {
 			}
 		}),		
 		ProjectsAdminView = Parse.View.extend({
-			template: Handlebars.compile($('#admin-projects-tpl').html()),
+			template: Handlebars.compile($('#admin-tpl').html()),
 			render: function() {
 				var collection = { 
 					username: this.options.username,
@@ -249,7 +249,10 @@ $(function() {
 				'logout': 'logout',
 				'add': 'add',
 				'edit/:id': 'edit',
-				'del/:id': 'del'
+				'del/:id': 'del',
+				'addp': 'addproject',
+				'editp/:id': 'editproject',
+				'delp/:id': 'delproject'
 			},
 			index: function() {
 				this.blogs.fetch({
@@ -326,15 +329,9 @@ $(function() {
 				if (!Parse.User.current()) {
 					this.navigate('#/login', { trigger: true });
 				} else {
-					// if (blogs.has) {
-						var writeBlogView = new WriteBlogView();
-						writeBlogView.render();
-						$container.html(writeBlogView.el);
-					// } else if (this.projects) {
-						var writeProjectView = new WriteProjectView();
-						writeProjectView.render();
-						$container.html(writeProjectView.el);
-					// };
+					var writeBlogView = new WriteBlogView();
+					writeBlogView.render();
+					$container.html(writeBlogView.el);
 				}
 			},
 			edit: function(id) {
@@ -367,7 +364,48 @@ $(function() {
 						})
 					});
 				}
-			}     
+			},
+			addproject: function() {
+				// Check login
+				if (!Parse.User.current()) {
+					this.navigate('#/login', { trigger: true });
+				} else {
+					var writeProjectView = new WriteProjectView();
+					writeProjectView.render();
+					$container.html(writeProjectView.el);
+				}
+			},
+			editproject: function(id) {
+				// Check login
+				if (!Parse.User.current()) {
+					this.navigate('#/login', { trigger: true });
+				} else {
+					var query = new Parse.Query(Project);
+					query.get(id, {
+						success: function(project) {
+							var writeProjectView = new WriteProjectView({ model: project });
+							writeProjectView.render();
+							$container.html(writeProjectView.el);
+						},
+						error: function(project, error) {
+							console.log(error);
+						}
+					});
+				}
+			},
+			delproject: function(id){
+				if (!Parse.User.current()) {
+					this.navigate('#/login', { trigger: true });
+				} else {
+					var self = this,
+					query = new Parse.Query(Project);
+					query.get(id).then(function(project){
+						project.destroy().then(function(project){
+							self.navigate('admin', { trigger: true });
+						})
+					});
+				}
+			}      
 		}),
 		blogRouter = new BlogRouter();
 	 
