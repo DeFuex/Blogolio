@@ -136,7 +136,7 @@ $(function() {
 			render: function() {
 				var collection = { 
 					username: this.options.username,
-					blog: this.collection.toJSON()
+					blog: this.collection
 				};
 				this.$el.html(this.template(collection));
 			}
@@ -146,7 +146,7 @@ $(function() {
 			render: function() {
 				var collection = { 
 					username: this.options.username,
-					project: this.collection.toJSON() 
+					project: this.collection
 				};
 				this.$el.html(this.template(collection));
 			}
