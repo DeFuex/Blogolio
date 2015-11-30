@@ -314,10 +314,10 @@ $(function() {
 								console.log(error);
 							}
 						}).then (
-							blogsAdminView.render();
-							$container.html(blogsAdminView.el);
-							projectsAdminView.render();
-							$container.html(projectsAdminView.el);
+							blogsAdminView.render(),
+							$container.html(blogsAdminView.el),
+							projectsAdminView.render(),
+							$container.html(projectsAdminView.el)
 						)
 					);
 					// .done(function(blogs, projects) {
