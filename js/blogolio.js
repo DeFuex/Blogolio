@@ -169,7 +169,7 @@ $(function() {
 			render: function() {
 				var collection = { 
 					username: this.options.username,
-					blog: this.collection.toJSON()
+					blog: this.collection
 				};
 				this.$el.html(this.template(collection));
 			}
@@ -365,12 +365,12 @@ $(function() {
 						blogsAdminView.render();
 						$container.html(blogsAdminView.el);
 
-						var projectsAdminView = new ProjectsAdminView({
-							username: currentUser.get('username'),
-							collection: stack[1]
-						});
-						projectsAdminView.render();
-						$container.html(projectsAdminView.el);
+						// var projectsAdminView = new ProjectsAdminView({
+						// 	username: currentUser.get('username'),
+						// 	collection: stack[1]
+						// });
+						// projectsAdminView.render();
+						// $container.html(projectsAdminView.el);
 					});
 
 					// $.when(
