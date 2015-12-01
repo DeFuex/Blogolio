@@ -336,7 +336,7 @@ $(function() {
 							console.log(error);
 						}
 						}).done(function(){
-							this.projects.fetch({
+							projects.fetch({
 								success: function(projects) {
 									var projectsAdminView = new ProjectsAdminView({
 										username: currentUser.get('username'),
