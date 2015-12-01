@@ -165,6 +165,10 @@ $(function() {
 			}
 		}),
 		BlogsAdminView = Parse.View.extend({
+			initialize: function(){
+				this.blogs = new Blogs();
+				this.projects = new Projects(); 
+			}
 			template: Handlebars.compile($('#admin-blogs-tpl').html()),
 			render: function() {
 				var collection = { 
