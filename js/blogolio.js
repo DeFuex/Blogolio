@@ -172,7 +172,7 @@ $(function() {
 			render: function() {
 				var collection = { 
 					username: this.options.username,
-					blog: this.collection
+					blog: this.collection.toJSON()
 				};
 				this.$el.html(this.template(collection));
 			}
