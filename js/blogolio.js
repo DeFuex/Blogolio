@@ -1,5 +1,38 @@
 $(function() {
- 
+
+	var Utils = {};
+
+	/**
+	 * Fetch multiple models(or collections) and execute passed callback
+	 *
+	 * @param {Array} stack - stack of objects
+	 * @param {Function} callback - exec on ready
+	 * @param {Object} ctx - callback context
+	 *
+	 * @returns {Object} context
+	 */
+
+	Utils.fetch = function(stack, callback, ctx){
+	  var counter = stack.length
+	    , error
+	    , cb;
+
+	  cb = function(){
+	    counter--;
+	    if(counter == 0){
+	      return callback.call(ctx);
+	    }
+	  }
+
+	  for(var i in stack){
+	    var task = stack[i];
+	    task.target.bind(task.event, cb).fetch();
+	  }
+
+	  return ctx;
+	}
+
+
     Parse.$ = jQuery;
 	
 	//Connection to the Parse Database Webserver.
@@ -316,6 +349,16 @@ $(function() {
 					// 	blogsAdminView.render();
 					// 	$container.html(blogsAdminView.el);
 					// })
+
+					var stack = [];
+					stack.push({ target: blogs, event: 'reset' });
+					stack.push({ target: projects, event: 'reset' });
+
+					Utils.fetch(stack, function(){
+					  	console.log('Models are ready');
+					  	console.log(stack);
+					});
+
 					$.when(
 						this.blogs.fetch({
 							success: function(blogs) {
