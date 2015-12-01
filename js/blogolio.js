@@ -378,7 +378,7 @@ $(function() {
 								var blogsAdminView = new BlogsAdminView({ 
 									//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
 									username: currentUser.get('username'),
-									blog: blogs
+									blog: blogs,
 									project: projects
 								});
 								blogsAdminView.render();
