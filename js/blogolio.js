@@ -351,8 +351,8 @@ $(function() {
 					// })
 
 					var stack = [];
-					stack.push({ target: blogs, event: 'reset' });
-					stack.push({ target: projects, event: 'reset' });
+					stack.push({ target: this.blogs, event: 'reset' });
+					stack.push({ target: this.projects, event: 'reset' });
 
 					Utils.fetch(stack, function(){
 					  	console.log('Models are ready');
