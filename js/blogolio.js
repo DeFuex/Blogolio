@@ -344,7 +344,7 @@ $(function() {
 										collection: projects
 									});
 									projectsAdminView.render();
-									$container.html(projectsAdminView.el);
+									$container.html(blogsAdminView.el, projectsAdminView.el);
 								},
 								error: function(projects, error) {
 									console.log(error);
