@@ -166,8 +166,8 @@ $(function() {
 		}),
 		BlogsAdminView = Parse.View.extend({
 			initialize: function(){
-				this.blogs = new Blogs();
-				this.projects = new Projects(); 
+				this.blogs = Blogs();
+				this.projects = Projects(); 
 			},
 			template: Handlebars.compile($('#admin-blogs-tpl').html()),
 			render: function() {
@@ -266,8 +266,8 @@ $(function() {
 		BlogRouter = Parse.Router.extend({  
 			// Shared variables can be defined here.
 			initialize: function(options){
-				// this.blogs = new Blogs();
-				// this.projects = new Projects();
+				this.blogs = new Blogs();
+				this.projects = new Projects();
 			},
 			// Router start point.
 			start: function(){
