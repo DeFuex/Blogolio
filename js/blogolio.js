@@ -336,6 +336,7 @@ $(function() {
 							console.log(error);
 						}
 						}).done(function(){
+							var projects = new Projects();
 							projects.fetch({
 								success: function(projects) {
 									var projectsAdminView = new ProjectsAdminView({
