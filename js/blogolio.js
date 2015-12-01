@@ -360,7 +360,7 @@ $(function() {
 						var blogsAdminView = new BlogsAdminView({ 
 							//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
 							username: currentUser.get('username'),
-							collection: stack[0].models[0]
+							collection: stack[0].target
 						});
 						blogsAdminView.render();
 						$container.html(blogsAdminView.el);
