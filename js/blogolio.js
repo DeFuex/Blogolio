@@ -136,7 +136,8 @@ $(function() {
 			render: function() {
 				var collection = { 
 					username: this.options.username,
-					blog: this.collection.toJSON()
+					blog: this.collection.toJSON(),
+					project: this.collection.toJSON()
 				};
 				this.$el.html(this.template(collection));
 			}
@@ -146,7 +147,8 @@ $(function() {
 			render: function() {
 				var collection = { 
 					username: this.options.username,
-					project: this.collection.toJSON()
+					project: this.collection.toJSON(),
+					blog: this.collection.toJSON()
 				};
 				this.$el.html(this.template(collection));
 			}
@@ -316,7 +318,15 @@ $(function() {
 					// 	blogsAdminView.render();
 					// 	$container.html(blogsAdminView.el);
 					// })
-					$.when(
+					// $.when( this.blogs.fetch(), this.projects.fetch() ).done(function (collection) {
+						// var blogsAdminView = new BlogsAdminView({ 
+							// //Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
+							// username: currentUser.get('username'),
+							// collection: collection
+						// });
+						// blogsAdminView.render();
+						// $container.html(blogsAdminView.el);
+					// })
 						this.blogs.fetch({
 							success: function(blogs) {
 								var blogsAdminView = new BlogsAdminView({ 
@@ -345,7 +355,7 @@ $(function() {
 								console.log(error);
 							}
 						})
-					)
+					// )
 				}
 			},
 			login: function() {
