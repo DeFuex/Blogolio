@@ -262,7 +262,9 @@ $(function() {
 			template: Handlebars.compile($('#contact-tpl').html()),
 			render: function(){
 				var attributes;
-				attributes.form_title = 'Contact';
+				attributes = {
+					form_title: 'Contact'
+				}
 				this.$el.html(this.template(attributes));
 			}
 		}),
