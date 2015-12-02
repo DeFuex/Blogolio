@@ -258,6 +258,14 @@ $(function() {
 				this.$el.html(this.template(attributes)).find('textarea').wysihtml5();
 			}
 		}),
+		ContactView = Parse.View.extend({
+			template: Handlebars.compile($('#contact-tpl').html()),
+			render: function(){
+				var attributes;
+				attributes.form_title = 'Contact';
+				this.$el.html(this.template(attributes));
+			}
+		}),
 		BlogRouter = Parse.Router.extend({  
 			// Shared variables can be defined here.
 			initialize: function(options){
@@ -285,7 +293,8 @@ $(function() {
 				'del/:id': 'del',
 				'addp': 'addproject',
 				'editp/:id': 'editproject',
-				'delp/:id': 'delproject'
+				'delp/:id': 'delproject',
+				'contact': 'contact'
 			},
 			index: function() {
 				this.blogs.fetch({
@@ -441,6 +450,11 @@ $(function() {
 						})
 					});
 				}
+			},
+			contact: function(){
+				var contactView = new ContactView();
+				contactView.render();
+				$container.html(contactView.el);
 			}      
 		}),
 		blogRouter = new BlogRouter();
