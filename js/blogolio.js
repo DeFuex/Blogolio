@@ -268,7 +268,19 @@ $(function() {
 			// Shared variables can be defined here.
 			initialize: function(options){
 				this.blogs = new Blogs();
+
+				this.listenTo(this.blogs, 'reset', this.render);
+
+				this.fetch1 = this.blogs.fetch({
+					reset: true
+				});
+
+
 				this.projects = new Projects();
+				
+				this.fetch2 = this.projects.fetch({
+					reset: true
+				});
 			},
 			// Router start point.
 			start: function(){
@@ -389,30 +401,36 @@ $(function() {
 					// 	$container.html(projectsAdminView.el);
 					// });
 
-						$.when(this.blogs.fetch(), this.projects.fetch()).done(function(blogs, projects){
-								var blogsAdminView = new BlogsAdminView({ 
-									//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
-									username: currentUser.get('username'),
-									blog: blogs,
-									project: projects
-								});
-								blogsAdminView.render();
-								$container.html(blogsAdminView.el);
-						})
-						,
-						this.projects.fetch({
-							success: function(projects) {
-								var projectsAdminView = new ProjectsAdminView({
-									username: currentUser.get('username'),
-									collection: projects
-								});
-								projectsAdminView.render();
-								$container.html(projectsAdminView.el);
-							},
-							error: function(projects, error) {
-								console.log(error);
-							}
-						})
+						// $.when(this.blogs.fetch(), this.projects.fetch()).done(function(blogs, projects){
+						// 		var blogsAdminView = new BlogsAdminView({ 
+						// 			//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
+						// 			username: currentUser.get('username'),
+						// 			blog: blogs,
+						// 			project: projects
+						// 		});
+						// 		blogsAdminView.render();
+						// 		$container.html(blogsAdminView.el);
+						// })
+
+
+						$.when(this.fetch1, this.fetch2).done(function(){
+							blogsAdminView.render();
+							$container.html(this.blogs, this.projects);
+						});
+						// ,
+						// this.projects.fetch({
+						// 	success: function(projects) {
+						// 		var projectsAdminView = new ProjectsAdminView({
+						// 			username: currentUser.get('username'),
+						// 			collection: projects
+						// 		});
+						// 		projectsAdminView.render();
+						// 		$container.html(projectsAdminView.el);
+						// 	},
+						// 	error: function(projects, error) {
+						// 		console.log(error);
+						// 	}
+						// })
 
 					// $.when(
 					// 	this.blogs.fetch({
