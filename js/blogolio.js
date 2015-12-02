@@ -165,36 +165,36 @@ $(function() {
 			}
 		}),
 		BlogsAdminView = Parse.View.extend({
-			initialize: function(){
-				this.blogs = new Blogs();
+			// initialize: function(){
+			// 	this.blogs = new Blogs();
 
-				self.on(this.blogs, 'reset', this.render);
+			// 	this.on(this.blogs, 'reset', this.render);
 
-				this.fetch1 = this.blogs.fetch({
-					reset: true
-				});
+			// 	this.fetch1 = this.blogs.fetch({
+			// 		reset: true
+			// 	});
 
 
-				this.projects = new Projects();
+			// 	this.projects = new Projects();
 				
-				this.fetch2 = this.projects.fetch({
-					reset: true
-				});
-			},
+			// 	this.fetch2 = this.projects.fetch({
+			// 		reset: true
+			// 	});
+			// },
 			template: Handlebars.compile($('#admin-blogs-tpl').html()),
 			render: function() {
-				var this_ = this;
+				// var this_ = this;
 
-				$.when(this.fetch1, this.fetch2).done(function(){
-					this.$el.html(this.template(this.blogs, this.projects));
-				})
+				// $.when(this.fetch1, this.fetch2).done(function(){
+				// 	this.$el.html(this.template(this.blogs, this.projects));
+				// })
 
-				// var collection = { 
-				// 	username: this.options.username,
-				// 	blog: this.blogs.toJSON(),
-				// 	project: this.projects.toJSON()
-				// };
-				// this.$el.html(this.template(collection));
+				var collection = { 
+					username: this.options.username,
+					blog: this.blogs.toJSON(),
+					project: this.projects.toJSON()
+				};
+				this.$el.html(this.template(collection));
 			}
 		}),		
 		ProjectsAdminView = Parse.View.extend({
@@ -202,8 +202,7 @@ $(function() {
 			render: function() {
 				var collection = { 
 					username: this.options.username,
-					project: this.collection.toJSON(),
-					blog: this.collection.toJSON()
+					project: this.collection.toJSON()
 				};
 				this.$el.html(this.template(collection));
 			}
@@ -343,9 +342,9 @@ $(function() {
 				if (!currentUser) {
 					this.navigate('#/login', { trigger: true });
 				} else {
-					var blogsAdminView = new BlogsAdminView();
-					blogsAdminView.render();
-					$container.html(blogsAdminView.el);
+					// var blogsAdminView = new BlogsAdminView();
+					// blogsAdminView.render();
+					// $container.html(blogsAdminView.el);
 
 					// $.when(this.blogs.fetch(), this.projects.fetch())
 					//  .done(function(blogs, projects) {
@@ -438,36 +437,36 @@ $(function() {
 						// 	}
 						// })
 
-					// $.when(
-					// 	this.blogs.fetch({
-					// 		success: function(blogs) {
-					// 			var blogsAdminView = new BlogsAdminView({ 
-					// 				//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
-					// 				username: currentUser.get('username'),
-					// 				blogs: blogs
-					// 			});
-					// 			blogsAdminView.render();
-					// 			$container.html(blogsAdminView.el);
-					// 		},
-					// 		error: function(blogs, error) {
-					// 			console.log(error);
-					// 		}
-					// 	})
-					// 	,
-					// 	this.projects.fetch({
-					// 		success: function(projects) {
-					// 			var projectsAdminView = new ProjectsAdminView({
-					// 				username: currentUser.get('username'),
-					// 				projects: projects
-					// 			});
-					// 			projectsAdminView.render();
-					// 			$container.html(projectsAdminView.el);
-					// 		},
-					// 		error: function(projects, error) {
-					// 			console.log(error);
-					// 		}
-					// 	})
-					// )
+					$.when(
+						this.blogs.fetch({
+							success: function(blogs) {
+								var blogsAdminView = new BlogsAdminView({ 
+									//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
+									username: currentUser.get('username'),
+									blogs: blogs
+								});
+								blogsAdminView.render();
+								$container.html(blogsAdminView.el);
+							},
+							error: function(blogs, error) {
+								console.log(error);
+							}
+						})
+						,
+						this.projects.fetch({
+							success: function(projects) {
+								var projectsAdminView = new ProjectsAdminView({
+									username: currentUser.get('username'),
+									projects: projects
+								});
+								projectsAdminView.render();
+								$container.html(projectsAdminView.el);
+							},
+							error: function(projects, error) {
+								console.log(error);
+							}
+						})
+					)
 				}
 			},
 			login: function() {
