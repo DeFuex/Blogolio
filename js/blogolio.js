@@ -258,6 +258,12 @@ $(function() {
 				this.$el.html(this.template(attributes)).find('textarea').wysihtml5();
 			}
 		}),
+		AboutView = Parse.View.extend({
+			template: Handlebars.compile($('#about-tpl').html()),
+			render: function() {
+				this.$el.html(this.template);
+			}
+		})
 		ContactView = Parse.View.extend({
 			template: Handlebars.compile($('#contact-tpl').html()),
 			render: function(){
@@ -296,6 +302,7 @@ $(function() {
 				'addp': 'addproject',
 				'editp/:id': 'editproject',
 				'delp/:id': 'delproject',
+				'about': 'about',
 				'contact': 'contact'
 			},
 			index: function() {
@@ -452,6 +459,11 @@ $(function() {
 						})
 					});
 				}
+			},
+			about: function(){
+				var aboutView = AboutView();
+				aboutView.render();
+				$container.html(aboutView.el);
 			},
 			contact: function(){
 				var contactView = new ContactView();
