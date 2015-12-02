@@ -168,7 +168,7 @@ $(function() {
 			initialize: function(){
 				this.blogs = new Blogs();
 
-				this.listenTo(this.blogs, 'reset', this.render);
+				this.on(this.blogs, 'reset', this.render);
 
 				this.fetch1 = this.blogs.fetch({
 					reset: true
