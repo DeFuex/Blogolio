@@ -342,7 +342,7 @@ $(function() {
 									collection: projects
 								});
 								projectsAdminView.render();
-								$container.html(projectsAdminView.el);
+								$('#projects-container').html(projectsAdminView.el);
 							},
 							error: function(projects, error) {
 								console.log(error);
