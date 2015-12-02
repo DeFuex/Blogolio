@@ -465,7 +465,7 @@ $(function() {
 				}
 			},
 			about: function(){
-				var aboutView = AboutView();
+				var aboutView = new AboutView();
 				aboutView.render();
 				$container.html(aboutView.el);
 			},
