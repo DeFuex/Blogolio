@@ -261,10 +261,13 @@ $(function() {
 		AboutView = Parse.View.extend({
 			template: Handlebars.compile($('#about-tpl').html()),
 			render: function() {
-
+				var attributes
+				attributes = {
+					form_title: 'About'
+				}
+				this.$el.html(this.template);
 			}
-			this.$el.html(this.template);
-		})
+		}),
 		ContactView = Parse.View.extend({
 			template: Handlebars.compile($('#contact-tpl').html()),
 			render: function(){
