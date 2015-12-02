@@ -166,17 +166,35 @@ $(function() {
 		}),
 		BlogsAdminView = Parse.View.extend({
 			initialize: function(){
-				this.blogs = Blogs();
-				this.projects = Projects(); 
+				this.blogs = new Blogs();
+
+				this.listenTo(this.blogs, 'reset', this.render);
+
+				this.fetch1 = this.blogs.fetch({
+					reset: true
+				});
+
+
+				this.projects = new Projects();
+				
+				this.fetch2 = this.projects.fetch({
+					reset: true
+				});
 			},
 			template: Handlebars.compile($('#admin-blogs-tpl').html()),
 			render: function() {
-				var collection = { 
-					username: this.options.username,
-					blog: this.blogs.toJSON(),
-					project: this.projects.toJSON()
-				};
-				this.$el.html(this.template(collection));
+				var this_ = this;
+
+				$.when(this.fetch1, this.fetch2).done(function(){
+					this.$el.html(this.template(this.blogs, this.projects));
+				})
+
+				// var collection = { 
+				// 	username: this.options.username,
+				// 	blog: this.blogs.toJSON(),
+				// 	project: this.projects.toJSON()
+				// };
+				// this.$el.html(this.template(collection));
 			}
 		}),		
 		ProjectsAdminView = Parse.View.extend({
@@ -268,19 +286,7 @@ $(function() {
 			// Shared variables can be defined here.
 			initialize: function(options){
 				this.blogs = new Blogs();
-
-				this.listenTo(this.blogs, 'reset', this.render);
-
-				this.fetch1 = this.blogs.fetch({
-					reset: true
-				});
-
-
 				this.projects = new Projects();
-				
-				this.fetch2 = this.projects.fetch({
-					reset: true
-				});
 			},
 			// Router start point.
 			start: function(){
@@ -413,10 +419,6 @@ $(function() {
 						// })
 
 
-						$.when(this.fetch1, this.fetch2).done(function(){
-							blogsAdminView.render();
-							$container.html(this.blogs, this.projects);
-						});
 						// ,
 						// this.projects.fetch({
 						// 	success: function(projects) {
