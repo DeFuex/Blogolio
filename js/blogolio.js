@@ -343,6 +343,10 @@ $(function() {
 				if (!currentUser) {
 					this.navigate('#/login', { trigger: true });
 				} else {
+					var blogsAdminView = new BlogsAdminView();
+					blogsAdminView.render();
+					$container.html(blogsAdminView.el);
+
 					// $.when(this.blogs.fetch(), this.projects.fetch())
 					//  .done(function(blogs, projects) {
 					//  	console.log(blogs);
