@@ -152,13 +152,19 @@
     <h2>{{form_title}}</h2>
     <form class="form-write" role="form">
       <div class="form-group">
-        <label for="title">Name</label>
-        <input name="stuff" type="text" class="form-control" id="title" value="{{title}}"></input>
+        <label for="title">First Name</label>
+        <input name="firstname" type="text" class="form-control" id="firstname" value="{{title}}"></input>
+        <label for="title">Last Name</label>
+        <input name="firstname" type="text" class="form-control" id="lastname" value="{{title}}"></input>
       </div>
-      // <div class="form-group">
-      //   <label for="content">Content</label>
-      //   <textarea name="content" class="form-control" rows="20">{{{content}}}</textarea>
-      // </div>
+      <div class="form-group">
+        <label for="content">Email</label>
+        <input name="content" type="email" class="form-control" id="email" value="{{content}}"></input>
+      </div>
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea name="content" class="form-control" rows="10">{{{content}}}</textarea>
+      </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form>
   </script>
