@@ -165,30 +165,8 @@ $(function() {
 			}
 		}),
 		BlogsAdminView = Parse.View.extend({
-			// initialize: function(){
-			// 	this.blogs = new Blogs();
-
-			// 	this.on(this.blogs, 'reset', this.render);
-
-			// 	this.fetch1 = this.blogs.fetch({
-			// 		reset: true
-			// 	});
-
-
-			// 	this.projects = new Projects();
-				
-			// 	this.fetch2 = this.projects.fetch({
-			// 		reset: true
-			// 	});
-			// },
 			template: Handlebars.compile($('#admin-blogs-tpl').html()),
 			render: function() {
-				// var this_ = this;
-
-				// $.when(this.fetch1, this.fetch2).done(function(){
-				// 	this.$el.html(this.template(this.blogs, this.projects));
-				// })
-
 				var collection = { 
 					username: this.options.username,
 					blog: this.collection.toJSON()
@@ -341,108 +319,13 @@ $(function() {
 				if (!currentUser) {
 					this.navigate('#/login', { trigger: true });
 				} else {
-					// var blogsAdminView = new BlogsAdminView();
-					// blogsAdminView.render();
-					// $container.html(blogsAdminView.el);
-
-					// $.when(this.blogs.fetch(), this.projects.fetch())
-					//  .done(function(blogs, projects) {
-					//  	console.log(blogs);
-					//  	console.log(projects);
-    	// 				var blogsAdminView = new BlogsAdminView({ 
-					// 	//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
-					// 		username: currentUser.get('username'),
-				 // 			collection: blogs
-				 // 		});
-					// 	blogsAdminView.render();
-				 // 		$container.html(blogsAdminView.el);
-				 		
-					// 	var projectsAdminView = new ProjectsAdminView({
-					// 		username: currentUser.get('username'),
-					// 		collection: projects
-					// 	});
-					//  	projectsAdminView.render();
-					// 	$container.html(projectsAdminView.el);
-    	// 			})
-
-					// $.when( this.blogs.fetch(), this.projects.fetch() ).done(function(blogs, projects){
-					// 	var blogsAdminView = new BlogsAdminView({ 
-					// 		//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
-					// 		username: currentUser.get('username'),
-					// 		collection: blogs,
-					// 		collection: projects
-					// 	});
-					// 	blogsAdminView.render();
-					// 	$container.html(blogsAdminView.el);
-					// })
-
-					// $.when( this.blogs.fetch(), this.projects.fetch() ).done(function (collection) {
-						// var blogsAdminView = new BlogsAdminView({ 
-							// //Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
-							// username: currentUser.get('username'),
-							// collection: collection
-						// });
-						// blogsAdminView.render();
-						// $container.html(blogsAdminView.el);
-					// })
-
-					// var stack = [];
-					// stack.push({ target: this.blogs, event: 'reset' });
-					// stack.push({ target: this.projects, event: 'reset' });
-
-					// Utils.fetch(stack, function(){
-					//   	console.log('Models are ready');
-					//   	console.log(stack);
-					// 	var blogsAdminView = new BlogsAdminView({ 
-					// 		//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
-					// 		username: currentUser.get('username'),
-					// 		collection: stack[0]
-					// 	});
-					// 	blogsAdminView.render();
-					// 	$container.html(blogsAdminView.el);
-
-					// 	var projectsAdminView = new ProjectsAdminView({
-					// 		username: currentUser.get('username'),
-					// 		collection: projects
-					// 	});
-					// 	projectsAdminView.render();
-					// 	$container.html(projectsAdminView.el);
-					// });
-
-						// $.when(this.blogs.fetch(), this.projects.fetch()).done(function(blogs, projects){
-						// 		var blogsAdminView = new BlogsAdminView({ 
-						// 			//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
-						// 			username: currentUser.get('username'),
-						// 			blog: blogs,
-						// 			project: projects
-						// 		});
-						// 		blogsAdminView.render();
-						// 		$container.html(blogsAdminView.el);
-						// })
-
-
-						// ,
-						// this.projects.fetch({
-						// 	success: function(projects) {
-						// 		var projectsAdminView = new ProjectsAdminView({
-						// 			username: currentUser.get('username'),
-						// 			collection: projects
-						// 		});
-						// 		projectsAdminView.render();
-						// 		$container.html(projectsAdminView.el);
-						// 	},
-						// 	error: function(projects, error) {
-						// 		console.log(error);
-						// 	}
-						// })
-
 					$.when(
 						this.blogs.fetch({
 							success: function(blogs) {
 								var blogsAdminView = new BlogsAdminView({ 
 									//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
 									username: currentUser.get('username'),
-									blogs: blogs
+									collection: blogs
 								});
 								blogsAdminView.render();
 								$container.html(blogsAdminView.el);
@@ -456,7 +339,7 @@ $(function() {
 							success: function(projects) {
 								var projectsAdminView = new ProjectsAdminView({
 									username: currentUser.get('username'),
-									projects: projects
+									collection: projects
 								});
 								projectsAdminView.render();
 								$container.html(projectsAdminView.el);
