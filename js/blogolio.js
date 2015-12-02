@@ -191,8 +191,9 @@ $(function() {
 
 				var collection = { 
 					username: this.options.username,
-					blog: this.blogs.toJSON(),
-					project: this.projects.toJSON()
+					blog: this.blogs.toJSON()
+					// ,
+					// project: this.projects.toJSON()
 				};
 				this.$el.html(this.template(collection));
 			}
@@ -202,7 +203,7 @@ $(function() {
 			render: function() {
 				var collection = { 
 					username: this.options.username,
-					project: this.collection.toJSON()
+					project: this.projects.toJSON()
 				};
 				this.$el.html(this.template(collection));
 			}
