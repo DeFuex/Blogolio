@@ -92,7 +92,7 @@ a:focus {
 }
 
 .nav ul{
-    text-align: center;
+    padding-left: 14px;
     margin-bottom: -4px;
 }
 
