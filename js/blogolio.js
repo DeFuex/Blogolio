@@ -235,7 +235,7 @@ $(function() {
 					}
 				}
 
-				this.$el.html(this.template(attributes)).find('textarea').wysihtml5();
+				this.$el.html(this.template(attributes)).find('.write-content').wysihtml5();
 			}
 		}),		
 		WriteProjectView = Parse.View.extend({
@@ -272,7 +272,7 @@ $(function() {
 					}
 				}
 
-				this.$el.html(this.template(attributes)).find('textarea').wysihtml5();
+				this.$el.html(this.template(attributes)).find('.write-content').wysihtml5();
 			}
 		}),
 		AboutView = Parse.View.extend({
