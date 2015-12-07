@@ -146,7 +146,7 @@ $(function() {
 		ProjectView = Parse.View.extend({
 			template: Handlebars.compile($('#project-tpl').html()),
 			render: function(){
-				var attributes = { project: this.model.toJSON() };
+				var attributes = this.model.toJSON();
 				this.$el.html(this.template(attributes));
 			}
 		}),
