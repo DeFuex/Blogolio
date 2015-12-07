@@ -91,6 +91,21 @@ a:focus {
     padding: 28px 0;
 }
 
+.nav ul{
+    font-size: 14px;
+    line-height: 1.5em;
+}
+
+.nav li{
+    display: inline-block;
+    text-align: center;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
 .blog-nav .active {
   color: #fff;
 }
