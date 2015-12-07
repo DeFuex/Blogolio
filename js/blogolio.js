@@ -39,8 +39,8 @@ $(function() {
 	Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
 	
 	var $container = $('.main-container'),
-	var base64 = "V29ya2luZyBhdCBQYXJzZSBpcyBncmVhdCE=",
-	var file = new Parse.File('some.png'), { base64: base64}),
+	// base64 = "V29ya2luZyBhdCBQYXJzZSBpcyBncmVhdCE=",
+	// file = new Parse.File('some.png'), { base64: base64}),
 		$sidebar = $('.blog-sidebar'),
 		Blog = Parse.Object.extend('Blog', {
 			update: function(data) {
