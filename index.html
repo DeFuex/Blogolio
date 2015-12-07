@@ -28,11 +28,13 @@
     <div class="blog-masthead">
       <div class="container">
         <nav class="nav">
-          <a class="blog-nav-item" href="">Home</a>
-          <a class="blog-nav-item" href="#/projects">Projects</a>
-		  <a class="blog-nav-item" href="#/about">About</a>
-		  <a class="blog-nav-item" href="#/contact">Contact</a>
-          <a class="blog-nav-item" href="#/admin" style="float: right">Admin</a>
+          <ul>
+            <li><a class="blog-nav-item" href="#">Home</a></li>
+            <li><a class="blog-nav-item" href="#/about">About</a></li>
+            <li><a class="blog-nav-item" href="#/projects">Projects</a></li>        	  
+        		<li><a class="blog-nav-item" href="#/contact">Contact</a></li>
+            <li><a class="blog-nav-item" href="#/admin" style="float: right">Admin</a></li>
+          </ul>
         </nav>
       </div>
     </div>
@@ -87,7 +89,7 @@
       {{#each blog}}
       <div class="blog-post">
           <h2 class="page-header"><a href="#">{{title}}</a></h2>
-          <div class="blog-content">{{{content}}}</div>
+          <div class="contact-description">{{{content}}}</div>
           <p class="blog-post-meta">At {{time}} by {{authorName}}</p>
       </div>
       {{/each}}
@@ -98,7 +100,7 @@
     {{#each project}}
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="#">{{title}}</a></h2>
-        <div class="contact-description">{{{content}}}</div>
+        <div class="blog-content">{{{content}}}</div>
         <p class="blog-post-meta">At {{time}} by {{authorName}}</p>
     </div>
     {{/each}}
@@ -138,7 +140,7 @@
           <a class="thumbnail" href="#">
               <img class="img-responsive" src="assets/projecttire.jpg" alt="">
           </a>
-	        <h2><a href="#">Project Tire(d)</a></h2>
+	        <h3><a href="#">Project Tire(d)</a></h3>
       </div>
 
       {{#each project}}
@@ -146,7 +148,7 @@
           <a class="thumbnail" href="#">
               <img class="img-responsive" src="http://placehold.it/400x300" alt="">
           </a>
-          <h2><a href="#">{{title}}</a></h2>
+          <h3><a href="#">{{title}}</a></h3>
       </div>
       {{/each}}
     </div>
@@ -165,7 +167,7 @@
 	  <h2 class="page-header" >{{form_title}}</h2>
 	  <p class="contact-description">
 		I love hearing from people landing on my site, so use the little form below
-		shoud you have a question, recommendation, or request for me. I will try my best
+		should you have a question, recommendation, or request for me. I will try my best
 		to get back to you.
 	  </p>
 		<div id="contact-form">
