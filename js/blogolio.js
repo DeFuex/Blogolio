@@ -480,3 +480,36 @@ $(function() {
 		blogRouter.start(); 
 
 });
+
+$(document).ready( function() {
+ $('.contactButton').on('click', sendMail());
+ 
+	 function sendMail() {
+		
+		var firstVal = document.getElementById('contactFirstName').value;
+		var lastVal = document.getElementById('contactLastName').value;
+		var bodyVal = document.getElementById('contactBody').value;
+		
+		if(firstVal.length > 0 &&
+			lastVal.length > 0 &&
+			bodyVal.length > 0) {
+				console.log(bla);
+				
+			var link = "mailto:timo.obereder@gmail.com"
+					 + "?cc=timo.obereder@gmail.com"
+					 + "&subject=" + escape("From Blogolio Contact")
+					 + "&body=" + firstVal.val()
+								+ ''
+								+ lastVal.val()
+								+ bodyVal.val()
+			;
+
+			window.location.href = link;
+			
+			$('.toshow').show();
+		} else {
+			$('.toshow').val('Email could not be sent. Fill in all required fields!');
+			
+		}
+	}
+});

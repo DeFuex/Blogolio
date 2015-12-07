@@ -164,24 +164,25 @@
 		to get back to you.
 	  </p>
 		<div id="contact-form">
-		  <form action="http://http://defuex.github.io/Blogolio/#/contact" method="post" class="contact-form" role="form">
+		  <form action="http://localhost/Blogolio/#/contact" method="post" class="contact-form" role="form">
 			<div>
 			  <label for="title">First Name</label><br/>
-			  <input name="firstname" type="text" id="firstname" value="{{title}}" >
+			  <input id=contactFirstName name="firstname" type="text" value="{{title}}" >
 			</div>
 			<div>			
 			  <label for="title">Last Name</label><br/>
-			  <input name="firstname" type="text" id="lastname" value="{{title}}" >
+			  <input id=contactLastName name="firstname" type="text" value="{{title}}" >
 			</div>
 			<div>
 			  <label for="content">Email</label><br/>
-			  <input name="content" type="email" id="email" value="{{content}}" >
+			  <input name="content" type="email" value="{{content}}" >
 			</div>
 			<div>
 			  <label for="content">Content</label><br/>
-			  <textarea name="content" rows="10">{{{content}}}</textarea>
+			  <textarea id=contactBody name="content" rows="10">{{{content}}}</textarea>
 			</div>
-			<input type="submit" value="Submit" class="pushbutton-wide">
+			<input type="submit" value="Submit" class="contactButton"> <!--onclick="sendMail(); return false"-->
+			<div class="toshow">Successfully Send Email</div>
 		  </form>
 		</div>
 	  </div>
