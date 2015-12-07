@@ -348,7 +348,7 @@ $(function() {
 						var blogView = new BlogView({ model: blog });
 						blogView.render();
 						$container.html(blogView.el);
-					}
+					},
 					error: function(blog, error){
 						console.log(error);
 					}
@@ -374,7 +374,7 @@ $(function() {
 						var projectView = new ProjectView({ model: project });
 						projectView.render();
 						$container.html(projectView.el);
-					}
+					},
 					error: function(project, error){
 						console.log(error);
 					}
