@@ -39,6 +39,8 @@ $(function() {
 	Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
 	
 	var $container = $('.main-container'),
+	var base64 = "V29ya2luZyBhdCBQYXJzZSBpcyBncmVhdCE=",
+	var file = new Parse.File('some.png'), { base64: base64}),
 		$sidebar = $('.blog-sidebar'),
 		Blog = Parse.Object.extend('Blog', {
 			update: function(data) {
@@ -59,7 +61,7 @@ $(function() {
 				this.set({
 					'title': data.title,
 					// 'category': category,
-					// 'summary': data.summary,
+					'summary': data.summary,
 					'content': data.content,
 					// Set author to the existing blog author if editing, use current user if creating
 					// The same logic goes into the following three fields
@@ -83,10 +85,20 @@ $(function() {
 					var projectACL = new Parse.ACL(Parse.User.current());
 					projectACL.setPublicReadAccess(true);
 					this.setACL(projectACL);
+
+					var fileUploadControl = $('#imageFileUpload')[0];
+					if (fileUploadControl.files.length > 0) {
+						var file = fileUploadControl.files[0];
+						var name = "photo.jpg";
+
+						var parseFile = new Parse.File(name, file);
+					};
 				}
 
 				this.set({
 					'title': data.title,
+					'image': this.get('image') || parseFile,
+					'summary': data.summary,
 					'content': data.content,
 					'author': this.get('author') || Parse.User.current(),
 					'authorName': this.get('authorName') || Parse.User.current().get('username'),
@@ -117,11 +129,11 @@ $(function() {
 				this.$el.html(this.template(collection));
 			}
 		}),
-		ProjectsView = Parse.View.extend({
-			template: Handlebars.compile($('#projects-tpl').html()),
-			render: function(){
-				var collection = { project: this.collection.toJSON() };
-				this.$el.html(this.template(collection));
+		BlogView = Parse.View.extend({
+			template: Handlebars.compile($('#blog-tpl').html()),
+			render: function() {
+				var attributes = this.model.toJSON();
+				this.$el.html(this.template(attributes));
 			}
 		}),
 		ProjectsGalleryView = Parse.View.extend({
@@ -130,7 +142,14 @@ $(function() {
 				var collection = { project: this.collection.toJSON() };
 				this.$el.html(this.template(collection));
 			}
-		})
+		}),
+		ProjectView = Parse.View.extend({
+			template: Handlebars.compile($('#project-tpl').html()),
+			render: function(){
+				var attributes = { project: this.model.toJSON() };
+				this.$el.html(this.template(attributes));
+			}
+		}),
 		LoginView = Parse.View.extend({
 			template: Handlebars.compile($('#login-tpl').html()),
 			events:{
@@ -195,11 +214,9 @@ $(function() {
 				// If there's no blog data, then create a new blog
 				this.model = this.model || new Blog();
 				this.model.update({
-						title: data[0].value, 
-						content: data[1].value
-						// category: data[1].value,
-						// summary: data[2].value,
-						// content: data[3].value
+						title: data[0].value,
+						summary: data[1].value, 
+						content: data[2].value
 					});
 			},
 			render: function(){
@@ -213,7 +230,7 @@ $(function() {
 					attributes = {
 						form_title: 'Add a Blog',
 						title: '',
-						// summary: '',
+						summary: '',
 						content: ''
 					}
 				}
@@ -232,11 +249,10 @@ $(function() {
 				// If there's no blog data, then create a new blog
 				this.model = this.model || new Project();
 				this.model.update({
-						title: data[0].value, 
-						content: data[1].value
-						// category: data[1].value,
-						// summary: data[2].value,
-						// content: data[3].value
+						title: data[0].value,
+						image: data[1].value,
+						summary: data[2].value, 
+						content: data[3].value
 					});
 			},
 			render: function(){
@@ -250,7 +266,8 @@ $(function() {
 					attributes = {
 						form_title: 'Add a Project',
 						title: '',
-						// summary: '',
+						image: '',
+						summary: '',
 						content: ''
 					}
 				}
@@ -296,7 +313,9 @@ $(function() {
 			// '{{URL pattern}}': '{{function name}}'
 			routes: {
 				'': 'index',
+				'blog/:id': 'blog',
 				'projects': 'projects',
+				'project/:id': 'project', 
 				'admin': 'admin',
 				'login': 'login',
 				'logout': 'logout',
@@ -321,6 +340,20 @@ $(function() {
 					}
 				});
 			},
+			blog: function(){
+				var query = new Parse.Query(Blog);
+				query.get(id, {
+					success: function(blog) {
+						console.log(blog);
+						var blogView = new BlogView({ model: blog });
+						blogView.render();
+						$container.html(blogView.el);
+					}
+					error: function(blog, error){
+						console.log(error);
+					}
+				})
+			},
 			projects: function(){
 				this.projects.fetch({
 					success: function(projects) {
@@ -333,6 +366,20 @@ $(function() {
 					}
 				})
 			},
+			project: function(){
+				var query = new Parse.Query(Project);
+				query.get(id, {
+					success: function(projet) {
+						console.log(project);
+						var projectView = new ProjectView({ model: project });
+						projectView.render();
+						$container.html(projectView.el);
+					}
+					error: function(project, error){
+						console.log(error);
+					}
+				})
+			}
 			admin: function() {
 				// Call current user from Parse.
 				var currentUser = Parse.User.current();

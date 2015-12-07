@@ -54,7 +54,7 @@
             <div>
               <img class="me" src="assets/avatar.png" alt="Avatar Icon" scale="0" />
               <div>
-                <p><em>Hi! My name is Timo and i'm Software Developer with over 4 years of experience designing and developing mobile (mostly Android) applications. Follow me on Twitter </em><a href="./">here</a></p>
+                <p><em>Hi! My name is Timo and i'm Software Developer with over 4 years of experience designing and developing mobile (mostly Android) applications. Follow me on Twitter </em><a target="_blank" href="https://twitter.com/defuex">here</a></p>
               </div>
             </div>
           </div>
@@ -67,8 +67,8 @@
           <div class="sidebar-module">
             <h4>Elsewhere</h4>
             <ol class="list-unstyled">
-              <li><a href="https://github.com/DeFuex">GitHub</a></li>
-              <li><a href="https://twitter.com/defuex">Twitter</a></li>
+              <li><a target="_blank" href="https://github.com/DeFuex">GitHub</a></li>
+              <li><a target="_blank" href="https://twitter.com/defuex">Twitter</a></li>
             </ol>
           </div>
         </div><!-- /.blog-sidebar -->
@@ -96,10 +96,35 @@
     </div>
     </script>
 
-    <script id="projects-tpl" type="text/x-handlebars-template">
+    <script id="thumb-gallery-tpl" type="text/x-handlebars-template">
+    <div class="contact-content">
+      <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Project Gallery</h2>
+        </div>
+        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <a class="thumbnail" href="#">
+              <img class="img-responsive" src="assets/projecttire.jpg" alt="">
+            </a>
+            <h3><a href="#">Project Tire(d)</a></h3>
+        </div>
+
+        {{#each project}}
+        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <a class="thumbnail" href="#/project/{{objectId}}">
+              <img class="img-responsive" src="{{image}}" alt="">
+            </a>
+            <h3><a href="#/project/{{objectId}}">{{title}}</a></h3>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    </script>
+
+    <script id="project-tpl" type="text/x-handlebars-template">
     {{#each project}}
     <div class="blog-post">
-        <h2 class="blog-post-title"><a href="#">{{title}}</a></h2>
+        <h2 class="blog-post-title">{{title}}</h2>
         <div class="blog-content">{{{content}}}</div>
         <p class="blog-post-meta">At {{time}} by {{authorName}}</p>
     </div>
@@ -111,7 +136,7 @@
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="text" name="username" class="form-control" placeholder="Username" required="" autofocus="">
         <input type="password" name="password" class="form-control" placeholder="Password" required="">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="contactButton" type="submit">Sign in</button>
     </form>
     </script>
      
@@ -120,41 +145,24 @@
 	<form class="form-write" role="form">
 		<div class="form-group">
 			<label for="title">Title</label>
-			<input name="title" type="text" class="form-control" id="title" value="{{title}}"></input>
+			<input id="title" name="title" type="text" class="form-control" value="{{title}}"></input>
 		</div>
+    <div class="form-group">
+      <label for="image">image</label>
+      <input id="imageFileUpload" name="image" type="file" class="contactButton" value="Image Upload">
+    </div>
+    <div class="form-group">
+      <label for="summary">Summary</label>
+      <textarea name="summary" class="form-control" rows="3">{{summary}}</textarea>
+    </div>
 		<div class="form-group">
 			<label for="content">Content</label>
-			<textarea name="content" class="form-control" rows="20">{{{content}}}</textarea>
+			<textarea name="content" class="form-control write-content" rows="20">{{{content}}}</textarea>
 		</div>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 	</form>
 	</script>
 	
-	<script id="thumb-gallery-tpl" type="text/x-handlebars-template">
-  <div class="contact-content">
-    <div class="row">
-      <div class="col-lg-12">
-          <h2 class="page-header">Project Gallery</h2>
-      </div>
-      <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-          <a class="thumbnail" href="#">
-              <img class="img-responsive" src="assets/projecttire.jpg" alt="">
-          </a>
-	        <h3><a href="#">Project Tire(d)</a></h3>
-      </div>
-
-      {{#each project}}
-      <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-          <a class="thumbnail" href="#">
-              <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-          </a>
-          <h3><a href="#">{{title}}</a></h3>
-      </div>
-      {{/each}}
-    </div>
-  </div>
-	</script>
-
   <script id="about-tpl" type="text/x-handlebars-template">
   <div class="contact-content">
   <h2 class="page-header">About</h2>
