@@ -83,75 +83,80 @@
     </footer>
 
 	  <script id="blogs-tpl" type="text/x-handlebars-template">
-        {{#each blog}}
-        <div class="blog-post">
-            <h2 class="blog-post-title"><a href="#">{{title}}</a></h2>
-            <div class="blog-content">{{{content}}}</div>
-            <p class="blog-post-meta">At {{time}} by {{authorName}}</p>
-        </div>
-        {{/each}}
+    <div class="contact-content">
+      {{#each blog}}
+      <div class="blog-post">
+          <h2 class="blog-post-title"><a href="#">{{title}}</a></h2>
+          <div class="blog-content">{{{content}}}</div>
+          <p class="blog-post-meta">At {{time}} by {{authorName}}</p>
+      </div>
+      {{/each}}
+    </div>
     </script>
 
     <script id="projects-tpl" type="text/x-handlebars-template">
-        {{#each project}}
-        <div class="blog-post">
-            <h2 class="blog-post-title"><a href="#">{{title}}</a></h2>
-            <div class="blog-content">{{{content}}}</div>
-            <p class="blog-post-meta">At {{time}} by {{authorName}}</p>
-        </div>
-        {{/each}}
+    {{#each project}}
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="#">{{title}}</a></h2>
+        <div class="blog-content">{{{content}}}</div>
+        <p class="blog-post-meta">At {{time}} by {{authorName}}</p>
+    </div>
+    {{/each}}
     </script>
 	
     <script id="login-tpl" type="text/x-handlebars-template">
-        <form class="form-signin" role="form">
-            <h2 class="form-signin-heading">Please sign in</h2>
-            <input type="text" name="username" class="form-control" placeholder="Username" required="" autofocus="">
-            <input type="password" name="password" class="form-control" placeholder="Password" required="">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </form>
+    <form class="form-signin" role="form">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="text" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+        <input type="password" name="password" class="form-control" placeholder="Password" required="">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
     </script>
      
 	<script id="write-tpl" type="text/x-handlebars-template">
-		<h2>{{form_title}}</h2>
-		<form class="form-write" role="form">
-			<div class="form-group">
-				<label for="title">Title</label>
-				<input name="title" type="text" class="form-control" id="title" value="{{title}}"></input>
-			</div>
-			<div class="form-group">
-				<label for="content">Content</label>
-				<textarea name="content" class="form-control" rows="20">{{{content}}}</textarea>
-			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-		</form>
+	<h2>{{form_title}}</h2>
+	<form class="form-write" role="form">
+		<div class="form-group">
+			<label for="title">Title</label>
+			<input name="title" type="text" class="form-control" id="title" value="{{title}}"></input>
+		</div>
+		<div class="form-group">
+			<label for="content">Content</label>
+			<textarea name="content" class="form-control" rows="20">{{{content}}}</textarea>
+		</div>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+	</form>
 	</script>
 	
 	<script id="thumb-gallery-tpl" type="text/x-handlebars-template">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Project Gallery</h1>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="assets/projecttire.jpg" alt="">
-                </a>
-				        <h2><a href="#">Project Tire(d)</a></h2>
-            </div>
+  <div class="contact-content">
+    <div class="row">
+      <div class="col-lg-12">
+          <h1 class="page-header">Project Gallery</h1>
+      </div>
+      <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+          <a class="thumbnail" href="#">
+              <img class="img-responsive" src="assets/projecttire.jpg" alt="">
+          </a>
+	        <h2><a href="#">Project Tire(d)</a></h2>
+      </div>
 
-            {{#each project}}
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-                <h2><a href="#">{{title}}</a></h2>
-            </div>
-            {{/each}}
+      {{#each project}}
+      <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+          <a class="thumbnail" href="#">
+              <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+          </a>
+          <h2><a href="#">{{title}}</a></h2>
+      </div>
+      {{/each}}
+    </div>
+  </div>
 	</script>
 
   <script id="about-tpl" type="text/x-handlebars-template">
-    <div class="contact-content">
-	  <h2 class="page-header">About</h2>
-	  <!-- Content -->
+  <div class="contact-content">
+  <h2 class="page-header">About</h2>
+  <!-- Content -->
 	</div>
   </script>
 	
@@ -159,9 +164,9 @@
 	<div class="contact-content">
 	  <h2 class="page-header" >{{form_title}}</h2>
 	  <p class="contact-description">
-		"I love hearing from people landing on my site, so use the little form below
-		shoud you have a question, recommendation, or request for me. I'll try my best
-		to get back to you."
+		I love hearing from people landing on my site, so use the little form below
+		shoud you have a question, recommendation, or request for me. I will try my best
+		to get back to you.
 	  </p>
 		<div id="contact-form">
 		  <form action="http://localhost/Blogolio/#/contact" method="post" class="contact-form" role="form">
@@ -185,64 +190,64 @@
 			<div class="toshow">Successfully Send Email</div>
 		  </form>
 		</div>
-	  </div>
+	</div>
   </script>
 
   <script id="admin-blogs-tpl" type="text/x-handlebars-template">
-    <h2>Welcome, {{username}}!</h2>
-    <a href="#/add" class="add-blog btn btn-lg btn-primary">Add a New Blog</a>
-    <a href="#/logout" class="add-blog btn btn-lg">Logout</a>
-    <table>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Time</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each blog}}
-        <tr>
-          <td><a class="app-link" href="#/edit/{{objectId}}">{{title}}</a></td>
-          <td>{{authorName}}</td>
-          <td>{{time}}</td>
-          <td>
-            <a class="app-link app-edit" href="#/edit/{{objectId}}">Edit</a> | 
-            <a class="app-link" href="#/del/{{objectId}}">Delete</a>
-          </td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
+  <h2>Welcome, {{username}}!</h2>
+  <a href="#/add" class="add-blog btn btn-lg btn-primary">Add a New Blog</a>
+  <a href="#/logout" class="add-blog btn btn-lg">Logout</a>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Time</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each blog}}
+      <tr>
+        <td><a class="app-link" href="#/edit/{{objectId}}">{{title}}</a></td>
+        <td>{{authorName}}</td>
+        <td>{{time}}</td>
+        <td>
+          <a class="app-link app-edit" href="#/edit/{{objectId}}">Edit</a> | 
+          <a class="app-link" href="#/del/{{objectId}}">Delete</a>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
   </script><b>
   </b>	
 
   <script id="admin-projects-tpl" type="text/x-handlebars-template">
-    <a href="#/addp" class="add-blog btn btn-lg btn-primary">Add a New Project</a>
-    <table>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Time</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each project}}
-        <tr>
-          <td><a class="app-link" href="#/editp/{{objectId}}">{{title}}</a></td>
-          <td>{{authorName}}</td>
-          <td>{{time}}</td>
-          <td>
-            <a class="app-link app-edit" href="#/editp/{{objectId}}">Edit</a> | 
-            <a class="app-link" href="#/delp/{{objectId}}">Delete</a>
-          </td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
+  <a href="#/addp" class="add-blog btn btn-lg btn-primary">Add a New Project</a>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Time</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each project}}
+      <tr>
+        <td><a class="app-link" href="#/editp/{{objectId}}">{{title}}</a></td>
+        <td>{{authorName}}</td>
+        <td>{{time}}</td>
+        <td>
+          <a class="app-link app-edit" href="#/editp/{{objectId}}">Edit</a> | 
+          <a class="app-link" href="#/delp/{{objectId}}">Delete</a>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
 	</script><b>
   </b>
 
