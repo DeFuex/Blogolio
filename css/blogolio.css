@@ -88,13 +88,13 @@ a:focus {
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;
     margin: 0;
-    padding: 28px 0;
+    padding: 20px 0;
 }
 
 .nav ul{
     font-size: 14px;
     line-height: 1.0em;
-    margin-bottom: -10px;
+    margin-bottom: -4px;
 }
 
 .nav li{
