@@ -379,7 +379,7 @@ $(function() {
 						console.log(error);
 					}
 				})
-			}
+			},
 			admin: function() {
 				// Call current user from Parse.
 				var currentUser = Parse.User.current();
