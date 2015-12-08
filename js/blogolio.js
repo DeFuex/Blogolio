@@ -39,8 +39,6 @@ $(function() {
 	Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
 	
 	var $container = $('.main-container'),
-	// base64 = "V29ya2luZyBhdCBQYXJzZSBpcyBncmVhdCE=",
-	// file = new Parse.File('some.png'), { base64: base64}),
 		$sidebar = $('.blog-sidebar'),
 		Blog = Parse.Object.extend('Blog', {
 			update: function(data) {
@@ -97,7 +95,7 @@ $(function() {
 
 				this.set({
 					'title': data.title,
-					'image': this.get('image') || parseFile,
+					'image': parseFile,//this.get("parseFile").url(),//this.get('image') || parseFile,
 					'summary': data.summary,
 					'content': data.content,
 					'author': this.get('author') || Parse.User.current(),
@@ -246,13 +244,13 @@ $(function() {
 			submit: function(e) {
 				e.preventDefault();
 				var data = $(e.target).serializeArray();
-				// If there's no blog data, then create a new blog
+				// If there's no project data, then create a new project
 				this.model = this.model || new Project();
 				this.model.update({
 						title: data[0].value,
-						image: data[1].value,
-						summary: data[2].value, 
-						content: data[3].value
+						// image: data.image.url,
+						summary: data[1].value,
+						content: data[2].value
 					});
 			},
 			render: function(){
@@ -340,7 +338,7 @@ $(function() {
 					}
 				});
 			},
-			blog: function(){
+			blog: function(id){
 				var query = new Parse.Query(Blog);
 				query.get(id, {
 					success: function(blog) {
@@ -366,11 +364,10 @@ $(function() {
 					}
 				})
 			},
-			project: function(){
+			project: function(id){
 				var query = new Parse.Query(Project);
 				query.get(id, {
-					success: function(projet) {
-						console.log(project);
+					success: function(project) {
 						var projectView = new ProjectView({ model: project });
 						projectView.render();
 						$container.html(projectView.el);
