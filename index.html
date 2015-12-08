@@ -69,6 +69,7 @@
             <ol class="list-unstyled">
               <li><a target="_blank" href="https://github.com/DeFuex">GitHub</a></li>
               <li><a target="_blank" href="https://twitter.com/defuex">Twitter</a></li>
+              <li><a target="_blank" href="https://at.linkedin.com/in/timo-obereder-11b65167">LinkedIn</a></li>
             </ol>
           </div>
         </div><!-- /.blog-sidebar -->
@@ -89,7 +90,7 @@
       {{#each blog}}
       <div class="blog-post">
           <h2 class="page-header"><a href="#">{{title}}</a></h2>
-          <div class="log-content">{{{content}}}</div>
+          <div class="blog-content">{{{content}}}</div>
           <p class="blog-post-meta">At {{time}} by {{authorName}}</p>
       </div>
       {{/each}}
@@ -164,12 +165,33 @@
 	</form>
 	</script>
 	
-  <script id="about-tpl" type="text/x-handlebars-template">
-  <div class="contact-content">
-  <h2 class="page-header">About</h2>
-  <!-- Content -->
+	<script id="about-tpl" type="text/x-handlebars-template">
+	<div class="contact-content">
+	<h2 class="page-header">About</h2>
+	  <div class="blog-content">{{{content}}}
+		I'm a web/mobile (mostly Android) developer from Austria and I always look for ways to improve my skills in certain technologies.
+		<br/>
+		<br/>
+		Currently I'm working at Ebcont Technologies GmbH, a consulting company which develops many customer based services in the fields of software, mobile and web development.
+		<br/>
+		<br/>
+		During my time as student (which was recently) i had the chance to study abroad in South Korea at Korea University for 1 semester. I could get an insight on some cultural differences and travel to nearby areas and countries involving Japan. Overall it was a nice experience, which motivated me to finally visit a japanese language course back in my home town Vienna. Learning a third language never can't be that bad actually...
+		<br/>
+		<br/>
+		Besides my little adventures, my passions are -
+		<br/>
+		<br/>
+		<ul>
+			<li>Learning Japanese</li>
+			<li>Developing Android applications.</li>
+			<li>Drawing and a little bit 3D modelling to it.</li>
+			<li>I'm also interested in the field of Computer Grapic.</li>
+			<li>Sometimes I play Counter Strike Global Offensive with friends.</li>
+			<li>And if the time allows it i do sports like endurance and strength training or skiing in winter.</li>
+		</ul>
+		</div>
 	</div>
-  </script>
+	</script>
 	
   <script id="contact-tpl" type="text/x-handlebars-template">
 	<div class="contact-content">
