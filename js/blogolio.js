@@ -526,10 +526,55 @@ $(function() {
 });
 
 $(document).ready( function() {
- $('.contactButton').on('click', sendMail());
- 
-	 function sendMail() {
+	// $('#home-container').click(function() {
+		// $('#sidebar-info').css('display', '');
+		// $('#blog-container').css('width', '58.33333333%');
+		// $('#main-container').css('width', '58.33333333%');
+		// $('#blog-container').css('text-align', '');
+		// $('#blog-container').css('display', '');
+		// $('#blog-row').css('text-align', '');
+		// $('#blog-container').css('text-align', '');
+	// });
+	// $('#about-container').click(function() {
+		// $('#blog-container').css('width', '80%');
+		// $('#main-container').css('width', '80%');
+		// $('#blog-container').css('text-align', 'center');
+		// $('#blog-container').css('display', 'inline-block');
+		// $('#blog-row').css('text-align', 'center');
+		// $('#blog-container').css('text-align', 'left');
 		
+		// $('#sidebar-info').css('display', 'none');
+		// $('#sidebar-info').css('position', 'relative');
+	// });
+	
+	// $('#project-container').click(function() {
+		// $('#sidebar-info').css('display', '');
+		// $('#blog-container').css('width', '58.33333333%');
+		// $('#main-container').css('width', '58.33333333%');
+		// $('#blog-container').css('text-align', '');
+		// $('#blog-container').css('display', '');
+		// $('#blog-row').css('text-align', '');
+		// $('#blog-container').css('text-align', '');
+	// });
+	
+	// $('#contact-container').click(function() {
+		// $('#sidebar-info').css('display', '');
+		// $('#blog-container').css('width', '58.33333333%');
+		// $('#main-container').css('width', '58.33333333%');
+		// $('#blog-container').css('text-align', '');
+		// $('#blog-container').css('display', '');
+		// $('#blog-row').css('text-align', '');
+		// $('#blog-container').css('text-align', '');
+	// });
+	
+	// $('#admin-container').click(function() {
+		// $('#sidebar-info').css('display', 'none');
+		// // $('#blog-container').css('margin-left', '-12%');
+	// });
+	
+	$('.contactButton').on('click', sendMail());
+ 
+	function sendMail() {	
 		var firstVal = document.getElementById('contactFirstName').value;
 		var lastVal = document.getElementById('contactLastName').value;
 		var bodyVal = document.getElementById('contactBody').value;

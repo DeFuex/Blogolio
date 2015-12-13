@@ -29,11 +29,11 @@
       <div class="container">
         <nav class="nav">
           <ul>
-            <li><a class="blog-nav-item" href="#">Home</a></li>
-            <li><a class="blog-nav-item" href="#/about">About</a></li>
-            <li><a class="blog-nav-item" href="#/projects">Projects</a></li>        	  
-        		<li><a class="blog-nav-item" href="#/contact">Contact</a></li>
-            <li><a class="blog-nav-item" href="#/admin">Admin</a></li>
+            <li><a id="home-container" class="blog-nav-item" href="#">Home</a></li>
+            <li><a id="about-container" class="blog-nav-item" href="#/about">About</a></li>
+            <li><a id="project-container" class="blog-nav-item" href="#/projects">Projects</a></li>        	  
+        	<li><a id="contact-container" class="blog-nav-item" href="#/contact">Contact</a></li>
+            <li><a id="admin-container" class="blog-nav-item" href="#/admin">Admin</a></li>
           </ul>
         </nav>
       </div>
@@ -41,14 +41,14 @@
 	
     <div id="blog-home" class="container">
 
-      <div class="row">
+      <div id="blog-row" class="row">
 
-        <div class="col-sm-7 blog-main">
+        <div id="blog-container" class="col-sm-7 blog-main">
           <div class="main-container"></div>
           <div id="projects-container"></div>
         </div><!-- /.blog-main -->
 
-        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+        <div id="sidebar-info" class="col-sm-3 col-sm-offset-1 blog-sidebar">
           <div class="widget sidebar-module sidebar-module-inset">
             <h2 class="widget-title">About Timo Obereder</h2>
             <div>
@@ -109,16 +109,16 @@
     <script id="thumb-gallery-tpl" type="text/x-handlebars-template">
     <div class="contact-content">
       <div class="row">
+		{{#each project}}
         <div class="col-lg-12">
-            <h2 class="page-header">Project Gallery</h2>
+			<h2 class="page-header" ><a href="#/project/{{objectId}}">{{title}}</a></h2>
         </div>
-        {{#each project}}
         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#/project/{{objectId}}">
               <img class="img-responsive" src="{{image.url}}" alt="">
             </a>
-            <h5><a href="#/project/{{objectId}}">{{title}}</a></h5>
         </div>
+		<p>{{summary}}</p>
         {{/each}}
       </div>
     </div>
@@ -167,7 +167,7 @@
 	</script>
 	
 	<script id="about-tpl" type="text/x-handlebars-template">
-	<div class="contact-content">
+	<div id="about-content" class="contact-content">
 	<h2 class="page-header">About</h2>
 	  <div class="blog-content">{{{content}}}
 		I'm a web/mobile (mostly Android) developer from Austria and I always look for ways to improve my skills in certain technologies.
