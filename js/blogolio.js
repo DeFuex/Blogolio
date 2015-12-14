@@ -525,10 +525,9 @@ $(function() {
 
 });
 
-var mailgun = require('mailgun.js');
-var mg = mailgun.client({ username: 'api', key: process.env.MAILGUN_API_KEY || 'key-722ab466daff92ad06e2a1f8f72dfe5a' });
-
 $(document).ready( function() {
+	var mailgun = require('mailgun.js');
+	var mg = mailgun.client({ username: 'defuex', key: process.env.MAILGUN_API_KEY || 'key-722ab466daff92ad06e2a1f8f72dfe5a' });
 
 	console.log("TEST STUUUFFF");
 
@@ -537,10 +536,25 @@ $(document).ready( function() {
 		var lastVal = document.getElementById('contactLastName').value;
 		var bodyVal = document.getElementById('contactBody').value;
 
+		// var api_key = 'key-722ab466daff92ad06e2a1f8f72dfe5a';
+		// var domain = 'sandbox102af30daf9e4b1e80bae2e606ef9ec7.mailgun.org';
+		// var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+
+		// var data = {
+		//   from: 'Excited User <me@samples.mailgun.org>',
+		//   to: 'serobnic@mail.ru',
+		//   subject: 'Hello',
+		//   text: 'Testing some Mailgun awesomness!'
+		// };
+
+		mailgun.messages().send(data, function (error, body) {
+		  console.log(body);
+		});
+
 		mg.messages.create('sandbox102af30daf9e4b1e80bae2e606ef9ec7.mailgun.org',{
-			from: "Excited User <mailgun@sandbox102af30daf9e4b1e80bae2e606ef9ec7.mailgun.org>",
+			from: "Excited User <postmaster@sandbox102af30daf9e4b1e80bae2e606ef9ec7.mailgun.org>",
 		    to: ["timo.obereder@gmail.com"],
-		    subject: "Hello",
+		    subject: "Hello Timo",
 		    text: "Testing some Mailgun awesomness!",
 		    html: "<h1>Testing some Mailgun awesomness!</h1>"
 		})
