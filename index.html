@@ -196,36 +196,33 @@
 	
   <script id="contact-tpl" type="text/x-handlebars-template">
 	<div class="contact-content">
-	  <h2 class="page-header" >{{form_title}}</h2>
-	  <p class="contact-description">
-		I love hearing from people landing on my site, so use the little form below
-		should you have a question, recommendation, or request for me. I will try my best
-		to get back to you.
-	  </p>
-		<div id="contact-form">
-		 
-      <div class="contact-form" role="form">
-			<div>
-			  <label for="title">First Name</label><br/>
-			  <input id=contactFirstName name="firstname" type="text" value="{{title}}" >
-			</div>
-			<div>			
-			  <label for="title">Last Name</label><br/>
-			  <input id=contactLastName name="firstname" type="text" value="{{title}}" >
-			</div>
-			<div>
-			  <label for="content">Email</label><br/>
-			  <input name="content" type="email" value="{{content}}" >
-			</div>
-			<div>
-			  <label for="content">Content</label><br/>
-			  <textarea id=contactBody name="content" rows="10">{{{content}}}</textarea>
-			</div>
-			<input id="contactButton" type="button" value="Submit" >
-			<div class="toshow">Successfully Send Email</div>
-		  
-      </div>
-		</div>
+  	  <h2 class="page-header" >{{form_title}}</h2>
+  	  <p class="contact-description">
+  		I love hearing from people landing on my site, so use the little form below
+  		should you have a question, recommendation, or request for me. I will try my best
+  		to get back to you.
+  	  </p>
+  		<div id="contact-form"> 
+        <div class="contact-form" role="form">
+  			<div>
+  			  <label for="title">First Name</label><br/>
+  			  <input id=contactFirstName name="firstname" type="text" value="{{title}}" >
+  			</div>
+  			<div>			
+  			  <label for="title">Last Name</label><br/>
+  			  <input id=contactLastName name="firstname" type="text" value="{{title}}" >
+  			</div>
+  			<div>
+  			  <label for="content">Email</label><br/>
+  			  <input name="content" type="email" value="{{content}}" >
+  			</div>
+  			<div>
+  			  <label for="content">Content</label><br/>
+  			  <textarea id=contactBody name="content" rows="10">{{{content}}}</textarea>
+  			</div>
+  			<input id="contactButton" type="submit" value="Submit" >
+  			<div class="toshow">Successfully Send Email</div>      
+		  </div>
 	</div>
   </script>
 
