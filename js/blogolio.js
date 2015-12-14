@@ -525,80 +525,100 @@ $(function() {
 
 });
 
-$(document).ready( function() {
-	// $('#home-container').click(function() {
-		// $('#sidebar-info').css('display', '');
-		// $('#blog-container').css('width', '58.33333333%');
-		// $('#main-container').css('width', '58.33333333%');
-		// $('#blog-container').css('text-align', '');
-		// $('#blog-container').css('display', '');
-		// $('#blog-row').css('text-align', '');
-		// $('#blog-container').css('text-align', '');
-	// });
-	// $('#about-container').click(function() {
-		// $('#blog-container').css('width', '80%');
-		// $('#main-container').css('width', '80%');
-		// $('#blog-container').css('text-align', 'center');
-		// $('#blog-container').css('display', 'inline-block');
-		// $('#blog-row').css('text-align', 'center');
-		// $('#blog-container').css('text-align', 'left');
-		
-		// $('#sidebar-info').css('display', 'none');
-		// $('#sidebar-info').css('position', 'relative');
-	// });
-	
-	// $('#project-container').click(function() {
-		// $('#sidebar-info').css('display', '');
-		// $('#blog-container').css('width', '58.33333333%');
-		// $('#main-container').css('width', '58.33333333%');
-		// $('#blog-container').css('text-align', '');
-		// $('#blog-container').css('display', '');
-		// $('#blog-row').css('text-align', '');
-		// $('#blog-container').css('text-align', '');
-	// });
-	
-	// $('#contact-container').click(function() {
-		// $('#sidebar-info').css('display', '');
-		// $('#blog-container').css('width', '58.33333333%');
-		// $('#main-container').css('width', '58.33333333%');
-		// $('#blog-container').css('text-align', '');
-		// $('#blog-container').css('display', '');
-		// $('#blog-row').css('text-align', '');
-		// $('#blog-container').css('text-align', '');
-	// });
-	
-	// $('#admin-container').click(function() {
-		// $('#sidebar-info').css('display', 'none');
-		// // $('#blog-container').css('margin-left', '-12%');
-	// });
-	
-	$('.contactButton').on('click', sendMail());
- 
-	function sendMail() {	
-		var firstVal = document.getElementById('contactFirstName').value;
-		var lastVal = document.getElementById('contactLastName').value;
-		var bodyVal = document.getElementById('contactBody').value;
-		
-		if(firstVal.length > 0 &&
-			lastVal.length > 0 &&
-			bodyVal.length > 0) {
-				console.log(bla);
-				
-			var link = "mailto:timo.obereder@gmail.com"
-					 + "?cc=timo.obereder@gmail.com"
-					 + "&subject=" + escape("From Blogolio Contact")
-					 + "&body=" + firstVal.val()
-								+ ''
-								+ lastVal.val()
-								+ bodyVal.val()
-			;
+var mailgun = require('mailgun.js');
+var mg = mailgun.client({ username: 'api', key: process.env.MAILGUN_API_KEY || 'key-722ab466daff92ad06e2a1f8f72dfe5a' });
 
-			window.location.href = link;
+function sendMail(){
+	var firstVal = document.getElementById('contactFirstName').value;
+	var lastVal = document.getElementById('contactLastName').value;
+	var bodyVal = document.getElementById('contactBody').value;
+
+	mg.messages.create('sandbox-123.mailgun.org',{
+		from: "Excited User <mailgun@sandbox-123.mailgun.org>",
+	    to: ["timo.obereder@gmail.com"],
+	    subject: "Hello",
+	    text: "Testing some Mailgun awesomness!"
+	    html: "<h1>Testing some Mailgun awesomness!</h1>"
+	})
+	.then(msg => console.log(msg))
+	.catch(err => console.log(err));
+}
+
+
+// $(document).ready( function() {
+// 	// $('#home-container').click(function() {
+// 		// $('#sidebar-info').css('display', '');
+// 		// $('#blog-container').css('width', '58.33333333%');
+// 		// $('#main-container').css('width', '58.33333333%');
+// 		// $('#blog-container').css('text-align', '');
+// 		// $('#blog-container').css('display', '');
+// 		// $('#blog-row').css('text-align', '');
+// 		// $('#blog-container').css('text-align', '');
+// 	// });
+// 	// $('#about-container').click(function() {
+// 		// $('#blog-container').css('width', '80%');
+// 		// $('#main-container').css('width', '80%');
+// 		// $('#blog-container').css('text-align', 'center');
+// 		// $('#blog-container').css('display', 'inline-block');
+// 		// $('#blog-row').css('text-align', 'center');
+// 		// $('#blog-container').css('text-align', 'left');
+		
+// 		// $('#sidebar-info').css('display', 'none');
+// 		// $('#sidebar-info').css('position', 'relative');
+// 	// });
+	
+// 	// $('#project-container').click(function() {
+// 		// $('#sidebar-info').css('display', '');
+// 		// $('#blog-container').css('width', '58.33333333%');
+// 		// $('#main-container').css('width', '58.33333333%');
+// 		// $('#blog-container').css('text-align', '');
+// 		// $('#blog-container').css('display', '');
+// 		// $('#blog-row').css('text-align', '');
+// 		// $('#blog-container').css('text-align', '');
+// 	// });
+	
+// 	// $('#contact-container').click(function() {
+// 		// $('#sidebar-info').css('display', '');
+// 		// $('#blog-container').css('width', '58.33333333%');
+// 		// $('#main-container').css('width', '58.33333333%');
+// 		// $('#blog-container').css('text-align', '');
+// 		// $('#blog-container').css('display', '');
+// 		// $('#blog-row').css('text-align', '');
+// 		// $('#blog-container').css('text-align', '');
+// 	// });
+	
+// 	// $('#admin-container').click(function() {
+// 		// $('#sidebar-info').css('display', 'none');
+// 		// // $('#blog-container').css('margin-left', '-12%');
+// 	// });
+	
+// 	$('.contactButton').on('click', sendMail());
+ 
+// 	function sendMail() {	
+// 		var firstVal = document.getElementById('contactFirstName').value;
+// 		var lastVal = document.getElementById('contactLastName').value;
+// 		var bodyVal = document.getElementById('contactBody').value;
+		
+// 		if(firstVal.length > 0 &&
+// 			lastVal.length > 0 &&
+// 			bodyVal.length > 0) {
+// 				console.log(bla);
+				
+// 			var link = "mailto:timo.obereder@gmail.com"
+// 					 + "?cc=timo.obereder@gmail.com"
+// 					 + "&subject=" + escape("From Blogolio Contact")
+// 					 + "&body=" + firstVal.val()
+// 								+ ''
+// 								+ lastVal.val()
+// 								+ bodyVal.val()
+// 			;
+
+// 			window.location.href = link;
 			
-			$('.toshow').show();
-		} else {
-			$('.toshow').val('Email could not be sent. Fill in all required fields!');
+// 			$('.toshow').show();
+// 		} else {
+// 			$('.toshow').val('Email could not be sent. Fill in all required fields!');
 			
-		}
-	}
-});
+// 		}
+// 	}
+// });
