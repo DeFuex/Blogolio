@@ -537,7 +537,7 @@ function sendMail(){
 		from: "Excited User <mailgun@sandbox-123.mailgun.org>",
 	    to: ["timo.obereder@gmail.com"],
 	    subject: "Hello",
-	    text: "Testing some Mailgun awesomness!"
+	    text: "Testing some Mailgun awesomness!",
 	    html: "<h1>Testing some Mailgun awesomness!</h1>"
 	})
 	.then(msg => console.log(msg))
