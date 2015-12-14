@@ -530,21 +530,29 @@ $(function() {
 var mailgun = require('mailgun.js');
 var mg = mailgun.client({ username: 'api', key: process.env.MAILGUN_API_KEY || 'key-722ab466daff92ad06e2a1f8f72dfe5a' });
 
-function sendMail(){
-	var firstVal = document.getElementById('contactFirstName').value;
-	var lastVal = document.getElementById('contactLastName').value;
-	var bodyVal = document.getElementById('contactBody').value;
+$(document).ready( function() {
 
-	mg.messages.create('sandbox-123.mailgun.org',{
-		from: "Excited User <mailgun@sandbox-123.mailgun.org>",
-	    to: ["timo.obereder@gmail.com"],
-	    subject: "Hello",
-	    text: "Testing some Mailgun awesomness!",
-	    html: "<h1>Testing some Mailgun awesomness!</h1>"
-	})
-	.then(msg => console.log(msg))
-	.catch(err => console.log(err));
-}
+	console.log("TEST STUUUFFF");
+
+	$('#target').submit(function(e){
+		var firstVal = document.getElementById('contactFirstName').value;
+		var lastVal = document.getElementById('contactLastName').value;
+		var bodyVal = document.getElementById('contactBody').value;
+
+		mg.messages.create('sandbox-123.mailgun.org',{
+			from: "Excited User <mailgun@sandbox-123.mailgun.org>",
+		    to: ["timo.obereder@gmail.com"],
+		    subject: "Hello",
+		    text: "Testing some Mailgun awesomness!",
+		    html: "<h1>Testing some Mailgun awesomness!</h1>"
+		})
+		.then(msg => console.log(msg))
+		.catch(err => console.log(err));
+
+		e.preventDefault();
+	});
+
+});
 
 
 // $(document).ready( function() {

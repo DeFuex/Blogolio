@@ -532,10 +532,7 @@ $(document).ready( function() {
 
 	console.log("TEST STUUUFFF");
 
-	$('#contactButton').keypress(function(e) {
-
-	console.log("pressed contact button");
-	// function sendMail(){
+	$('#target').submit(function(e){
 		var firstVal = document.getElementById('contactFirstName').value;
 		var lastVal = document.getElementById('contactLastName').value;
 		var bodyVal = document.getElementById('contactBody').value;
@@ -549,8 +546,9 @@ $(document).ready( function() {
 		})
 		.then(msg => console.log(msg))
 		.catch(err => console.log(err));
-	// }
-	})
+
+		e.preventDefault();
+	});
 
 });
 
