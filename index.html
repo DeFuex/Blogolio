@@ -203,7 +203,7 @@
 		to get back to you.
 	  </p>
 		<div id="contact-form">
-		  <form action="" method="post" class="contact-form" role="form">
+		  <form method="post" class="contact-form" role="form">
 			<div>
 			  <label for="title">First Name</label><br/>
 			  <input id=contactFirstName name="firstname" type="text" value="{{title}}" >
@@ -220,7 +220,7 @@
 			  <label for="content">Content</label><br/>
 			  <textarea id=contactBody name="content" rows="10">{{{content}}}</textarea>
 			</div>
-			<input type="submit" value="Submit" class="contactButton" onclick="sendMail(); return false" >
+			<input type="submit" value="Submit" class="contactButton" onclick="sendMail();" >
 			<div class="toshow">Successfully Send Email</div>
 		  </form>
 		</div>
