@@ -529,7 +529,8 @@ var mailgun = require('mailgun.js');
 var mg = mailgun.client({ username: 'api', key: process.env.MAILGUN_API_KEY || 'key-722ab466daff92ad06e2a1f8f72dfe5a' });
 
 $(document).ready( function() {
-	$('#contactButton').click(function() {
+
+	$('#contact-form').on('click', '#contactButton', function() {
 
 	console.log("pressed contact button");
 	// function sendMail(){
@@ -548,6 +549,7 @@ $(document).ready( function() {
 		.catch(err => console.log(err));
 	// }
 		})
+
 });
 
 
