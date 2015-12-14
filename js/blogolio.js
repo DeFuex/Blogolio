@@ -537,8 +537,8 @@ $(document).ready( function() {
 		var lastVal = document.getElementById('contactLastName').value;
 		var bodyVal = document.getElementById('contactBody').value;
 
-		mg.messages.create('sandbox-123.mailgun.org',{
-			from: "Excited User <mailgun@sandbox-123.mailgun.org>",
+		mg.messages.create('sandbox102af30daf9e4b1e80bae2e606ef9ec7.mailgun.org',{
+			from: "Excited User <mailgun@sandbox102af30daf9e4b1e80bae2e606ef9ec7.mailgun.org>",
 		    to: ["timo.obereder@gmail.com"],
 		    subject: "Hello",
 		    text: "Testing some Mailgun awesomness!",
