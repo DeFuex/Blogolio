@@ -528,8 +528,7 @@ $(function() {
 	var CommentObject = Parse.Object.extend("CommentObject");
 	
 	$("#contactForm").on("submit", function(e) {
-			e.preventDefault();
-
+		
 		console.log("Handling the submit");
 		//add error handling here
 		//gather the form data
@@ -553,6 +552,7 @@ $(function() {
 			}
 		});
 		
+		e.preventDefault();
 	});
 
 });
