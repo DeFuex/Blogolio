@@ -523,35 +523,35 @@ $(function() {
 	 
 		blogRouter.start(); 
 		
-		
-	var CommentObject = Parse.Object.extend("CommentObject");
+	$(document).ready(function(){
+		var CommentObject = Parse.Object.extend("CommentObject");
 	
-	$("#contactForm").on("submit", function(e) {
-		
-		console.log("Handling the submit");
-		//add error handling here
-		//gather the form data
+		$("#contactForm").on("submit", function(e) {
+			
+			console.log("Handling the submit");
+			//add error handling here
+			//gather the form data
 
-		var data = {};
-		data.firstname = $("#contactFirstName").val();
-		data.lastname = $("#contactLastName").val();
-		data.email = $("#email").val();
-		data.subject = $("#subject").val();
-		data.content = $("#content").val();
-		
-		var comment = new CommentObject();
-		comment.save(data, {
-			success:function() {
-				console.log("Success");
-				//Alerts are lame - but quick and easy
-				alert("Thanks for filling the form!");
-			},
-			error:function(e) {
-				console.dir(e);
-			}
+			var data = {};
+			data.firstname = $("#contactFirstName").val();
+			data.lastname = $("#contactLastName").val();
+			data.email = $("#email").val();
+			data.subject = $("#subject").val();
+			data.content = $("#content").val();
+			
+			var comment = new CommentObject();
+			comment.save(data, {
+				success:function() {
+					console.log("Success");
+					//Alerts are lame - but quick and easy
+					alert("Thanks for filling the form!");
+				},
+				error:function(e) {
+					console.dir(e);
+				}
+			});
+			
+			e.preventDefault();
 		});
-		
-		e.preventDefault();
 	});
-
 });
