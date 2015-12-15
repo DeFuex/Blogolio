@@ -203,23 +203,28 @@
 		to get back to you.
 	  </p>
 		<div id="contact-form">
-		  <form id="target" class="contact-form" role="form">
+		  <form id="contactForm" class="contact-form" role="form">
 			<div>
 			  <label for="title">First Name</label><br/>
-			  <input id=contactFirstName name="firstname" type="text" value="{{title}}" >
+			  <input id="contactFirstName" name="firstname" type="text" value="{{title}}" >
 			</div>
 			<div>			
 			  <label for="title">Last Name</label><br/>
-			  <input id=contactLastName name="firstname" type="text" value="{{title}}" >
+			  <input id="contactLastName" name="firstname" type="text" value="{{title}}" >
 			</div>
 			<div>
-			  <label for="content">Email</label><br/>
-			  <input name="content" type="email" value="{{content}}" >
+			  <label for="email">Email</label><br/>
+			  <input id="email" name="email" type="email" value="{{email}}" >
+			</div>
+			<div>
+			  <label for="subject">Subject</label><br/>
+			  <input id="subject" name="subject" type="text" value="{{subject}}" >
 			</div>
 			<div>
 			  <label for="content">Content</label><br/>
-			  <textarea id=contactBody name="content" rows="10">{{{content}}}</textarea>
+			  <textarea id="content" name="content" rows="10">{{content}}</textarea>
 			</div>
+
 			<input type="submit" value="Submit" class="contactButton" >
 			<div class="toshow">Successfully Send Email</div>
 		  </form>

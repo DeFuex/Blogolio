@@ -522,49 +522,119 @@ $(function() {
 		blogRouter = new BlogRouter();
 	 
 		blogRouter.start(); 
+		
+		
+	var CommentObject = Parse.Object.extend("CommentObject");
+	
+	$("#contactForm").on("submit", function(e) {
+			e.preventDefault();
 
-});
+		console.log("Handling the submit");
+		//add error handling here
+		//gather the form data
 
-$(document).ready( function() {
-	var mailgun = require('mailgun.js');
-	var mg = mailgun.client({ username: 'defuex', key: process.env.MAILGUN_API_KEY || 'key-722ab466daff92ad06e2a1f8f72dfe5a' });
-
-	console.log("TEST STUUUFFF");
-
-	$('#target').submit(function(e){
-		var firstVal = document.getElementById('contactFirstName').value;
-		var lastVal = document.getElementById('contactLastName').value;
-		var bodyVal = document.getElementById('contactBody').value;
-
-		// var api_key = 'key-722ab466daff92ad06e2a1f8f72dfe5a';
-		// var domain = 'sandbox102af30daf9e4b1e80bae2e606ef9ec7.mailgun.org';
-		// var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
-
-		// var data = {
-		//   from: 'Excited User <me@samples.mailgun.org>',
-		//   to: 'serobnic@mail.ru',
-		//   subject: 'Hello',
-		//   text: 'Testing some Mailgun awesomness!'
-		// };
-
-		mailgun.messages().send(data, function (error, body) {
-		  console.log(body);
+		var data = {};
+		data.firstname = $("#contactFirstName").val();
+		data.lastname = $("#contactLastName").val();
+		data.email = $("#email").val();
+		data.subject = $("#subject").val();
+		data.content = $("#content").val();
+		
+		var comment = new CommentObject();
+		comment.save(data, {
+			success:function() {
+				console.log("Success");
+				//Alerts are lame - but quick and easy
+				alert("Thanks for filling the form!");
+			},
+			error:function(e) {
+				console.dir(e);
+			}
 		});
-
-		mg.messages.create('sandbox102af30daf9e4b1e80bae2e606ef9ec7.mailgun.org',{
-			from: "Excited User <postmaster@sandbox102af30daf9e4b1e80bae2e606ef9ec7.mailgun.org>",
-		    to: ["timo.obereder@gmail.com"],
-		    subject: "Hello Timo",
-		    text: "Testing some Mailgun awesomness!",
-		    html: "<h1>Testing some Mailgun awesomness!</h1>"
-		})
-		.then(msg => console.log(msg))
-		.catch(err => console.log(err));
-
-		e.preventDefault();
+		
 	});
 
 });
+
+// $(document).ready( function() {
+	// console.log("TEST STUUUFFF");
+
+	// $('#target').submit(function(e){
+		
+		// $.ajax({
+			// type     : 'GET',
+			// cache    : false, 
+			// url      : 'https://api.mailgun.net/v3/defuex.blogolio.com/log',
+			 // dataType: "jsonp",                
+            // jsonpCallback: 'fnsuccesscallback',
+			// data     : {"from": "foreign@emailio.com", "to": "timo.obereder@gmail.com", "subject": "Hello", "text": "Testing some Mailgun awesomness!" }, 
+			// success  : function(data) {
+				// somefunctionhere();
+			// },
+			// error  : function(data) {
+				// console.log('Silent failure.');
+			// }
+		// });
+		
+		// var mailgun = require('mailgun.js');
+		// var mg = mailgun.client({ username: 'api', key: process.env.MAILGUN_API_KEY || 'key-722ab466daff92ad06e2a1f8f72dfe5a' });
+		
+		// Parse.Cloud.define("SendEmail", function(request, response) {
+			// var Mailgun = require('mailgun');
+			// Mailgun.initialize('defuex.blogolio.com', 'key-722ab466daff92ad06e2a1f8f72dfe5a' );
+			// var firstVal = document.getElementById('contactFirstName').value;
+			// var lastVal = document.getElementById('contactLastName').value;
+			// var bodyVal = document.getElementById('contactBody').value;
+
+			// var api_key = 'key-722ab466daff92ad06e2a1f8f72dfe5a';
+			// var domain = 'defuex.blogolio.com';
+			// var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+
+			// var unirest = require('unirest');
+			
+			// var data = {
+			  // from: 'Excited User <me@samples.mailgun.org>',
+			  // to: 'timo.obereder@gmail.com',
+			  // subject: 'Hello',
+			  // text: 'Testing some Mailgun awesomness!'
+			// };
+
+			// Mailgun.sendEmail({
+				// to: "timo.obereder@gmail.com",
+				// from: "someone@important.com",
+				// subject: "Comment Form",
+				// text: "Important Mailgun Text!"
+			// });
+		// });
+		// mailgun.messages().send(data, function (error, body) {
+		  // console.log(body);
+		// });
+		// var api_Key = 'key-722ab466daff92ad06e2a1f8f72dfe5a';
+		// var header = new Buffer("api:" + api_Key).toString('base64');
+		// var api_base_url = 'https://api.mailgun.net/v3/defuex.blogolio.com';
+		
+		// unirest.post(api_base_url + "/messages") 
+		// .headers({'Authentication': "Basic " + header}) 
+		// .send(data);
+		// .end(function(res){ 
+			// cb(); 
+		// });
+		
+		
+		// mg.messages.create('defuex.blogolio.com',{	
+			// from: "Successful User EMAIL <mad.ex.hatter@gmail.com>",
+		    // to: ["timo.obereder@gmail.com"],
+		    // subject: "Hello Timo",
+		    // text: "Testing some Mailgun awesomness!",
+		    // html: "<h1>Testing some Mailgun awesomness!</h1>"
+		// })
+		// .then(msg => console.log(msg))
+		// .catch(err => console.log(err));
+
+		// e.preventDefault();
+	// });
+
+// });
 
 
 // $(document).ready( function() {
