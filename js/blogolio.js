@@ -1,38 +1,5 @@
 $(function() {
 
-	var Utils = {};
-
-	/**
-	 * Fetch multiple models(or collections) and execute passed callback
-	 *
-	 * @param {Array} stack - stack of objects
-	 * @param {Function} callback - exec on ready
-	 * @param {Object} ctx - callback context
-	 *
-	 * @returns {Object} context
-	 */
-
-	Utils.fetch = function(stack, callback, ctx){
-	  var counter = stack.length
-	    , error
-	    , cb;
-
-	  cb = function(){
-	    counter--;
-	    if(counter == 0){
-	      return callback.call(ctx);
-	    }
-	  }
-
-	  for(var i in stack){
-	    var task = stack[i];
-	    task.target.bind(task.event, cb).fetch();
-	  }
-
-	  return ctx;
-	}
-
-
     Parse.$ = jQuery;
 	
 	//Connection to the Parse Database Webserver.
@@ -527,7 +494,7 @@ $(function() {
 		var CommentObject = Parse.Object.extend("CommentObject");
 	
 		$("#contactForm").on("submit", function(e) {
-			
+			e.preventDefault();			
 			console.log("Handling the submit");
 			//add error handling here
 			//gather the form data
@@ -544,14 +511,13 @@ $(function() {
 				success:function() {
 					console.log("Success");
 					//Alerts are lame - but quick and easy
-					alert("Thanks for filling the form!");
+					alert("Thanks for filling the form! Email has been send!");
 				},
 				error:function(e) {
+					alert("Something went wrong! Try sending the email again!");
 					console.dir(e);
 				}
 			});
-			
-			e.preventDefault();
 		});
 	});
 });
