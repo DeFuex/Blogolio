@@ -190,6 +190,12 @@ li {
   margin-bottom: 0;
 }
 
+ol {
+  display: inline;
+  list-style-type: none;
+  padding-right: 2px;
+}
+
 /* Photo Classes */
 .widget {
     border-radius: 5px;
