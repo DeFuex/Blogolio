@@ -520,6 +520,15 @@ $(function() {
 				}
 			});
 		});
+
+		tinymce.remove();
+      	tinymce.init({
+	        selector: "textarea.form-control",
+	        plugins: [
+	          "media table paste "
+	        ],
+	        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
+	    });
 	});
 });
 },{}]},{},[1]);
