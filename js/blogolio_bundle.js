@@ -571,6 +571,11 @@ $(function() {
 				'//www.tinymce.com/css/codepen.min.css'
 			]
    		});
-	} 
+	}
+
+	var buttonBlog = document.getElementById("addBlogButton");
+	document.addEventListener('DOMContentLoaded', function () {
+	    buttonBlog.addEventListener('click', loadTinyMCE, false);
+	}); 
 });
 },{}]},{},[1]);
