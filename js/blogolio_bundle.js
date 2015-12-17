@@ -523,8 +523,9 @@ $(function() {
 			});
 		});
 
-		$('#addBlogButton').click(function () { 
-			tinymce.init({
+
+		$("#addBlogButton").on("click", function(e) {
+					    tinymce.init({
 		  		setup: function(e){
 		  			e.on('init', function(args) {
 		  				console.debug(args.target.id);
@@ -539,8 +540,12 @@ $(function() {
 					'//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
 					'//www.tinymce.com/css/codepen.min.css'
 				]
-   			}); 
-   		});
+	   		});
+		});
+
+		$("#addProjectButton").on("click", function(e) {
+			
+		});
 	});
 
 	function loadTinyMCE() {
