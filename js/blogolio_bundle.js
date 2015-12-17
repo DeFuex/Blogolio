@@ -201,7 +201,7 @@ $(function() {
 					}
 				}
 
-				this.$el.html(this.template(attributes)).find('.write-content').wysihtml5();
+				this.$el.html(this.template(attributes)).find('.write-content');
 			}
 		}),		
 		WriteProjectView = Parse.View.extend({
@@ -238,7 +238,7 @@ $(function() {
 					}
 				}
 
-				this.$el.html(this.template(attributes)).find('.write-content').wysihtml5();
+				this.$el.html(this.template(attributes)).find('.write-content');
 			}
 		}),
 		AboutView = Parse.View.extend({
@@ -512,7 +512,7 @@ $(function() {
 				success:function() {
 					console.log("Success");
 					//Alerts are lame - but quick and easy
-					alert("Thanks for filling the form!");
+					alert("Thanks for filling the form! Email has been send!");
 				},
 				error:function(e) {
 					alert("Something went wrong! Try sending the email again!");
