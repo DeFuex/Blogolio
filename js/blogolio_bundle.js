@@ -499,8 +499,8 @@ $(function() {
 	$(document).ready(function(){
 		var CommentObject = Parse.Object.extend("CommentObject");
 	
-		$("#contactForm").submit(function () {
-			// e.preventDefault();			
+		$("#contactForm").on("submit", function(e) {
+			e.preventDefault();			
 			console.log("Handling the submit");
 			//add error handling here
 			//gather the form data
