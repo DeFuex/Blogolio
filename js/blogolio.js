@@ -522,8 +522,9 @@ $(function() {
 			});
 		});
 
-
+		
 		$("#addBlogButton").on("click", function(e) {
+			console.log("addbutton clicked");
 					    tinymce.init({
 		  		setup: function(e){
 		  			e.on('init', function(args) {
