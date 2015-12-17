@@ -532,7 +532,7 @@ $(function() {
 			buttonBlog.addEventListener ("click", loadTinyMCE, false);
 		};
 
-		function loadTinyMCE() {
+		var loadTinyMCE = function () {
 	    tinymce.init({
 	  		setup: function(e){
 	  			e.on('init', function(args) {
