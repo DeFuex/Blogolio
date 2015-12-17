@@ -237,7 +237,7 @@ $(function() {
 					}
 				}
 
-				this.$el.html(this.template(attributes)).find('.write-content').wysihtml5();
+				this.$el.html(this.template(attributes)).find('.write-content');
 			}
 		}),
 		AboutView = Parse.View.extend({
