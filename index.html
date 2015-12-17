@@ -307,8 +307,9 @@
     <script src="js/bootstrap-wysihtml5-0.0.2.min.js"></script> -->
     <script src="js/tinymce.min.js"></script>
     <script type="text/javascript">
+      tinymce.remove();
       tinymce.init({
-        selector: "textarea",
+        selector: "textarea.form-control",
         plugins: [
           "media table paste "
         ],
