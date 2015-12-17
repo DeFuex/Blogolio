@@ -201,7 +201,7 @@ $(function() {
 				}
 
 				this.$el.html(this.template(attributes)).find('.write-content');
-				loadTinyMCE
+				loadTinyMCE();
 			}
 		}),		
 		WriteProjectView = Parse.View.extend({
