@@ -523,8 +523,14 @@ $(function() {
 			});
 		});
 
-		document.getElementById ("addBlogButton").addEventListener ("click", loadTinyMCE, false);
-		
+// document.addEventListener('DOMContentLoaded', function () {
+//     el.addEventListener('click', swapper, false);
+// });
+
+		var buttonBlog = document.getElementById("addBlogButton");
+		if (buttonBlog) {		
+			buttonBlog.addEventListener ("click", loadTinyMCE, false);
+		};
 
 
 		// $("#addBlogButton").on("click", function(e) {
