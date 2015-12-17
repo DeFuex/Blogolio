@@ -311,6 +311,49 @@
     <script src="js/bootstrap3-wysihtml5.min.js"></script>
     <script src="js/bootstrap-wysihtml5.en-US.js"></script> -->
 
+    <script type="text/javascript">
+
+        // Wait for the page to load first
+        window.onload = function() {
+
+          //Get a reference to the link on the page
+          // with an id of "mylink"
+          var a = document.getElementById("addBlogButton");
+
+          //Set code to run when the link is clicked
+          // by assigning a function to "onclick"
+          a.onclick = function() {
+
+          tinymce.init({
+          setup: function(e){
+            e.on('init', function(args) {
+              console.debug(args.target.id);
+            })
+          },
+            selector: "textarea.form-control",
+            plugins: [
+              "media table paste "
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image",
+        content_css: [
+          '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+          '//www.tinymce.com/css/codepen.min.css'
+        ]
+        }); 
+
+            // Your code here...
+
+            //If you don't want the link to actually 
+            // redirect the browser to another page,
+            // "google.com" in our example here, then
+            // return false at the end of this block.
+            // Note that this also prevents event bubbling,
+            // which is probably what we want here, but won't 
+            // always be the case.
+            return false;
+          }
+        }
+    </script>
 	
   </body>
 </html>
