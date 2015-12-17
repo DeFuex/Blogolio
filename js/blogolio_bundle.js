@@ -404,7 +404,7 @@ $(function() {
 					loadTinyMCE();
 					var writeBlogView = new WriteBlogView();
 					writeBlogView.render();
-					
+					loadTinyMCE();
 					$container.html(writeBlogView.el);
 				}
 			},
