@@ -202,6 +202,7 @@ $(function() {
 				}
 
 				this.$el.html(this.template(attributes)).find('.write-content');
+				loadTinyMCE
 			}
 		}),		
 		WriteProjectView = Parse.View.extend({
@@ -239,6 +240,7 @@ $(function() {
 				}
 
 				this.$el.html(this.template(attributes)).find('.write-content');
+				loadTinyMCE();
 			}
 		}),
 		AboutView = Parse.View.extend({
@@ -520,14 +522,15 @@ $(function() {
 				}
 			});
 		});
+	});
 
-		
-      	tinymce.init({
-      		setup: function(e){
-      			e.on('init', function(args) {
-      				console.debug(args.target.id);
-      			})
-      		},
+	function loadTinyMCE() {
+	    tinymce.init({
+	  		setup: function(e){
+	  			e.on('init', function(args) {
+	  				console.debug(args.target.id);
+	  			})
+	  		},
 	        selector: "textarea.form-control",
 	        plugins: [
 	        	"media table paste "
@@ -537,7 +540,7 @@ $(function() {
 				'//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
 				'//www.tinymce.com/css/codepen.min.css'
 			]
-	    });
-	});
+   		});
+	} 
 });
 },{}]},{},[1]);
