@@ -494,8 +494,8 @@ $(function() {
 	$(document).ready(function(){
 		var CommentObject = Parse.Object.extend("CommentObject");
 	
-		$("#contactForm").on("submit", function(e) {
-			e.preventDefault();			
+		$("#contactForm").submit(function () {
+			// e.preventDefault();			
 			console.log("Handling the submit");
 			//add error handling here
 			//gather the form data
@@ -512,7 +512,7 @@ $(function() {
 				success:function() {
 					console.log("Success");
 					//Alerts are lame - but quick and easy
-					alert("Thanks for filling the form!");
+					alert("Thanks for filling the form! Email has been send!");
 				},
 				error:function(e) {
 					alert("Something went wrong! Try sending the email again!");
