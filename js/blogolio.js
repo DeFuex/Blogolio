@@ -522,10 +522,6 @@ $(function() {
 			});
 		});
 
-// document.addEventListener('DOMContentLoaded', function () {
-//     el.addEventListener('click', swapper, false);
-// });
-
 
 		function loadTinyMCE() {
 		    tinymce.init({
@@ -547,9 +543,14 @@ $(function() {
 		} 
 
 		var buttonBlog = document.getElementById("addBlogButton");
-		if (buttonBlog) {		
-			buttonBlog.addEventListener ("click", loadTinyMCE, false);
-		};
+		document.addEventListener('DOMContentLoaded', function () {
+		    buttonBlog.addEventListener('click', loadTinyMCE, false);
+		});
+
+		// var buttonBlog = document.getElementById("addBlogButton");
+		// if (buttonBlog) {		
+		// 	buttonBlog.addEventListener ("click", function, false);
+		// };
 	});
 
 	function loadTinyMCE() {
