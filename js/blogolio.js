@@ -156,7 +156,6 @@ $(function() {
 					blog: this.collection.toJSON()
 				};
 				this.$el.html(this.template(collection));
-				loadTinyMCE();
 			}
 		}),		
 		ProjectsAdminView = Parse.View.extend({
@@ -167,7 +166,6 @@ $(function() {
 					project: this.collection.toJSON()
 				};
 				this.$el.html(this.template(collection));
-				loadTinyMCE();
 			}
 		}),
 		WriteBlogView = Parse.View.extend({
@@ -402,8 +400,10 @@ $(function() {
 				if (!Parse.User.current()) {
 					this.navigate('#/login', { trigger: true });
 				} else {
+					loadTinyMCE();
 					var writeBlogView = new WriteBlogView();
 					writeBlogView.render();
+					
 					$container.html(writeBlogView.el);
 				}
 			},
