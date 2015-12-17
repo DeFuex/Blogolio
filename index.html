@@ -234,7 +234,7 @@
 
   <script id="admin-blogs-tpl" type="text/x-handlebars-template">
   <h2>Welcome, {{username}}!</h2>
-  <a href="#/add" class="add-blog btn btn-lg btn-primary">Add a New Blog</a>
+  <a id="addBlogButton" href="#/add" class="add-blog btn btn-lg btn-primary">Add a New Blog</a>
   <a href="#/logout" class="add-blog btn btn-lg">Logout</a>
   <table>
     <thead>
@@ -263,7 +263,7 @@
   </b>	
 
   <script id="admin-projects-tpl" type="text/x-handlebars-template">
-  <a href="#/addp" class="add-blog btn btn-lg btn-primary">Add a New Project</a>
+  <a id="addProjectButton" href="#/addp" class="add-blog btn btn-lg btn-primary">Add a New Project</a>
   <table>
     <thead>
       <tr>
@@ -306,16 +306,6 @@
     <!-- <script src="js/wysihtml5-0.3.0.min.js"></script>
     <script src="js/bootstrap-wysihtml5-0.0.2.min.js"></script> -->
     <script src="js/tinymce.min.js"></script>
-    <script type="text/javascript">
-      tinymce.remove();
-      tinymce.init({
-        selector: "textarea.form-control",
-        plugins: [
-          "media table paste "
-        ],
-        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
-      });
-</script>
 
     <!--<script src="js/wysihtml5.js"></script>
     <script src="js/bootstrap3-wysihtml5.min.js"></script>
