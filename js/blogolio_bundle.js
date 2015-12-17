@@ -201,7 +201,8 @@ $(function() {
 					}
 				}
 
-				this.$el.html(this.template(attributes)).find('.write-content').wysihtml5();
+				this.$el.html(this.template(attributes)).find('.write-content');
+				loadTinyMCE();
 			}
 		}),		
 		WriteProjectView = Parse.View.extend({
@@ -238,7 +239,8 @@ $(function() {
 					}
 				}
 
-				this.$el.html(this.template(attributes)).find('.write-content').wysihtml5();
+				this.$el.html(this.template(attributes)).find('.write-content');
+				loadTinyMCE();
 			}
 		}),
 		AboutView = Parse.View.extend({
@@ -401,6 +403,7 @@ $(function() {
 				} else {
 					var writeBlogView = new WriteBlogView();
 					writeBlogView.render();
+					tinymce.remove();
 					$container.html(writeBlogView.el);
 				}
 			},
@@ -490,6 +493,8 @@ $(function() {
 		blogRouter = new BlogRouter();
 	 
 		blogRouter.start(); 
+
+
 		
 	$(document).ready(function(){
 		var CommentObject = Parse.Object.extend("CommentObject");
@@ -521,5 +526,29 @@ $(function() {
 			});
 		});
 	});
+
+	function loadTinyMCE() {
+	    tinymce.init({
+	  		setup: function(e){
+	  			e.on('init', function(args) {
+	  				console.debug(args.target.id);
+	  			})
+	  		},
+	        selector: "textarea.form-control",
+	        plugins: [
+	        	"media table paste "
+	        ],
+	        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
+			// content_css: [
+			// 	'//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+			// 	'//www.tinymce.com/css/codepen.min.css'
+			// ]
+   		});
+	}
+
+	var buttonBlog = document.getElementById("addBlogButton");
+	document.addEventListener('DOMContentLoaded', function () {
+	    buttonBlog.addEventListener('click', loadTinyMCE, false);
+	}); 
 });
 },{}]},{},[1]);

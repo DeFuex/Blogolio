@@ -10,7 +10,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
 	  <link href="css/blogolio.css" rel="stylesheet">
-    <link href="css/bootstrap-wysihtml5-0.0.2.css" rel="stylesheet">
+    <!-- <link href="css/bootstrap-wysihtml5-0.0.2.css" rel="stylesheet"> -->
     <link href="css/bootstrap-social.css" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
  
@@ -234,7 +234,7 @@
 
   <script id="admin-blogs-tpl" type="text/x-handlebars-template">
   <h2>Welcome, {{username}}!</h2>
-  <a href="#/add" class="add-blog btn btn-lg btn-primary">Add a New Blog</a>
+  <a id="addBlogButton" href="#/add" class="add-blog btn btn-lg btn-primary">Add a New Blog</a>
   <a href="#/logout" class="add-blog btn btn-lg">Logout</a>
   <table>
     <thead>
@@ -263,7 +263,7 @@
   </b>	
 
   <script id="admin-projects-tpl" type="text/x-handlebars-template">
-  <a href="#/addp" class="add-blog btn btn-lg btn-primary">Add a New Project</a>
+  <a id="addProjectButton" href="#/addp" class="add-blog btn btn-lg btn-primary">Add a New Project</a>
   <table>
     <thead>
       <tr>
@@ -303,13 +303,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   	<script src="js/blogolio_bundle.js"></script>
-    <script src="js/wysihtml5-0.3.0.min.js"></script>
-    <script src="js/bootstrap-wysihtml5-0.0.2.min.js"></script>
-
-    <!--<script src="js/wysihtml5.js"></script>
-    <script src="js/bootstrap3-wysihtml5.min.js"></script>
-    <script src="js/bootstrap-wysihtml5.en-US.js"></script> -->
-
+    <script src="js/tinymce.min.js"></script>
 	
   </body>
 </html>
