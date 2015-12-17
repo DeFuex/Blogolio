@@ -520,7 +520,7 @@ $(function() {
 			});
 		});
 
-		tinymce.remove();
+		
       	tinymce.init({
 	        selector: "textarea.form-control",
 	        plugins: [
