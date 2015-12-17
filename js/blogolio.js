@@ -400,10 +400,9 @@ $(function() {
 				if (!Parse.User.current()) {
 					this.navigate('#/login', { trigger: true });
 				} else {
-					loadTinyMCE();
 					var writeBlogView = new WriteBlogView();
 					writeBlogView.render();
-					loadTinyMCE();
+					tinymce.remove();
 					$container.html(writeBlogView.el);
 				}
 			},
