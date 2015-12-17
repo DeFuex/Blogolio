@@ -522,6 +522,9 @@ $(function() {
 			});
 		});
 
+		document.getElementById ("addBlogButton").addEventListener ("click", loadTinyMCE, false);
+		
+
 
 		// $("#addBlogButton").on("click", function(e) {
 		// 	console.log("addbutton clicked");
@@ -565,26 +568,5 @@ $(function() {
 				'//www.tinymce.com/css/codepen.min.css'
 			]
    		});
-   		return true;
 	} 
 });
-
-	function loadTinyMCE() {
-	    tinymce.init({
-	  		setup: function(e){
-	  			e.on('init', function(args) {
-	  				console.debug(args.target.id);
-	  			})
-	  		},
-	        selector: "textarea.form-control",
-	        plugins: [
-	        	"media table paste "
-	        ],
-	        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image",
-			content_css: [
-				'//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
-				'//www.tinymce.com/css/codepen.min.css'
-			]
-   		});
-   		return true;
-	} 
