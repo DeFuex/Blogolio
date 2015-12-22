@@ -504,9 +504,9 @@ $(function() {
 	 
 	    $("a.transition").click(function(event){
 	        event.preventDefault();
-	        linkLocation = this.href;
+	        var linkLocation = this.href;
 	        console.log("TEST" + linkLocation);
-	        $("body").fadeOut(1000, redirectPage);      
+	        $("body").fadeOut(1000, redirectPage(linkLocation));      
 	    });
 	         
 		var CommentObject = Parse.Object.extend("CommentObject");
@@ -564,10 +564,8 @@ $(function() {
 	}); 
 });
 
-
-
-	    function redirectPage() {
-	        window.location = linkLocation;
-	    }
+    function redirectPage(linkLocation) {
+        window.location = linkLocation;
+    }
 
 },{}]},{},[1]);
