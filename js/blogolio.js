@@ -508,10 +508,6 @@ $(function() {
 	        $("body").fadeOut(1000, redirectPage);      
 	    });
 	         
-	    function redirectPage() {
-	        window.location = linkLocation;
-	    }
-
 		var CommentObject = Parse.Object.extend("CommentObject");
 	
 		$("#contactForm").on("submit", function(e) {
@@ -566,3 +562,9 @@ $(function() {
 	    buttonBlog.addEventListener('click', loadTinyMCE, false);
 	}); 
 });
+
+
+
+	    function redirectPage() {
+	        window.location = linkLocation;
+	    }
