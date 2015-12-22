@@ -506,7 +506,10 @@ $(function() {
 	        event.preventDefault();
 	        var linkLocation = this.href;
 	        console.log(linkLocation);
-	        $('body').fadeOut(1000, function(){$('body').fadeIn(600);});      
+	        $('body').fadeOut(1000, function(){
+	        	window.location = linkLocation;
+	        	$('body').fadeIn(600);
+	        });      
 	    });
 	         
 		var CommentObject = Parse.Object.extend("CommentObject");
