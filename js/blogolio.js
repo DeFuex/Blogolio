@@ -497,15 +497,15 @@ $(function() {
 		
 	$(document).ready(function(){
 
-		$("body").css("display", "none");
+		$('body').css("display", "none");
 	 
-	    $("body").fadeIn(2000);
+	    $('body').fadeIn(2000);
 	 
 	    $("a.transition").click(function(event){
 	        event.preventDefault();
 	        var linkLocation = this.href;
-	        console.log("TEST" + linkLocation);
-	        $("body").fadeOut(1000, redirectPage(linkLocation));      
+	        console.log(linkLocation);
+	        $('body').fadeOut(1000, function(){$('body').fadeIn(600);});      
 	    });
 	         
 		var CommentObject = Parse.Object.extend("CommentObject");
