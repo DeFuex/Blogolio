@@ -498,17 +498,17 @@ $(function() {
 		
 	$(document).ready(function(){
 
-		$('body').css("display", "none");
+		$('.main-container').css("display", "none");
 	 
-	    $('body').fadeIn(2000);
+	    $('.main-container').fadeIn(2000);
 	 
 	    $("a.transition").click(function(event){
 	        event.preventDefault();
 	        var linkLocation = this.href;
 	        console.log(linkLocation);
-	        $('body').fadeOut(1000, function(){
+	        $('.main-container').fadeOut(1000, function(){
 	        	window.location = linkLocation;
-	        	$('body').fadeIn(600);
+	        	$('.main-container').fadeIn(600);
 	        });      
 	    });
 	         
@@ -567,8 +567,5 @@ $(function() {
 	}); 
 });
 
-    function redirectPage(linkLocation) {
-        window.location = linkLocation;
-    }
 
 },{}]},{},[1]);
