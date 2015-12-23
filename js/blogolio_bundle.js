@@ -500,15 +500,15 @@ $(function() {
 
 		$('.main-container').css("display", "none");
 	 
-	    $('.main-container').fadeIn(2000);
+	    $('.main-container').fadeIn(300);
 	 
 	    $("a.transition").click(function(event){
 	        event.preventDefault();
 	        var linkLocation = this.href;
 	        console.log(linkLocation);
-	        $('.main-container').fadeOut(1000, function(){
+	        $('.main-container').fadeOut(300, function(){
 	        	window.location = linkLocation;
-	        	$('.main-container').fadeIn(600);
+	        	$('.main-container').fadeIn(300);
 	        });      
 	    });
 	         
