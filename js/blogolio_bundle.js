@@ -512,8 +512,8 @@ $(function() {
 	        });      
 	    });
 
-    	var buttonBlog = document.getElementById("addBlogButton");
-	    buttonBlog.addEventListener('click', function(){
+	    ("a.add-blog").click(function(event){
+	    	event.preventDefault();
 		    tinymce.init({
 		  		setup: function(e){
 		  			e.on('init', function(args) {
@@ -526,8 +526,7 @@ $(function() {
 		        ],
 		        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
 	   		});
-	    	}, 
-	    false);
+	    }, false);
 	         
 		var CommentObject = Parse.Object.extend("CommentObject");
 	
