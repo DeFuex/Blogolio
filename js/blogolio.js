@@ -510,6 +510,23 @@ $(function() {
 	        	$('.main-container').fadeIn(300);
 	        });      
 	    });
+
+    	var buttonBlog = document.getElementById("addBlogButton");
+	    buttonBlog.addEventListener('click', function(){
+		    tinymce.init({
+		  		setup: function(e){
+		  			e.on('init', function(args) {
+		  				console.debug(args.target.id);
+		  			})
+		  		},
+		        selector: "textarea.form-control",
+		        plugins: [
+		        	"media table paste "
+		        ],
+		        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
+	   		});
+	    	}, 
+	    false);
 	         
 		var CommentObject = Parse.Object.extend("CommentObject");
 	
@@ -560,9 +577,9 @@ $(function() {
    		});
 	}
 
-	var buttonBlog = document.getElementById("addBlogButton");
-	document.addEventListener('DOMContentLoaded', function () {
-	    buttonBlog.addEventListener('click', loadTinyMCE, false);
-	}); 
+	// var buttonBlog = document.getElementById("addBlogButton");
+	// document.addEventListener('DOMContentLoaded', function () {
+	//     buttonBlog.addEventListener('click', loadTinyMCE, false);
+	// }); 
 });
 
