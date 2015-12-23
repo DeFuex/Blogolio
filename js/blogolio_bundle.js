@@ -512,7 +512,7 @@ $(function() {
 	        });      
 	    });
 
-	    ("a.add-blog").click(function(event){
+	    $("a.add-blog").click(function(event){
 	    	event.preventDefault();
 		    tinymce.init({
 		  		setup: function(e){
