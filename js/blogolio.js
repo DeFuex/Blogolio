@@ -204,7 +204,7 @@ $(function() {
 						content: ''
 					}
 				}
-				this.$el.html(this.template(attributes)).find('.form-control').on('load', function (){
+				this.$el.html(this.template(attributes)).find('.write-content').on('load', function (){
 					tinymce.init({
 				  		setup: function(e){
 				  			e.on('init', function(args) {
