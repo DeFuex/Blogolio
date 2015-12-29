@@ -156,6 +156,10 @@ $(function() {
 					blog: this.collection.toJSON()
 				};
 				this.$el.html(this.template(collection));
+				
+			    $('a.btn-primary').on('click', function(){
+			    	alert('a tag pressed');
+			    })
 			}
 		}),		
 		ProjectsAdminView = Parse.View.extend({
@@ -555,10 +559,6 @@ $(function() {
 	        	$('.main-container').fadeIn(300);
 	        });      
 	    });
-
-	    $('a.btn-primary').on('click', function(){
-	    	alert('a tag pressed');
-	    })
 
 	    //Contact Formular functionalities
 		var CommentObject = Parse.Object.extend("CommentObject");
