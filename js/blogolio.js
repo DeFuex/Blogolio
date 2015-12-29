@@ -511,8 +511,8 @@ $(function() {
 	        });      
 	    });
 
-	    $("a.add-blog").click(function(event){
-	    	event.preventDefault();
+	    $("a.add-blog").click(function(e){
+	    	e.preventDefault();
 		    tinymce.init({
 		  		setup: function(e){
 		  			e.on('init', function(args) {
