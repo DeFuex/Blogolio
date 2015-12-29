@@ -612,8 +612,16 @@ $('a.btn-primary').click(function(){
 
 		// create the wysiwyg
 		tinyMCE.init({
-			mode: 'textareas',
-			theme: 'advanced'
+	  		setup: function(e){
+	  			e.on('init', function(args) {
+	  				console.debug(args.target.id);
+	  			})
+	  		},
+	        selector: "textarea.form-control",
+	        plugins: [
+	        	"media table paste "
+	        ],
+	        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
 		});
 
 		alert('tinymce LOADED');
