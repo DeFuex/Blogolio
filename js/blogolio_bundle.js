@@ -505,8 +505,6 @@ $(function() {
 		blogRouter = new BlogRouter();
 	 
 		blogRouter.start(); 
-		
-	$(document).ready(function(){
 
 		window._loaded = false;
 
@@ -539,6 +537,8 @@ $(function() {
 				alert('tinymce has not finished downloading');
 			}
 		});
+		
+	$(document).ready(function(){
 
 		//Fade in/out functionalities.
 		$('.main-container').css("display", "none");
