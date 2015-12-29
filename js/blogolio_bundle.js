@@ -194,7 +194,6 @@ $(function() {
 				if (this.model) {
 					attributes = this.model.toJSON();
 					attributes.form_title = 'Edit Blog';
-					loadTinyMCE();
 				} else {
 					attributes = {
 						form_title: 'Add a Blog',
@@ -202,9 +201,21 @@ $(function() {
 						summary: '',
 						content: ''
 					}
-					loadTinyMCE();
 				}
-				this.$el.html(this.template(attributes)).find('.write-content').loadTinyMCE();
+				this.$el.html(this.template(attributes)).find('.write-content').done(function (){
+					tinymce.init({
+				  		setup: function(e){
+				  			e.on('init', function(args) {
+				  				console.debug(args.target.id);
+				  			})
+				  		},
+				        selector: "textarea.form-control",
+				        plugins: [
+				        	"media table paste "
+				        ],
+				        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
+					});
+				});
 			}
 		}),		
 		WriteProjectView = Parse.View.extend({
