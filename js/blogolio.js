@@ -589,47 +589,47 @@ $(function() {
 });
 
 
-window._loaded = false;
+// window._loaded = false;
 
-window.tinyMCEPreInit = {
-	base: 'js/tinymce.min.js', 
-	suffix : '', 
-	query : ''
-};   
+// window.tinyMCEPreInit = {
+// 	base: 'js/tinymce.min.js', 
+// 	suffix : '', 
+// 	query : ''
+// };   
 
-$.getScript(window.tinyMCEPreInit.base, function(){
+// $.getScript(window.tinyMCEPreInit.base, function(){
 
-	//$('#debug').html('tinymce has been loaded');
-	window._loaded = true;
+// 	//$('#debug').html('tinymce has been loaded');
+// 	window._loaded = true;
 	
-	tinymce.dom.Event.domLoaded = true; 
-});     
+// 	tinymce.dom.Event.domLoaded = true; 
+// });     
 
-$('a.btn-primary').click(function(){	
+// $('a.btn-primary').click(function(){	
 
-	if (window._loaded) {
+// 	if (window._loaded) {
 
-		// create the wysiwyg
-		tinyMCE.init({
-	  		setup: function(e){
-	  			e.on('init', function(args) {
-	  				console.debug(args.target.id);
-	  			})
-	  		},
-	        selector: "textarea.form-control",
-	        plugins: [
-	        	"media table paste "
-	        ],
-	        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
-		});
+// 		// create the wysiwyg
+// 		tinyMCE.init({
+// 	  		setup: function(e){
+// 	  			e.on('init', function(args) {
+// 	  				console.debug(args.target.id);
+// 	  			})
+// 	  		},
+// 	        selector: "textarea.form-control",
+// 	        plugins: [
+// 	        	"media table paste "
+// 	        ],
+// 	        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
+// 		});
 
-		alert('tinymce LOADED');
+// 		alert('tinymce LOADED');
 
-	} else {
+// 	} else {
 		
-		alert('tinymce has not finished downloading');
-	}
-});
+// 		alert('tinymce has not finished downloading');
+// 	}
+// });
 
 // $('a.btn-primary').on('click', '.form-write', loadTinyMCE());
 
