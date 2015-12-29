@@ -157,6 +157,24 @@ $(function() {
 					blog: this.collection.toJSON()
 				};
 				this.$el.html(this.template(collection));
+				
+		$('a.btn-primary').click(function(){	
+
+			if (window._loaded) {
+
+				// create the wysiwyg
+				tinyMCE.init({
+					mode: 'textareas',
+					theme: 'advanced'
+				});
+
+				alert('tinymce LOADED');
+
+			} else {
+				
+				alert('tinymce has not finished downloading');
+			}
+		});
 			}
 		}),		
 		ProjectsAdminView = Parse.View.extend({
@@ -539,24 +557,6 @@ $(function() {
 	        	$('.main-container').fadeIn(300);
 	        });      
 	    });
-
-		$('a.btn-primary').click(function(){	
-
-			if (window._loaded) {
-
-				// create the wysiwyg
-				tinyMCE.init({
-					mode: 'textareas',
-					theme: 'advanced'
-				});
-
-				alert('tinymce LOADED');
-
-			} else {
-				
-				alert('tinymce has not finished downloading');
-			}
-		});
 
 	    //Contact Formular functionalities
 		var CommentObject = Parse.Object.extend("CommentObject");
