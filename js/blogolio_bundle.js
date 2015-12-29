@@ -532,6 +532,8 @@ $(function() {
 					theme: 'advanced'
 				});
 
+				alert('tinymce LOADED');
+
 			} else {
 				
 				alert('tinymce has not finished downloading');
