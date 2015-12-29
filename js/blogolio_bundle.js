@@ -497,8 +497,8 @@ $(function() {
 
 		
 	$(document).ready(function(){
-		$(document).delegate('a.add-blog', 'click', loadTinyMCE());
 
+		//Fade in/out functionalities.
 		$('.main-container').css("display", "none");
 	 
 	    $('.main-container').fadeIn(300);
@@ -513,22 +513,8 @@ $(function() {
 	        });      
 	    });
 
-	    // $("a.add-blog").click(function(e){
-	    // 	e.preventDefault();
-		   //  tinymce.init({
-		  	// 	setup: function(e){
-		  	// 		e.on('init', function(args) {
-		  	// 			console.debug(args.target.id);
-		  	// 		})
-		  	// 	},
-		   //      selector: "textarea.form-control",
-		   //      plugins: [
-		   //      	"media table paste "
-		   //      ],
-		   //      toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
-	   	// 	});
-	    // }, false);
-	         
+
+	    //Contact Formular functionalities
 		var CommentObject = Parse.Object.extend("CommentObject");
 	
 		$("#contactForm").on("submit", function(e) {
@@ -559,6 +545,7 @@ $(function() {
 		});
 	});
 
+	//function to initialize tinyMCE
 	function loadTinyMCE() {
 	    tinymce.init({
 	  		setup: function(e){
@@ -571,10 +558,6 @@ $(function() {
 	        	"media table paste "
 	        ],
 	        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
-			// content_css: [
-			// 	'//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
-			// 	'//www.tinymce.com/css/codepen.min.css'
-			// ]
    		});
 	}
 });
