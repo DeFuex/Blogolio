@@ -183,6 +183,7 @@ $(function() {
 						summary: data[1].value, 
 						content: data[2].value
 					});
+				loadTinyMCE();
 			},
 			render: function(){
 				var attributes;
