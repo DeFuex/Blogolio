@@ -174,7 +174,7 @@ $(function() {
 		}),
 		WriteBlogView = Parse.View.extend({
 			initialize: function(options){
-				_.bindAll(this, 'beforeRender', 'render', 'afterRender');
+				_.bindAll(this, 'submit', 'beforeRender', 'render', 'afterRender');
 				var _this = this;
 				this.render = _.wrap(this.render, function(render) {
 					_this.beforeRender();
