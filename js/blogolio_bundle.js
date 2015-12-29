@@ -496,7 +496,7 @@ $(function() {
 	 
 		blogRouter.start(); 
 
-
+	$('a.btn-primary').click(loadTinyMCE());
 		
 	$(document).ready(function(){
 
@@ -505,7 +505,7 @@ $(function() {
 	 
 	    $('.main-container').fadeIn(300);
 	 
-	    $("a.transition").click(function(event){
+	    $('a.transition').click(function(event){
 	        event.preventDefault();
 	        var linkLocation = this.href;
 	        console.log(linkLocation);
