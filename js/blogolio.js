@@ -537,42 +537,6 @@ $(function() {
 		blogRouter = new BlogRouter();
 	 
 		blogRouter.start(); 
-
-		// window._loaded = false;
-
-		// window.tinyMCEPreInit = {
-		// 	base: 'js/tinymce.min.js', 
-		// 	suffix : '', 
-		// 	query : ''
-		// };   
-
-		// $.getScript(window.tinyMCEPreInit.base, function(){
-
-		// 	//$('#debug').html('tinymce has been loaded');
-		// 	window._loaded = true;
-			
-		// 	tinymce.dom.Event.domLoaded = true; 
-		// });     
-
-		// $('a.btn-primary').click(function(){	
-
-		// 	if (window._loaded) {
-
-		// 		// create the wysiwyg
-		// 		tinyMCE.init({
-		// 			mode: 'textareas',
-		// 			theme: 'advanced'
-		// 		});
-
-		// 		alert('tinymce LOADED');
-
-		// 	} else {
-				
-		// 		alert('tinymce has not finished downloading');
-		// 	}
-		// });
-
-
 		
 	$(document).ready(function(){
 
@@ -624,11 +588,46 @@ $(function() {
 
 });
 
-$('a.btn-primary').on('click', '.form-write', loadTinyMCE());
+
+// window._loaded = false;
+
+// window.tinyMCEPreInit = {
+// 	base: 'js/tinymce.min.js', 
+// 	suffix : '', 
+// 	query : ''
+// };   
+
+// $.getScript(window.tinyMCEPreInit.base, function(){
+
+// 	//$('#debug').html('tinymce has been loaded');
+// 	window._loaded = true;
+	
+// 	tinymce.dom.Event.domLoaded = true; 
+// });     
+
+// $('a.btn-primary').click(function(){	
+
+// 	if (window._loaded) {
+
+// 		// create the wysiwyg
+// 		tinyMCE.init({
+// 			mode: 'textareas',
+// 			theme: 'advanced'
+// 		});
+
+// 		alert('tinymce LOADED');
+
+// 	} else {
+		
+// 		alert('tinymce has not finished downloading');
+// 	}
+// });
+
+// $('a.btn-primary').on('click', '.form-write', loadTinyMCE());
 
 //function to initialize tinyMCE
 function loadTinyMCE() {
-    tinymce.init({
+    tinyMCE.init({
   		setup: function(e){
   			e.on('init', function(args) {
   				console.debug(args.target.id);
