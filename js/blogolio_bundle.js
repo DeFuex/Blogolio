@@ -205,22 +205,9 @@ $(function() {
 						content: ''
 					}
 				}
-				this.$el.html(this.template(attributes)).find('.write-content').on('load', function (){
-					tinymce.init({
-				  		setup: function(e){
-				  			e.on('init', function(args) {
-				  				console.debug(args.target.id);
-				  			})
-				  		},
-				        selector: "textarea.form-control",
-				        plugins: [
-				        	"media table paste "
-				        ],
-				        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
-					});
-				});
+				this.$el.html(this.template(attributes))
 
-				// promise().done(function (){
+				// .find('.write-content').on('load', function (){
 				// 	tinymce.init({
 				//   		setup: function(e){
 				//   			e.on('init', function(args) {
@@ -234,6 +221,21 @@ $(function() {
 				//         toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
 				// 	});
 				// });
+
+				.promise().done(function (){
+					tinymce.init({
+				  		setup: function(e){
+				  			e.on('init', function(args) {
+				  				console.debug(args.target.id);
+				  			})
+				  		},
+				        selector: "textarea.form-control",
+				        plugins: [
+				        	"media table paste "
+				        ],
+				        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
+					});
+				});
 			}
 		}),		
 		WriteProjectView = Parse.View.extend({
