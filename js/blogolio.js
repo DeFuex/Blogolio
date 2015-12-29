@@ -170,10 +170,19 @@ $(function() {
 					project: this.collection.toJSON()
 				};
 				this.$el.html(this.template(collection));
-				loadTinyMCE();
 			}
 		}),
 		WriteBlogView = Parse.View.extend({
+			initialize: function(options){
+				_.bindAll(this, 'beforeRender', 'render', 'afterRender');
+				var _this = this;
+				this.render = _.wrap(this.render, function(render) {
+					_this.beforeRender();
+					render();
+					_this.afterRender();
+					return _this;
+				});
+			},
 			template: Handlebars.compile($('#write-tpl').html()),
 			events: {
 				'submit .form-write': 'submit'
@@ -188,6 +197,9 @@ $(function() {
 						summary: data[1].value, 
 						content: data[2].value
 					});
+			},
+			beforeRender: function(){
+				console.log('beforeRender');
 			},
 			render: function(){
 				var attributes;
@@ -235,6 +247,9 @@ $(function() {
 				        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
 					});
 				});
+			},
+			afterRender: function(){
+				console.log('afterRender');
 			}
 		}),		
 		WriteProjectView = Parse.View.extend({
