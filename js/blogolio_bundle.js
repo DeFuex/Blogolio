@@ -497,7 +497,7 @@ $(function() {
 
 		
 	$(document).ready(function(){
-		$(document).delegate('a.transition', 'click', loadTinyMCE());
+		$(document).on('click', 'a.transition', loadTinyMCE());
 
 		$('.main-container').css("display", "none");
 	 
