@@ -631,11 +631,11 @@ $('a.btn-primary').click(function(){
 	}
 });
 
-$('a.btn-primary').on('click', '.form-write', loadTinyMCE());
+// $('a.btn-primary').on('click', '.form-write', loadTinyMCE());
 
 //function to initialize tinyMCE
 function loadTinyMCE() {
-    tinyMCE.init({
+    tinymce.init({
   		setup: function(e){
   			e.on('init', function(args) {
   				console.debug(args.target.id);
