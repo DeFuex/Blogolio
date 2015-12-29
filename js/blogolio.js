@@ -156,10 +156,10 @@ $(function() {
 					blog: this.collection.toJSON()
 				};
 				this.$el.html(this.template(collection));
-				
-			    $('a.btn-primary').on('click', function(){
-			    	alert('a tag pressed');
-			    })
+
+			    // $('a.btn-primary').on('click', function(){
+			    // 	alert('a tag pressed');
+			    // })
 			}
 		}),		
 		ProjectsAdminView = Parse.View.extend({
@@ -204,7 +204,7 @@ $(function() {
 						content: ''
 					}
 				}
-				this.$el.html(this.template(attributes)).promise().done(function (){
+				this.$el.html(this.template(attributes)).find('.form-control').on('load', function (){
 					tinymce.init({
 				  		setup: function(e){
 				  			e.on('init', function(args) {
@@ -218,6 +218,21 @@ $(function() {
 				        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
 					});
 				});
+
+				// promise().done(function (){
+				// 	tinymce.init({
+				//   		setup: function(e){
+				//   			e.on('init', function(args) {
+				//   				console.debug(args.target.id);
+				//   			})
+				//   		},
+				//         selector: "textarea.form-control",
+				//         plugins: [
+				//         	"media table paste "
+				//         ],
+				//         toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
+				// 	});
+				// });
 			}
 		}),		
 		WriteProjectView = Parse.View.extend({
