@@ -202,7 +202,7 @@ $(function() {
 						content: ''
 					}
 				}
-				this.$el.html(this.template(attributes)).find('.write-content').done(function (){
+				this.$el.html(this.template(attributes)).promise().done(function (){
 					tinymce.init({
 				  		setup: function(e){
 				  			e.on('init', function(args) {
