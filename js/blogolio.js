@@ -183,7 +183,6 @@ $(function() {
 						summary: data[1].value, 
 						content: data[2].value
 					});
-				loadTinyMCE();
 			},
 			render: function(){
 				var attributes;
@@ -192,6 +191,7 @@ $(function() {
 				if (this.model) {
 					attributes = this.model.toJSON();
 					attributes.form_title = 'Edit Blog';
+					loadTinyMCE();
 				} else {
 					attributes = {
 						form_title: 'Add a Blog',
@@ -199,10 +199,9 @@ $(function() {
 						summary: '',
 						content: ''
 					}
+					loadTinyMCE();
 				}
-
 				this.$el.html(this.template(attributes)).find('.write-content');
-				loadTinyMCE();
 			}
 		}),		
 		WriteProjectView = Parse.View.extend({
