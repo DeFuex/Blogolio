@@ -156,6 +156,7 @@ $(function() {
 					blog: this.collection.toJSON()
 				};
 				this.$el.html(this.template(collection));
+				loadTinyMCE();
 			}
 		}),		
 		ProjectsAdminView = Parse.View.extend({
@@ -166,6 +167,7 @@ $(function() {
 					project: this.collection.toJSON()
 				};
 				this.$el.html(this.template(collection));
+				loadTinyMCE();
 			}
 		}),
 		WriteBlogView = Parse.View.extend({
