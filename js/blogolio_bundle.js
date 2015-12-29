@@ -157,10 +157,6 @@ $(function() {
 					blog: this.collection.toJSON()
 				};
 				this.$el.html(this.template(collection));
-
-			    // $('a.btn-primary').on('click', function(){
-			    // 	alert('a tag pressed');
-			    // })
 			}
 		}),		
 		ProjectsAdminView = Parse.View.extend({
@@ -174,16 +170,16 @@ $(function() {
 			}
 		}),
 		WriteBlogView = Parse.View.extend({
-			initialize: function(options){
-				_.bindAll(this, 'submit', 'beforeRender', 'render', 'afterRender');
-				var _this = this;
-				this.render = _.wrap(this.render, function(render) {
-					_this.beforeRender();
-					render();
-					_this.afterRender();
-					return _this;
-				});
-			},
+			// initialize: function(options){
+			// 	_.bindAll(this, 'submit', 'beforeRender', 'render', 'afterRender');
+			// 	var _this = this;
+			// 	this.render = _.wrap(this.render, function(render) {
+			// 		_this.beforeRender();
+			// 		render();
+			// 		_this.afterRender();
+			// 		return _this;
+			// 	});
+			// },
 			template: Handlebars.compile($('#write-tpl').html()),
 			events: {
 				'submit .form-write': 'submit'
@@ -199,9 +195,9 @@ $(function() {
 						content: data[2].value
 					});
 			},
-			beforeRender: function(){
-				console.log('beforeRender');
-			},
+			// beforeRender: function(){
+			// 	console.log('beforeRender');
+			// },
 			render: function(){
 				var attributes;
 				// If the user is editing a blog, that means there will be a blog set as this.model
@@ -248,10 +244,11 @@ $(function() {
 				        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
 					});
 				});
-			},
-			afterRender: function(){
-				console.log('afterRender');
 			}
+			// ,
+			// afterRender: function(){
+			// 	console.log('afterRender');
+			// }
 		}),		
 		WriteProjectView = Parse.View.extend({
 			template: Handlebars.compile($('#write-tpl').html()),
@@ -575,6 +572,8 @@ $(function() {
 		// 		alert('tinymce has not finished downloading');
 		// 	}
 		// });
+
+
 		
 	$(document).ready(function(){
 
@@ -625,6 +624,8 @@ $(function() {
 	});
 
 });
+
+$('a.btn-primary').on('click', '.form-write', loadTinyMCE());
 
 //function to initialize tinyMCE
 function loadTinyMCE() {
