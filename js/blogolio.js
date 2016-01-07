@@ -4,6 +4,8 @@ $(function() {
 	
 	//Connection to the Parse Database Webserver.
 	Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
+
+  var loadingState = new (Parse.Object.extend('LoadingState', {}))
 	
 	var $container = $('.main-container'),
 		$sidebar = $('.blog-sidebar'),
@@ -341,11 +343,13 @@ $(function() {
 				'contact': 'contact'
 			},
 			index: function() {
+        loadingState.set({ status: true })
 				this.blogs.fetch({
 					success: function(blogs) {
 						var blogsView = new BlogsView({ collection: blogs });
 						blogsView.render();
 						$container.html(blogsView.el);
+            loadingState.set({ status: false })
 					},
 					error: function(blogs, error){
 						console.log(error);
@@ -367,11 +371,13 @@ $(function() {
 				})
 			},
 			projects: function(){
+        loadingState.set({ status: true })
 				this.projects.fetch({
 					success: function(projects) {
 						var projectsGalleryView = new ProjectsGalleryView({ collection: projects });
 						projectsGalleryView.render();
 						$container.html(projectsGalleryView.el);
+            loadingState.set({ status: false })
 					},
 					error: function(projects, error){
 						console.log(error);
@@ -540,12 +546,20 @@ $(function() {
 		
 	$(document).ready(function(){
 
+    var $container = $('.blog-main')
+    loadingState.on('change:status', function(model, status) {
+      status ? $container.addClass('loading') : $container.removeClass('loading')
+    })
+
+    var $main = $('.main-container')
+
 		//Fade in/out functionalities.
-		$('.main-container').css("display", "none");
-	 
-	    $('.main-container').fadeIn(300);
+		$main
+      .css("display", "none")
+      .fadeIn(300)
 	 
 	    $('a.transition').click(function(event){
+          return
 	        event.preventDefault();
 	        var linkLocation = this.href;
 	        console.log(linkLocation);
