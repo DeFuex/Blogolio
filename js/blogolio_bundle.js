@@ -1,10 +1,12 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 $(function() {
 
     Parse.$ = jQuery;
 	
 	//Connection to the Parse Database Webserver.
 	Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
+
+  var loadingState = new (Parse.Object.extend('LoadingState', {}))
 	
 	var $container = $('.main-container'),
 		$sidebar = $('.blog-sidebar'),
@@ -342,11 +344,13 @@ $(function() {
 				'contact': 'contact'
 			},
 			index: function() {
+        loadingState.set({ status: true })
 				this.blogs.fetch({
 					success: function(blogs) {
 						var blogsView = new BlogsView({ collection: blogs });
 						blogsView.render();
 						$container.html(blogsView.el);
+            loadingState.set({ status: false })
 					},
 					error: function(blogs, error){
 						console.log(error);
@@ -368,11 +372,13 @@ $(function() {
 				})
 			},
 			projects: function(){
+        loadingState.set({ status: true })
 				this.projects.fetch({
 					success: function(projects) {
 						var projectsGalleryView = new ProjectsGalleryView({ collection: projects });
 						projectsGalleryView.render();
 						$container.html(projectsGalleryView.el);
+            loadingState.set({ status: false })
 					},
 					error: function(projects, error){
 						console.log(error);
@@ -541,12 +547,20 @@ $(function() {
 		
 	$(document).ready(function(){
 
+    var $container = $('.blog-main')
+    loadingState.on('change:status', function(model, status) {
+      status ? $container.addClass('loading') : $container.removeClass('loading')
+    })
+
+    var $main = $('.main-container')
+
 		//Fade in/out functionalities.
-		$('.main-container').css("display", "none");
-	 
-	    $('.main-container').fadeIn(300);
+		$main
+      .css("display", "none")
+      .fadeIn(300)
 	 
 	    $('a.transition').click(function(event){
+          return
 	        event.preventDefault();
 	        var linkLocation = this.href;
 	        console.log(linkLocation);
@@ -651,4 +665,4 @@ function loadTinyMCE() {
 }
 
 
-},{}]},{},[1]);
+},{}]},{},[1])
