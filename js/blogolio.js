@@ -1,6 +1,16 @@
 $(function() {
 
-    Parse.$ = jQuery;
+	var Parse = require('parse');
+	var ParseReact = require('parse-react');
+	var React = require('react');
+	var ReactDom = require('react-dom');
+	// var DOMPurify = require('dompurify');
+	// var ReactDomServer = require('react-dom/server');
+	// var HtmlToReact = require('html-to-react');
+    
+
+	
+	Parse.$ = jQuery;
 	
 	//Connection to the Parse Database Webserver.
 	Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
@@ -79,464 +89,510 @@ $(function() {
 				});
 			}
 		}),
-		Blogs = Parse.Collection.extend({
-			model: Blog,
-			query: (new Parse.Query(Blog)).descending('createdAt')
-		}),
-		Projects = Parse.Collection.extend({
-			model: Project,
-			query: (new Parse.Query(Project)).descending('createdAt')
-		}),
-		BlogsView = Parse.View.extend({
-			template: Handlebars.compile($('#blogs-tpl').html()),
-			render: function(){ 
-				var collection = { blog: this.collection.toJSON() };
-				this.$el.html(this.template(collection));
-			}
-		}),
-		BlogView = Parse.View.extend({
-			template: Handlebars.compile($('#blog-tpl').html()),
-			render: function() {
-				var attributes = this.model.toJSON();
-				this.$el.html(this.template(attributes));
-			}
-		}),
-		ProjectsGalleryView = Parse.View.extend({
-			template: Handlebars.compile($('#thumb-gallery-tpl').html()),
-			render: function(){
-				var collection = { project: this.collection.toJSON() };
-				this.$el.html(this.template(collection));
-			}
-		}),
-		ProjectView = Parse.View.extend({
-			template: Handlebars.compile($('#project-tpl').html()),
-			render: function(){
-				var attributes = this.model.toJSON();
-				this.$el.html(this.template(attributes));
-			}
-		}),
-		LoginView = Parse.View.extend({
-			template: Handlebars.compile($('#login-tpl').html()),
-			events:{
-				'submit .form-signin': 'login'
-			},
-			login: function(e){
-				// Prevent Default Submit Event
-				e.preventDefault();
-			 
-				// Get data from the form and put them into variables
-				var data = $(e.target).serializeArray(),
-					username = data[0].value,
-					password = data[1].value;
-			 
-				// Call Parse Login function with those variables
-				Parse.User.logIn(username, password, {
-					// If the username and password matches
-					success: function(user) {
-						// var welcomeView = new WelcomeView({model: user});
-						// welcomeView.render();
-						// $container.html(welcomeView.el);
-						blogRouter.navigate('#/admin', { trigger: true });
-					},
-					// If there is an error
-					error: function(user, error) {
-						console.log(error);
-					}
-				});
-			},
-			render: function(){
-				this.$el.html(this.template());
-			}
-		}),
-		BlogsAdminView = Parse.View.extend({
-			template: Handlebars.compile($('#admin-blogs-tpl').html()),
-			render: function() {
-				var collection = { 
-					username: this.options.username,
-					blog: this.collection.toJSON()
+		Blogs = React.createClass({
+			mixins: [ParseReact.Mixin],
+			observe: function(){
+				return{
+					blogs: (new Parse.Query(Blog)).descending('createdAt')
 				};
-				this.$el.html(this.template(collection));
-			}
-		}),		
-		ProjectsAdminView = Parse.View.extend({
-			template: Handlebars.compile($('#admin-projects-tpl').html()),
-			render: function() {
-				var collection = { 
-					username: this.options.username,
-					project: this.collection.toJSON()
-				};
-				this.$el.html(this.template(collection));
+			},
+			render: function(){
+				return (
+					<div className="contact-content">
+					{
+						this.data.blogs.map(function(b) {
+							// var htmlInput = b.content;
+							// var htmlToReactParser = new HtmlToReact.Parser(React);
+							// var reactComponent = htmlToReactParser.parse(htmlInput);
+							// var reactHtml = ReactDomServer.renderToStaticMarkup(reactComponent);
+							// var clean = DOMPurify.sanitize(b.content, {ALLOWED_TAGS: ['b', 'a', 'div', '&nbsp;', '&gt;']});
+							return (
+								<div className="blog-post">
+									<h2 className="page-header"><a href="#">{b.title}</a></h2>
+									<div className="blog-content" dangerouslySetInnerHTML={{__html: b.content}}></div>
+									<p className="blog-post-meta">At {b.time} by {b.authorName}</p>
+								</div>
+							);
+						})
+					}
+					</div>
+				);
 			}
 		}),
-		WriteBlogView = Parse.View.extend({
-			// initialize: function(options){
-			// 	_.bindAll(this, 'submit', 'beforeRender', 'render', 'afterRender');
-			// 	var _this = this;
-			// 	this.render = _.wrap(this.render, function(render) {
-			// 		_this.beforeRender();
-			// 		render();
-			// 		_this.afterRender();
-			// 		return _this;
-			// 	});
-			// },
-			template: Handlebars.compile($('#write-tpl').html()),
-			events: {
-				'submit .form-write': 'submit'
+		Projects = React.createClass({
+			mixins: [ParseReact.Mixin],
+			observe: function(){
+				return{
+					projects: (new Parse.Query(Project)).descending('createdAt')
+				};
 			},
-			submit: function(e) {
-				e.preventDefault();
-				var data = $(e.target).serializeArray();
-				// If there's no blog data, then create a new blog
-				this.model = this.model || new Blog();
-				this.model.update({
-						title: data[0].value,
-						summary: data[1].value, 
-						content: data[2].value
-					});
-			},
-			// beforeRender: function(){
-			// 	console.log('beforeRender');
-			// },
 			render: function(){
-				var attributes;
-				// If the user is editing a blog, that means there will be a blog set as this.model
-				// therefore, we use this logic to render different titles and pass in empty strings
-				if (this.model) {
-					attributes = this.model.toJSON();
-					attributes.form_title = 'Edit Blog';
-				} else {
-					attributes = {
-						form_title: 'Add a Blog',
-						title: '',
-						summary: '',
-						content: ''
-					}
-				}
-				this.$el.html(this.template(attributes))
-
-				// .find('.write-content').on('load', function (){
-				// 	tinymce.init({
-				//   		setup: function(e){
-				//   			e.on('init', function(args) {
-				//   				console.debug(args.target.id);
-				//   			})
-				//   		},
-				//         selector: "textarea.form-control",
-				//         plugins: [
-				//         	"media table paste "
-				//         ],
-				//         toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
-				// 	});
-				// });
-
-				.promise().done(function (){
-					tinymce.init({
-				  		setup: function(e){
-				  			e.on('init', function(args) {
-				  				console.debug(args.target.id);
-				  			})
-				  		},
-				        selector: "textarea.form-control",
-				        plugins: [
-				        	"media table paste "
-				        ],
-				        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
-					});
-				});
+				return(
+					<ul></ul>
+				);
 			}
-			// ,
-			// afterRender: function(){
-			// 	console.log('afterRender');
+		})
+		
+		ReactDom.render(<Blogs />, document.getElementById('main-container'))
+
+		// Blogs = Parse.Collection.extend({
+			// model: Blog,
+			// query: (new Parse.Query(Blog)).descending('createdAt')
+		// }),
+		// Projects = Parse.Collection.extend({
+			// model: Project,
+			// query: (new Parse.Query(Project)).descending('createdAt')
+		// }),
+		// BlogsView = Parse.View.extend({
+			// template: Handlebars.compile($('#blogs-tpl').html()),
+			// render: function(){ 
+				// var collection = { blog: this.collection.toJSON() };
+				// this.$el.html(this.template(collection));
 			// }
-		}),		
-		WriteProjectView = Parse.View.extend({
-			template: Handlebars.compile($('#write-tpl').html()),
-			events: {
-				'submit .form-write': 'submit'
-			},
-			submit: function(e) {
-				e.preventDefault();
-				var data = $(e.target).serializeArray();
-				// If there's no project data, then create a new project
-				this.model = this.model || new Project();
-				this.model.update({
-						title: data[0].value,
-						// image: data.image.url,
-						summary: data[1].value,
-						content: data[2].value
-					});
-			},
-			render: function(){
-				var attributes;
-				// If the user is editing a blog, that means there will be a blog set as this.model
-				// therefore, we use this logic to render different titles and pass in empty strings
-				if (this.model) {
-					attributes = this.model.toJSON();
-					attributes.form_title = 'Edit Project';
-				} else {
-					attributes = {
-						form_title: 'Add a Project',
-						title: '',
-						image: '',
-						summary: '',
-						content: ''
-					}
-				}
-
-				this.$el.html(this.template(attributes)).find('.write-content');
-				loadTinyMCE();
-			}
-		}),
-		AboutView = Parse.View.extend({
-			template: Handlebars.compile($('#about-tpl').html()),
-			render: function() {
-				var attributes
-				attributes = {
-					form_title: 'About'
-				}
-				this.$el.html(this.template);
-			}
-		}),
-		ContactView = Parse.View.extend({
-			template: Handlebars.compile($('#contact-tpl').html()),
-			render: function(){
-				var attributes;
-				attributes = {
-					form_title: 'Contact'
-				}
-				this.$el.html(this.template(attributes));
-			}
-		}),
-		BlogRouter = Parse.Router.extend({  
-			// Shared variables can be defined here.
-			initialize: function(options){
-				this.blogs = new Blogs();
-				this.projects = new Projects();
-			},
-			// Router start point.
-			start: function(){
-				Parse.history.start({ 
-				root: '/Blogolio/'
-				// pushState: true 
-				});
-				// this.navigate('', { trigger: true });
-			},			
-			// Map functions to urls.
-			// '{{URL pattern}}': '{{function name}}'
-			routes: {
-				'': 'index',
-				'blog/:id': 'blog',
-				'projects': 'projects',
-				'project/:id': 'project', 
-				'admin': 'admin',
-				'login': 'login',
-				'logout': 'logout',
-				'add': 'add',
-				'edit/:id': 'edit',
-				'del/:id': 'del',
-				'addp': 'addproject',
-				'editp/:id': 'editproject',
-				'delp/:id': 'delproject',
-				'about': 'about',
-				'contact': 'contact'
-			},
-			index: function() {
-				this.blogs.fetch({
-					success: function(blogs) {
-						var blogsView = new BlogsView({ collection: blogs });
-						blogsView.render();
-						$container.html(blogsView.el);
-					},
-					error: function(blogs, error){
-						console.log(error);
-					}
-				});
-			},
-			blog: function(id){
-				var query = new Parse.Query(Blog);
-				query.get(id, {
-					success: function(blog) {
-						console.log(blog);
-						var blogView = new BlogView({ model: blog });
-						blogView.render();
-						$container.html(blogView.el);
-					},
-					error: function(blog, error){
-						console.log(error);
-					}
-				})
-			},
-			projects: function(){
-				this.projects.fetch({
-					success: function(projects) {
-						var projectsGalleryView = new ProjectsGalleryView({ collection: projects });
-						projectsGalleryView.render();
-						$container.html(projectsGalleryView.el);
-					},
-					error: function(projects, error){
-						console.log(error);
-					}
-				})
-			},
-			project: function(id){
-				var query = new Parse.Query(Project);
-				query.get(id, {
-					success: function(project) {
-						var projectView = new ProjectView({ model: project });
-						projectView.render();
-						$container.html(projectView.el);
-					},
-					error: function(project, error){
-						console.log(error);
-					}
-				})
-			},
-			admin: function() {
-				// Call current user from Parse.
-				var currentUser = Parse.User.current();
+		// }),
+		// BlogView = Parse.View.extend({
+			// template: Handlebars.compile($('#blog-tpl').html()),
+			// render: function() {
+				// var attributes = this.model.toJSON();
+				// this.$el.html(this.template(attributes));
+			// }
+		// }),
+		// ProjectsGalleryView = Parse.View.extend({
+			// template: Handlebars.compile($('#thumb-gallery-tpl').html()),
+			// render: function(){
+				// var collection = { project: this.collection.toJSON() };
+				// this.$el.html(this.template(collection));
+			// }
+		// }),
+		// ProjectView = Parse.View.extend({
+			// template: Handlebars.compile($('#project-tpl').html()),
+			// render: function(){
+				// var attributes = this.model.toJSON();
+				// this.$el.html(this.template(attributes));
+			// }
+		// }),
+		// LoginView = Parse.View.extend({
+			// template: Handlebars.compile($('#login-tpl').html()),
+			// events:{
+				// 'submit .form-signin': 'login'
+			// },
+			// login: function(e){
+				// // Prevent Default Submit Event
+				// e.preventDefault();
 			 
-				//Check login
-				if (!currentUser) {
-					this.navigate('#/login', { trigger: true });
-				} else {
-					$.when(
-						this.blogs.fetch({
-							success: function(blogs) {
-								var blogsAdminView = new BlogsAdminView({ 
-									//Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
-									username: currentUser.get('username'),
-									collection: blogs
-								});
-								blogsAdminView.render();
-								$container.html(blogsAdminView.el);
-							},
-							error: function(blogs, error) {
-								console.log(error);
-							}
-						})
-						,
-						this.projects.fetch({
-							success: function(projects) {
-								var projectsAdminView = new ProjectsAdminView({
-									username: currentUser.get('username'),
-									collection: projects
-								});
-								projectsAdminView.render();
-								$('#projects-container').html(projectsAdminView.el);
-							},
-							error: function(projects, error) {
-								console.log(error);
-							}
-						})
-					)
-				}
-			},
-			login: function() {
-				var loginView = new LoginView();
-				loginView.render();
-				$container.html(loginView.el);
-			},
-			logout: function(){
-				Parse.User.logOut();
-				this.navigate('#/login', {trigger: true });
-			},
-			add: function() {
-				// Check login
-				if (!Parse.User.current()) {
-					this.navigate('#/login', { trigger: true });
-				} else {
-					var writeBlogView = new WriteBlogView();
-					writeBlogView.render();
-					tinymce.remove();
-					$container.html(writeBlogView.el);
-				}
-			},
-			edit: function(id) {
-				// Check login
-				if (!Parse.User.current()) {
-					this.navigate('#/login', { trigger: true });
-				} else {
-					var query = new Parse.Query(Blog);
-					query.get(id, {
-						success: function(blog) {
-							var writeBlogView = new WriteBlogView({ model: blog });
-							writeBlogView.render();
-							$container.html(writeBlogView.el);
-						},
-						error: function(blog, error) {
-							console.log(error);
-						}
-					});
-				}
-			},
-			del: function(id){
-				if (!Parse.User.current()) {
-					this.navigate('#/login', { trigger: true });
-				} else {
-					var self = this,
-					query = new Parse.Query(Blog);
-					query.get(id).then(function(blog){
-						blog.destroy().then(function(blog){
-							self.navigate('admin', { trigger: true });
-						})
-					});
-				}
-			},
-			addproject: function() {
-				// Check login
-				if (!Parse.User.current()) {
-					this.navigate('#/login', { trigger: true });
-				} else {
-					var writeProjectView = new WriteProjectView();
-					writeProjectView.render();
-					$container.html(writeProjectView.el);
-				}
-			},
-			editproject: function(id) {
-				// Check login
-				if (!Parse.User.current()) {
-					this.navigate('#/login', { trigger: true });
-				} else {
-					var query = new Parse.Query(Project);
-					query.get(id, {
-						success: function(project) {
-							var writeProjectView = new WriteProjectView({ model: project });
-							writeProjectView.render();
-							$container.html(writeProjectView.el);
-						},
-						error: function(project, error) {
-							console.log(error);
-						}
-					});
-				}
-			},
-			delproject: function(id){
-				if (!Parse.User.current()) {
-					this.navigate('#/login', { trigger: true });
-				} else {
-					var self = this,
-					query = new Parse.Query(Project);
-					query.get(id).then(function(project){
-						project.destroy().then(function(project){
-							self.navigate('admin', { trigger: true });
-						})
-					});
-				}
-			},
-			about: function(){
-				var aboutView = new AboutView();
-				aboutView.render();
-				$container.html(aboutView.el);
-			},
-			contact: function(){
-				var contactView = new ContactView();
-				contactView.render();
-				$container.html(contactView.el);
-			}      
-		}),
-		blogRouter = new BlogRouter();
+				// // Get data from the form and put them into variables
+				// var data = $(e.target).serializeArray(),
+					// username = data[0].value,
+					// password = data[1].value;
+			 
+				// // Call Parse Login function with those variables
+				// Parse.User.logIn(username, password, {
+					// // If the username and password matches
+					// success: function(user) {
+						// // var welcomeView = new WelcomeView({model: user});
+						// // welcomeView.render();
+						// // $container.html(welcomeView.el);
+						// blogRouter.navigate('#/admin', { trigger: true });
+					// },
+					// // If there is an error
+					// error: function(user, error) {
+						// console.log(error);
+					// }
+				// });
+			// },
+			// render: function(){
+				// this.$el.html(this.template());
+			// }
+		// }),
+		// BlogsAdminView = Parse.View.extend({
+			// template: Handlebars.compile($('#admin-blogs-tpl').html()),
+			// render: function() {
+				// var collection = { 
+					// username: this.options.username,
+					// blog: this.collection.toJSON()
+				// };
+				// this.$el.html(this.template(collection));
+			// }
+		// }),		
+		// ProjectsAdminView = Parse.View.extend({
+			// template: Handlebars.compile($('#admin-projects-tpl').html()),
+			// render: function() {
+				// var collection = { 
+					// username: this.options.username,
+					// project: this.collection.toJSON()
+				// };
+				// this.$el.html(this.template(collection));
+			// }
+		// }),
+		// WriteBlogView = Parse.View.extend({
+			// // initialize: function(options){
+			// // 	_.bindAll(this, 'submit', 'beforeRender', 'render', 'afterRender');
+			// // 	var _this = this;
+			// // 	this.render = _.wrap(this.render, function(render) {
+			// // 		_this.beforeRender();
+			// // 		render();
+			// // 		_this.afterRender();
+			// // 		return _this;
+			// // 	});
+			// // },
+			// template: Handlebars.compile($('#write-tpl').html()),
+			// events: {
+				// 'submit .form-write': 'submit'
+			// },
+			// submit: function(e) {
+				// e.preventDefault();
+				// var data = $(e.target).serializeArray();
+				// // If there's no blog data, then create a new blog
+				// this.model = this.model || new Blog();
+				// this.model.update({
+						// title: data[0].value,
+						// summary: data[1].value, 
+						// content: data[2].value
+					// });
+			// },
+			// // beforeRender: function(){
+			// // 	console.log('beforeRender');
+			// // },
+			// render: function(){
+				// var attributes;
+				// // If the user is editing a blog, that means there will be a blog set as this.model
+				// // therefore, we use this logic to render different titles and pass in empty strings
+				// if (this.model) {
+					// attributes = this.model.toJSON();
+					// attributes.form_title = 'Edit Blog';
+				// } else {
+					// attributes = {
+						// form_title: 'Add a Blog',
+						// title: '',
+						// summary: '',
+						// content: ''
+					// }
+				// }
+				// this.$el.html(this.template(attributes))
+
+				// // .find('.write-content').on('load', function (){
+				// // 	tinymce.init({
+				// //   		setup: function(e){
+				// //   			e.on('init', function(args) {
+				// //   				console.debug(args.target.id);
+				// //   			})
+				// //   		},
+				// //         selector: "textarea.form-control",
+				// //         plugins: [
+				// //         	"media table paste "
+				// //         ],
+				// //         toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
+				// // 	});
+				// // });
+
+				// .promise().done(function (){
+					// tinymce.init({
+				  		// setup: function(e){
+				  			// e.on('init', function(args) {
+				  				// console.debug(args.target.id);
+				  			// })
+				  		// },
+				        // selector: "textarea.form-control",
+				        // plugins: [
+				        	// "media table paste "
+				        // ],
+				        // toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
+					// });
+				// });
+			// }
+			// // ,
+			// // afterRender: function(){
+			// // 	console.log('afterRender');
+			// // }
+		// }),		
+		// WriteProjectView = Parse.View.extend({
+			// template: Handlebars.compile($('#write-tpl').html()),
+			// events: {
+				// 'submit .form-write': 'submit'
+			// },
+			// submit: function(e) {
+				// e.preventDefault();
+				// var data = $(e.target).serializeArray();
+				// // If there's no project data, then create a new project
+				// this.model = this.model || new Project();
+				// this.model.update({
+						// title: data[0].value,
+						// // image: data.image.url,
+						// summary: data[1].value,
+						// content: data[2].value
+					// });
+			// },
+			// render: function(){
+				// var attributes;
+				// // If the user is editing a blog, that means there will be a blog set as this.model
+				// // therefore, we use this logic to render different titles and pass in empty strings
+				// if (this.model) {
+					// attributes = this.model.toJSON();
+					// attributes.form_title = 'Edit Project';
+				// } else {
+					// attributes = {
+						// form_title: 'Add a Project',
+						// title: '',
+						// image: '',
+						// summary: '',
+						// content: ''
+					// }
+				// }
+
+				// this.$el.html(this.template(attributes)).find('.write-content');
+				// loadTinyMCE();
+			// }
+		// }),
+		// AboutView = Parse.View.extend({
+			// template: Handlebars.compile($('#about-tpl').html()),
+			// render: function() {
+				// var attributes
+				// attributes = {
+					// form_title: 'About'
+				// }
+				// this.$el.html(this.template);
+			// }
+		// }),
+		// ContactView = Parse.View.extend({
+			// template: Handlebars.compile($('#contact-tpl').html()),
+			// render: function(){
+				// var attributes;
+				// attributes = {
+					// form_title: 'Contact'
+				// }
+				// this.$el.html(this.template(attributes));
+			// }
+		// }),
+		// BlogRouter = Parse.Router.extend({  
+			// // Shared variables can be defined here.
+			// initialize: function(options){
+				// this.blogs = new Blogs();
+				// this.projects = new Projects();
+			// },
+			// // Router start point.
+			// start: function(){
+				// Parse.history.start({ 
+				// root: '/Blogolio/'
+				// // pushState: true 
+				// });
+				// // this.navigate('', { trigger: true });
+			// },			
+			// // Map functions to urls.
+			// // '{{URL pattern}}': '{{function name}}'
+			// routes: {
+				// '': 'index',
+				// 'blog/:id': 'blog',
+				// 'projects': 'projects',
+				// 'project/:id': 'project', 
+				// 'admin': 'admin',
+				// 'login': 'login',
+				// 'logout': 'logout',
+				// 'add': 'add',
+				// 'edit/:id': 'edit',
+				// 'del/:id': 'del',
+				// 'addp': 'addproject',
+				// 'editp/:id': 'editproject',
+				// 'delp/:id': 'delproject',
+				// 'about': 'about',
+				// 'contact': 'contact'
+			// },
+			// index: function() {
+				// this.blogs.fetch({
+					// success: function(blogs) {
+						// var blogsView = new BlogsView({ collection: blogs });
+						// blogsView.render();
+						// $container.html(blogsView.el);
+					// },
+					// error: function(blogs, error){
+						// console.log(error);
+					// }
+				// });
+			// },
+			// blog: function(id){
+				// var query = new Parse.Query(Blog);
+				// query.get(id, {
+					// success: function(blog) {
+						// console.log(blog);
+						// var blogView = new BlogView({ model: blog });
+						// blogView.render();
+						// $container.html(blogView.el);
+					// },
+					// error: function(blog, error){
+						// console.log(error);
+					// }
+				// })
+			// },
+			// projects: function(){
+				// this.projects.fetch({
+					// success: function(projects) {
+						// var projectsGalleryView = new ProjectsGalleryView({ collection: projects });
+						// projectsGalleryView.render();
+						// $container.html(projectsGalleryView.el);
+					// },
+					// error: function(projects, error){
+						// console.log(error);
+					// }
+				// })
+			// },
+			// project: function(id){
+				// var query = new Parse.Query(Project);
+				// query.get(id, {
+					// success: function(project) {
+						// var projectView = new ProjectView({ model: project });
+						// projectView.render();
+						// $container.html(projectView.el);
+					// },
+					// error: function(project, error){
+						// console.log(error);
+					// }
+				// })
+			// },
+			// admin: function() {
+				// // Call current user from Parse.
+				// var currentUser = Parse.User.current();
+			 
+				// //Check login
+				// if (!currentUser) {
+					// this.navigate('#/login', { trigger: true });
+				// } else {
+					// $.when(
+						// this.blogs.fetch({
+							// success: function(blogs) {
+								// var blogsAdminView = new BlogsAdminView({ 
+									// //Pass current username to be rendered in the #admin-blogs-tpl depending html tag.
+									// username: currentUser.get('username'),
+									// collection: blogs
+								// });
+								// blogsAdminView.render();
+								// $container.html(blogsAdminView.el);
+							// },
+							// error: function(blogs, error) {
+								// console.log(error);
+							// }
+						// })
+						// ,
+						// this.projects.fetch({
+							// success: function(projects) {
+								// var projectsAdminView = new ProjectsAdminView({
+									// username: currentUser.get('username'),
+									// collection: projects
+								// });
+								// projectsAdminView.render();
+								// $('#projects-container').html(projectsAdminView.el);
+							// },
+							// error: function(projects, error) {
+								// console.log(error);
+							// }
+						// })
+					// )
+				// }
+			// },
+			// login: function() {
+				// var loginView = new LoginView();
+				// loginView.render();
+				// $container.html(loginView.el);
+			// },
+			// logout: function(){
+				// Parse.User.logOut();
+				// this.navigate('#/login', {trigger: true });
+			// },
+			// add: function() {
+				// // Check login
+				// if (!Parse.User.current()) {
+					// this.navigate('#/login', { trigger: true });
+				// } else {
+					// var writeBlogView = new WriteBlogView();
+					// writeBlogView.render();
+					// tinymce.remove();
+					// $container.html(writeBlogView.el);
+				// }
+			// },
+			// edit: function(id) {
+				// // Check login
+				// if (!Parse.User.current()) {
+					// this.navigate('#/login', { trigger: true });
+				// } else {
+					// var query = new Parse.Query(Blog);
+					// query.get(id, {
+						// success: function(blog) {
+							// var writeBlogView = new WriteBlogView({ model: blog });
+							// writeBlogView.render();
+							// $container.html(writeBlogView.el);
+						// },
+						// error: function(blog, error) {
+							// console.log(error);
+						// }
+					// });
+				// }
+			// },
+			// del: function(id){
+				// if (!Parse.User.current()) {
+					// this.navigate('#/login', { trigger: true });
+				// } else {
+					// var self = this,
+					// query = new Parse.Query(Blog);
+					// query.get(id).then(function(blog){
+						// blog.destroy().then(function(blog){
+							// self.navigate('admin', { trigger: true });
+						// })
+					// });
+				// }
+			// },
+			// addproject: function() {
+				// // Check login
+				// if (!Parse.User.current()) {
+					// this.navigate('#/login', { trigger: true });
+				// } else {
+					// var writeProjectView = new WriteProjectView();
+					// writeProjectView.render();
+					// $container.html(writeProjectView.el);
+				// }
+			// },
+			// editproject: function(id) {
+				// // Check login
+				// if (!Parse.User.current()) {
+					// this.navigate('#/login', { trigger: true });
+				// } else {
+					// var query = new Parse.Query(Project);
+					// query.get(id, {
+						// success: function(project) {
+							// var writeProjectView = new WriteProjectView({ model: project });
+							// writeProjectView.render();
+							// $container.html(writeProjectView.el);
+						// },
+						// error: function(project, error) {
+							// console.log(error);
+						// }
+					// });
+				// }
+			// },
+			// delproject: function(id){
+				// if (!Parse.User.current()) {
+					// this.navigate('#/login', { trigger: true });
+				// } else {
+					// var self = this,
+					// query = new Parse.Query(Project);
+					// query.get(id).then(function(project){
+						// project.destroy().then(function(project){
+							// self.navigate('admin', { trigger: true });
+						// })
+					// });
+				// }
+			// },
+			// about: function(){
+				// var aboutView = new AboutView();
+				// aboutView.render();
+				// $container.html(aboutView.el);
+			// },
+			// contact: function(){
+				// var contactView = new ContactView();
+				// contactView.render();
+				// $container.html(contactView.el);
+			// }      
+		// }),
+		// blogRouter = new BlogRouter();
 	 
-		blogRouter.start(); 
+		// blogRouter.start(); 
 		
 	$(document).ready(function(){
 
