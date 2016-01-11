@@ -91,18 +91,6 @@
       </p>
     </footer>
 
-	  <script id="blogs-tpl" type="text/x-handlebars-template">
-    <div class="contact-content">
-      {{#each blog}}
-      <div class="blog-post">
-          <h2 class="page-header"><a href="#">{{title}}</a></h2>
-          <div class="blog-content">{{{content}}}</div>
-          <p class="blog-post-meta">At {{time}} by {{authorName}}</p>
-      </div>
-      {{/each}}
-    </div>
-    </script>
-
     <script id="blog-tpl" type="text/x-handlebars-template">
     <div class="blog-post">
       <h2 class="blog-post-title">{{title}}</h2>
@@ -129,7 +117,7 @@
     </div>
     </script>
 
-    <script id="project-tpl" type="text/x-handlebars-template">
+  <script id="project-tpl" type="text/x-handlebars-template">
 	<div class="contact-content">
 	  <div class="blog-post">
 		  <h2 class="page-header">{{title}}</h2>
@@ -298,9 +286,6 @@
 	  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-    <!-- Handlebars.js -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>

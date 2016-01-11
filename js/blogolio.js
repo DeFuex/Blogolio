@@ -128,42 +128,58 @@ $(function() {
 			},
 			render: function(){
 				return(
-					<ul></ul>
+					<div className="contact-content">
+      					<div className="row">
+      					{
+  		  					this.data.projects.map(function(p) {
+  		  						return (
+		        					<div className="col-lg-12">
+		    							<h2 className="page-header" ><a href="#/project/{p.objectId}">{p.title}</a></h2>
+		          						<div className="col-lg-3 col-md-4 col-xs-6 thumb">
+			              					<a className="thumbnail" href="#/project/{p.objectId}">
+			                					<img className="img-responsive" src="{p.image.url}" alt="" />
+			              					</a>
+		          						</div>
+		  		    					<p>{p.summary}</p>
+		        					</div>
+		        				);
+		        			})
+  		  				}
+      					</div>
+    				</div>
+				);
+			}
+		}),
+		ProjectView = React.createClass({
+			observe: function(){
+				var projectId = this.props.projectid.id;
+				return {
+					projectWithId: (new Parse.Query(Project).get(projectId, {
+						success: function(project) {
+							console.log("ID was correct! Project retreived successfully");
+						},
+						error: function(project, error){
+							console.log(error);
+						}
+					}))
+				};
+			},
+			render: function(){
+				var project = this.data.projectWithId;
+				return(
+					<div className="contact-content">
+					  <div className="blog-post">
+						  <h2 className="page-header">{project.title}</h2>
+						  <div>{project.content}</div>
+						  <p className="blog-post-meta">At {{time}} by {{authorName}}</p>
+					  </div>
+					</div>
 				);
 			}
 		})
 		
 		ReactDom.render(<Blogs />, document.getElementById('main-container'))
 
-		// Blogs = Parse.Collection.extend({
-			// model: Blog,
-			// query: (new Parse.Query(Blog)).descending('createdAt')
-		// }),
-		// Projects = Parse.Collection.extend({
-			// model: Project,
-			// query: (new Parse.Query(Project)).descending('createdAt')
-		// }),
-		// BlogsView = Parse.View.extend({
-			// template: Handlebars.compile($('#blogs-tpl').html()),
-			// render: function(){ 
-				// var collection = { blog: this.collection.toJSON() };
-				// this.$el.html(this.template(collection));
-			// }
-		// }),
-		// BlogView = Parse.View.extend({
-			// template: Handlebars.compile($('#blog-tpl').html()),
-			// render: function() {
-				// var attributes = this.model.toJSON();
-				// this.$el.html(this.template(attributes));
-			// }
-		// }),
-		// ProjectsGalleryView = Parse.View.extend({
-			// template: Handlebars.compile($('#thumb-gallery-tpl').html()),
-			// render: function(){
-				// var collection = { project: this.collection.toJSON() };
-				// this.$el.html(this.template(collection));
-			// }
-		// }),
 		// ProjectView = Parse.View.extend({
 			// template: Handlebars.compile($('#project-tpl').html()),
 			// render: function(){
@@ -446,6 +462,13 @@ $(function() {
 						// console.log(error);
 					// }
 				// })
+
+				// var ProjectViewShow = React.createClass({
+					// render: function(){
+					// 	return <ProjectView projectid={id} />
+					// }
+				// })
+
 			// },
 			// admin: function() {
 				// // Call current user from Parse.
