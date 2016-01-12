@@ -1,9 +1,15 @@
 $(function() {
 
 	var Parse = require('parse');
+	var ParseFile = require('parse').ParseFile;
 	var ParseReact = require('parse-react');
 	var React = require('react');
 	var ReactDom = require('react-dom');
+	var Router = require('react-router').Router;
+	var Route = require('react-router').Route;
+	var IndexLink = require('react-router').IndexLink;
+	var Link = require('react-router').Link;
+	var IndexRoute = require('react-router').IndexRoute;
 	// var DOMPurify = require('dompurify');
 	// var ReactDomServer = require('react-dom/server');
 	// var HtmlToReact = require('html-to-react');
@@ -131,13 +137,20 @@ $(function() {
 					<div className="contact-content">
       					<div className="row">
       					{
+      						console.log(this.data),
+
   		  					this.data.projects.map(function(p) {
+
+								var img = p.image;
+  		  						// img = p.get('image').url;
+  		  						console.log(img);
+
   		  						return (
 		        					<div className="col-lg-12">
-		    							<h2 className="page-header" ><a href="#/project/{p.objectId}">{p.title}</a></h2>
+		    							<h2 className="page-header" ><a href={'#/project/' + p.objectId }>{p.title}</a></h2>
 		          						<div className="col-lg-3 col-md-4 col-xs-6 thumb">
-			              					<a className="thumbnail" href="#/project/{p.objectId}">
-			                					<img className="img-responsive" src="{p.image.url}" alt="" />
+			              					<a className="thumbnail" href={'#/project/' + p.objectId }>
+			                					<img className="img-responsive" src={ img } alt="" />
 			              					</a>
 		          						</div>
 		  		    					<p>{p.summary}</p>
@@ -146,6 +159,7 @@ $(function() {
 		        			})
   		  				}
       					</div>
+      					
     				</div>
 				);
 			}
@@ -176,9 +190,173 @@ $(function() {
 					</div>
 				);
 			}
+		}),
+
+		Dashboard = React.createClass({
+		  render() {
+		    return <div>Welcome to the app!</div>
+		  }
 		})
-		
+
+		App = React.createClass({
+			render(){
+				return (
+					<div className="blog-masthead">
+				      	<div className="container">
+					        <nav className="nav">
+					        <ul>
+					        	<li><IndexLink className="blog-nav-item transition" to="/">Home</IndexLink></li>
+					            <li><Link className="blog-nav-item transition" to="/about">About</Link></li>
+					            <li><Link className="blog-nav-item transition" to="/projects">Projects</Link></li>        	  
+					        	<li><Link className="blog-nav-item transition" to="/contact">Contact</Link></li>
+					            <li><Link className="blog-nav-item transition" to="/admin">Admin</Link></li>
+					        </ul>
+					    	</nav>
+				    	</div>
+				    </div>
+				)
+			}
+		}),
+
+		About = React.createClass({
+			render(){
+				return (
+					<div className="contact-content">
+						<h2 className="page-header">About</h2>
+						<div className="blog-content">
+							"I'm a web/mobile (mostly Android) developer from Austria and I always look for ways to improve my skills in certain technologies."
+							<br/>
+							<br/>
+							"I recently finished my masters degree and I'm currently working at Ebcont Technologies GmbH, a consulting company which develops many customer based services in the fields of software, mobile and web development."
+							<br/>
+							<br/>
+							'During my time as student i had the chance to study abroad in South Korea at Korea University for 1 semester. I could get an insight on some cultural differences and travel to nearby areas, different places and also Japan. Overall, it was a nice experience and my stopover in Japan gave me motivation to finally enroll myself into a japanese language course back in my hometown Vienna. Learning a third language never '"can't be that bad actually..."
+							<br/>
+							<br/>
+							'Besides my little adventures, my passions are -'
+							<br/>
+							<br/>
+							<ul>
+								<li>'Developing Android applications.'</li>
+								<li>'Drawing and a little bit 3D modelling to it.'</li>
+								<li>"I'm also interested in the field of Computer Graphic programming."</li>
+								<li>'Sometimes I play Counter Strike Global Offensive with friends.'</li>
+								<li>'If the time allows it i do sports like endurance and strength training or skiing in winter.'</li>
+								<li>'And of course, learning Japanese'</li>
+							</ul>
+						</div>
+					</div>
+				)
+			}
+		}),
+
+		Contact = React.createClass({
+			render(){
+				return(
+					<div className="contact-content">
+					  <h2 className="page-header" >{{form_title}}</h2>
+					  <p className="contact-description">
+						I love hearing from people landing on my site, so use the little form below
+						should you have a question, recommendation, or request for me. I will try my best
+						to get back to you.
+					  </p>
+					  <form id="contactForm" className="contact-form" role="form">
+						<p>
+						  <label for="title">First Name</label><br/>
+						  <input id="contactFirstName" name="firstname" type="text" />
+						</p>
+						<p>			
+						  <label for="title">Last Name</label><br/>
+						  <input id="contactLastName" name="firstname" type="text" />
+						</p>
+						<p>
+						  <label for="email">Email</label><br/>
+						  <input id="email" name="email" type="email" />
+						</p>
+						<p>
+						  <label for="subject">Subject</label><br/>
+						  <input id="subject" name="subject" type="text" />
+						</p>
+						<p>
+						  <label for="content">Content</label><br/>
+						  <textarea id="content" name="content" rows="10" ></textarea>
+						</p>
+						<p>
+							<input type="submit" value="Submit" className="contactButton" />
+						</p>
+					  </form>
+					</div>
+				)
+			}
+		}),
+
+		Admin = React.createClass({
+			render(){
+				return(
+					<div>
+					<a href="#/add" className="add-blog btn btn-lg btn-primary">Add a New Blog</a>
+					<a href="#/logout" className="add-blog btn btn-lg">Logout</a>
+					<table>
+						<thead>
+							<tr>
+								<th>Title</th>
+								<th>Author</th>
+								<th>Time</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					</div>
+				)
+			}
+		}),
+
+		ReactDom.render((
+			<Router>
+				<Route path="/" component={App}>
+					<Route path="blog/:id" component={Blogs} />
+					</Route>
+					<IndexRoute component={Dashboard} />	
+					<Route path="about" component={About} />	
+					<Route path="projects" component={Projects} >
+						<Route path="project/:id" component={ProjectView} />
+					</Route>
+					<Route path="contact" component={Contact} />
+					<Route path="admin" component={Admin} />
+				
+			</Router>
+		), document.getElementById('header'))
+
 		ReactDom.render(<Blogs />, document.getElementById('main-container'))
+
+		function Field(val){
+			var value = val;
+
+			this.getValue = function(){
+				return value;
+			};
+			this.setValue = function(val){
+				value = val;
+			};
+		}
+
+						// '': 'index',
+				// 'blog/:id': 'blog',
+				// 'projects': 'projects',
+				// 'project/:id': 'project', 
+				// 'admin': 'admin',
+				// 'login': 'login',
+				// 'logout': 'logout',
+				// 'add': 'add',
+				// 'edit/:id': 'edit',
+				// 'del/:id': 'del',
+				// 'addp': 'addproject',
+				// 'editp/:id': 'editproject',
+				// 'delp/:id': 'delproject',
+				// 'about': 'about',
+				// 'contact': 'contact'
 
 		// ProjectView = Parse.View.extend({
 			// template: Handlebars.compile($('#project-tpl').html()),
@@ -667,52 +845,6 @@ $(function() {
 
 });
 
-
-// window._loaded = false;
-
-// window.tinyMCEPreInit = {
-// 	base: 'js/tinymce.min.js', 
-// 	suffix : '', 
-// 	query : ''
-// };   
-
-// $.getScript(window.tinyMCEPreInit.base, function(){
-
-// 	//$('#debug').html('tinymce has been loaded');
-// 	window._loaded = true;
-	
-// 	tinymce.dom.Event.domLoaded = true; 
-// });     
-
-// $('a.btn-primary').click(function(){	
-
-// 	if (window._loaded) {
-
-// 		// create the wysiwyg
-// 		tinyMCE.init({
-// 	  		setup: function(e){
-// 	  			e.on('init', function(args) {
-// 	  				console.debug(args.target.id);
-// 	  			})
-// 	  		},
-// 	        selector: "textarea.form-control",
-// 	        plugins: [
-// 	        	"media table paste "
-// 	        ],
-// 	        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
-// 		});
-
-// 		alert('tinymce LOADED');
-
-// 	} else {
-		
-// 		alert('tinymce has not finished downloading');
-// 	}
-// });
-
-// $('a.btn-primary').on('click', '.form-write', loadTinyMCE());
-
-//function to initialize tinyMCE
 function loadTinyMCE() {
     tinymce.init({
   		setup: function(e){
