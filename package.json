@@ -26,7 +26,8 @@
     "parse": "^1.6.9",
     "parse-react": "^0.5.0",
     "react": "^0.14.6",
-    "react-dom": "^0.14.3"
+    "react-dom": "^0.14.3",
+    "react-router": "^1.0.3"
   },
   "browserify": {
     "transform": [

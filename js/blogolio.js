@@ -4,11 +4,13 @@ $(function() {
 	var ParseReact = require('parse-react');
 	var React = require('react');
 	var ReactDom = require('react-dom');
+	var Router = require('react-router').Router
+	var Route = require('react-router').Route
+	var Link = require('react-router').Link
 	// var DOMPurify = require('dompurify');
 	// var ReactDomServer = require('react-dom/server');
 	// var HtmlToReact = require('html-to-react');
     
-
 	
 	Parse.$ = jQuery;
 	
@@ -176,17 +178,10 @@ $(function() {
 					</div>
 				);
 			}
-		})
+		}),
 		
-		ReactDom.render(<Blogs />, document.getElementById('main-container'))
+		// ReactDom.render(<Blogs />, document.getElementById('main-container')),
 
-		// ProjectView = Parse.View.extend({
-			// template: Handlebars.compile($('#project-tpl').html()),
-			// render: function(){
-				// var attributes = this.model.toJSON();
-				// this.$el.html(this.template(attributes));
-			// }
-		// }),
 		// LoginView = Parse.View.extend({
 			// template: Handlebars.compile($('#login-tpl').html()),
 			// events:{
@@ -379,27 +374,27 @@ $(function() {
 				// this.$el.html(this.template(attributes));
 			// }
 		// }),
-		// BlogRouter = Parse.Router.extend({  
-			// // Shared variables can be defined here.
-			// initialize: function(options){
+		BlogRouter = Parse.Router.extend({  
+			// Shared variables can be defined here.
+			initialize: function(options){
 				// this.blogs = new Blogs();
 				// this.projects = new Projects();
-			// },
-			// // Router start point.
-			// start: function(){
-				// Parse.history.start({ 
-				// root: '/Blogolio/'
-				// // pushState: true 
-				// });
-				// // this.navigate('', { trigger: true });
-			// },			
-			// // Map functions to urls.
-			// // '{{URL pattern}}': '{{function name}}'
-			// routes: {
+			},
+			// Router start point.
+			start: function(){
+				Parse.history.start({ 
+				root: '/Blogolio/'
+				// pushState: true 
+				});
+				// this.navigate('', { trigger: true });
+			},			
+			// Map functions to urls.
+			// '{{URL pattern}}': '{{function name}}'
+			routes: {
 				// '': 'index',
 				// 'blog/:id': 'blog',
-				// 'projects': 'projects',
-				// 'project/:id': 'project', 
+				'projects': 'projects',
+				'project/:id': 'project', 
 				// 'admin': 'admin',
 				// 'login': 'login',
 				// 'logout': 'logout',
@@ -411,7 +406,7 @@ $(function() {
 				// 'delp/:id': 'delproject',
 				// 'about': 'about',
 				// 'contact': 'contact'
-			// },
+			},
 			// index: function() {
 				// this.blogs.fetch({
 					// success: function(blogs) {
@@ -438,38 +433,26 @@ $(function() {
 					// }
 				// })
 			// },
-			// projects: function(){
-				// this.projects.fetch({
-					// success: function(projects) {
-						// var projectsGalleryView = new ProjectsGalleryView({ collection: projects });
-						// projectsGalleryView.render();
-						// $container.html(projectsGalleryView.el);
-					// },
-					// error: function(projects, error){
-						// console.log(error);
-					// }
-				// })
-			// },
-			// project: function(id){
-				// var query = new Parse.Query(Project);
-				// query.get(id, {
-					// success: function(project) {
-						// var projectView = new ProjectView({ model: project });
-						// projectView.render();
-						// $container.html(projectView.el);
-					// },
-					// error: function(project, error){
-						// console.log(error);
-					// }
-				// })
-
-				// var ProjectViewShow = React.createClass({
-					// render: function(){
-					// 	return <ProjectView projectid={id} />
-					// }
-				// })
-
-			// },
+			projects: function(){
+				this.projects.fetch({
+					success: function(projects) {
+						var projectsGalleryView = new ProjectsGalleryView({ collection: projects });
+						projectsGalleryView.render();
+						$container.html(projectsGalleryView.el);
+					},
+					error: function(projects, error){
+						console.log(error);
+					}
+				})
+			},
+			project: function(id){
+				var ProjectViewShow = React.createClass({
+					render: function(){
+						return <ProjectView projectid={id} />
+					}
+				})
+				ReactDom.render(<ProjectViewShow />, document.getElementById('main-container'));
+			},
 			// admin: function() {
 				// // Call current user from Parse.
 				// var currentUser = Parse.User.current();
@@ -612,10 +595,10 @@ $(function() {
 				// contactView.render();
 				// $container.html(contactView.el);
 			// }      
-		// }),
-		// blogRouter = new BlogRouter();
+		}),
+		blogRouter = new BlogRouter();
 	 
-		// blogRouter.start(); 
+		blogRouter.start(); 
 		
 	$(document).ready(function(){
 
