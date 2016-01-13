@@ -12,114 +12,16 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
-	  <link href="css/blogolio.css" rel="stylesheet">
+	<link href="css/blogolio.css" rel="stylesheet">
     <link href="css/bootstrap-social.css" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
  
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
   <body>
-	<div class="blog-header">
-	  <h1><a class="blog-title" href="./">The Very Personal Blogolio</a></h1>
-	  <p class="lead blog-description">This is a portfolio blog about some projects i did.</p>
-	</div>
-  
-<!--     <div class="blog-masthead">
-      <div class="container">
-        <nav class="nav">
-          <ul>
-            <li><a id="home-container" class="blog-nav-item transition" href="#">Home</a></li>
-            <li><a id="about-container" class="blog-nav-item transition" href="#/about">About</a></li>
-            <li><a id="project-container" class="blog-nav-item transition" href="#/projects">Projects</a></li>        	  
-        	  <li><a id="contact-container" class="blog-nav-item transition" href="#/contact">Contact</a></li>
-            <li><a id="admin-container" class="blog-nav-item transition" href="#/admin">Admin</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div> -->
+ 
+    <div id="app"></div>
 
-    <div id="header"></div>
-	
-    <div id="blog-home" class="container">
-
-      <div id="blog-row" class="row">
-
-        <div id="blog-container" class="col-sm-7 blog-main">
-		      <div id="main-container"></div>
-          <div class="main-container"></div>
-          <div id="projects-container"></div>
-        </div><!-- /.blog-main -->
-
-        <div id="sidebar-info" class="col-sm-3 col-sm-offset-1 blog-sidebar">
-          <div class="widget sidebar-module sidebar-module-inset">
-            <h2 class="widget-title">About Timo Obereder</h2>
-            <div>
-              <img class="me" src="assets/avatar.png" alt="Avatar Icon" scale="0" />
-              <div>
-                <p><em>Hi! My name is Timo and i'm Software Developer with over 4 years of experience designing and developing mobile (mostly Android) applications. Follow me on Twitter </em><a target="_blank" href="https://twitter.com/defuex">here</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="sidebar-module">
-            <h4>Archives</h4>
-            <ul class="list-unstyled">
-              <li><a href="#">Dezember 2015</a></li>
-              <li><a href="#">November 2015</a></li>
-            </ul>
-          </div>
-          <div class="sidebar-module">
-            <h4>Elsewhere</h4>
-            <ol class="list-unstyled">
-              <li><a class="btn btn-social-icon btn-github" target="_blank" href="https://github.com/DeFuex"><span class="fa fa-github"></span></a></li>
-              <li><a class="btn btn-social-icon btn-twitter" target="_blank" href="https://twitter.com/defuex"><span class="fa fa-twitter"></span></a></li>
-              <li><a class="btn btn-social-icon btn-linkedin" target="_blank" href="https://at.linkedin.com/in/timo-obereder-11b65167"><span class="fa fa-linkedin"></span></a></li>
-            </ol>
-          </div>
-        </div><!-- /.blog-sidebar -->
-    
-      </div><!-- /.row -->
-
-    </div><!-- /.container -->
-
-    <footer class="blog-footer">
-      <p>© 2015 Timo Obereder</p>
-      <p>
-        <a href="#">Back to top</a>
-      </p>
-    </footer>
-
-    <script id="blog-tpl" type="text/x-handlebars-template">
-    <div class="blog-post">
-      <h2 class="blog-post-title">{{title}}</h2>
-      <p class="blog-post-meta">At {{time}} by {{authorName}}</p>
-      <div>{{{content}}}</div>
-    </div>
-    </script>
-
-    <script id="thumb-gallery-tpl" type="text/x-handlebars-template">
-    <div class="contact-content">
-      <div class="row">
-  		  {{#each project}}
-        <div class="col-lg-12">
-    			<h2 class="page-header" ><a href="#/project/{{objectId}}">{{title}}</a></h2>
-          <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#/project/{{objectId}}">
-                <img class="img-responsive" src="{{image.url}}" alt="">
-              </a>
-          </div>
-  		    <p>{{{summary}}}</p>
-        </div>
-        {{/each}}
-      </div>
-    </div>
-    </script>
-
-  <script id="project-tpl" type="text/x-handlebars-template">
+	<script id="project-tpl" type="text/x-handlebars-template">
 	<div class="contact-content">
 	  <div class="blog-post">
 		  <h2 class="page-header">{{title}}</h2>
@@ -160,70 +62,6 @@
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 	</form>
 	</script>
-	
-	<script id="about-tpl" type="text/x-handlebars-template">
-	<div id="about-content" class="contact-content">
-	<h2 class="page-header">About</h2>
-	  <div class="blog-content">
-		I'm a web/mobile (mostly Android) developer from Austria and I always look for ways to improve my skills in certain technologies.
-		<br/>
-		<br/>
-		I recently finished my masters degree and I'm currently working at Ebcont Technologies GmbH, a consulting company which develops many customer based services in the fields of software, mobile and web development.
-		<br/>
-		<br/>
-		During my time as student i had the chance to study abroad in South Korea at Korea University for 1 semester. I could get an insight on some cultural differences and travel to nearby areas, different places and also Japan. Overall, it was a nice experience and my stopover in Japan gave me motivation to finally enroll myself into a japanese language course back in my hometown Vienna. Learning a third language never can't be that bad actually...
-		<br/>
-		<br/>
-		Besides my little adventures, my passions are -
-		<br/>
-		<br/>
-		<ul>
-			<li>Developing Android applications.</li>
-			<li>Drawing and a little bit 3D modelling to it.</li>
-			<li>I'm also interested in the field of Computer Graphic programming.</li>
-			<li>Sometimes I play Counter Strike Global Offensive with friends.</li>
-			<li>If the time allows it i do sports like endurance and strength training or skiing in winter.</li>
-			<li>And of course, learning Japanese</li>
-		</ul>
-		</div>
-	</div>
-	</script>
-	
-  <script id="contact-tpl" type="text/x-handlebars-template">
-	<div class="contact-content">
-	  <h2 class="page-header" >{{form_title}}</h2>
-	  <p class="contact-description">
-		I love hearing from people landing on my site, so use the little form below
-		should you have a question, recommendation, or request for me. I will try my best
-		to get back to you.
-	  </p>
-	  <form id="contactForm" class="contact-form" role="form">
-		<p>
-		  <label for="title">First Name</label><br/>
-		  <input id="contactFirstName" name="firstname" type="text" >
-		</p>
-		<p>			
-		  <label for="title">Last Name</label><br/>
-		  <input id="contactLastName" name="firstname" type="text" >
-		</p>
-		<p>
-		  <label for="email">Email</label><br/>
-		  <input id="email" name="email" type="email" >
-		</p>
-		<p>
-		  <label for="subject">Subject</label><br/>
-		  <input id="subject" name="subject" type="text" >
-		</p>
-		<p>
-		  <label for="content">Content</label><br/>
-		  <textarea id="content" name="content" rows="10" ></textarea>
-		</p>
-		<p>
-			<input type="submit" value="Submit" class="contactButton" >
-		</p>
-	  </form>
-	</div>
-  </script>
 
   <script id="admin-blogs-tpl" type="text/x-handlebars-template">
   <h2>Welcome, {{username}}!</h2>

@@ -3,9 +3,7 @@ $(function() {
 	var Parse = require('parse');
 	var ParseReact = require('parse-react');
 	var React = require('react');
-	
 	var ReactDom = require('react-dom');
-	
 	var Router = require('react-router').Router;
 	var Route = require('react-router').Route;
 	var IndexLink = require('react-router').IndexLink;
@@ -36,12 +34,8 @@ $(function() {
 					this.setACL(blogACL);
 				}
 
-				// var category = new Category();
-				// category.id = data.category;
-
 				this.set({
 					'title': data.title,
-					// 'category': category,
 					'summary': data.summary,
 					'content': data.content,
 					// Set author to the existing blog author if editing, use current user if creating
@@ -147,11 +141,11 @@ $(function() {
 
   		  						return (
 		        					<div className="col-lg-12">
-		    							<h2 className="page-header" ><a href={'#/project/' + p.objectId }>{p.title}</a></h2>
+										<h2 className="page-header" ><Link to={'/project/' + p.objectId}>{p.title}</Link></h2>
 		          						<div className="col-lg-3 col-md-4 col-xs-6 thumb">
-			              					<a className="thumbnail" href={'#/project/' + p.objectId }>
+			              					<Link className="thumbnail" to={'/project/' + p.objectId }>
 			                					<img className="img-responsive" src={ img } alt="" />
-			              					</a>
+			              					</Link>
 		          						</div>
 		  		    					<p>{p.summary}</p>
 		        					</div>
@@ -165,55 +159,128 @@ $(function() {
 			}
 		}),
 		ProjectView = React.createClass({
+			mixins: [ParseReact.Mixin],
 			observe: function(){
-				var projectId = this.props.projectid.id;
+				var projectId = this.props.params.id;
+				console.log(projectId);
 				return {
-					projectWithId: (new Parse.Query(Project).get(projectId, {
-						success: function(project) {
-							console.log("ID was correct! Project retreived successfully");
-						},
-						error: function(project, error){
-							console.log(error);
-						}
-					}))
+					project: (new Parse.Query(Project)).equalTo("objectId", this.props.params.id)
 				};
 			},
 			render: function(){
-				var project = this.data.projectWithId;
+				console.log(project)
 				return(
 					<div className="contact-content">
-					  <div className="blog-post">
-						  <h2 className="page-header">{project.title}</h2>
-						  <div>{project.content}</div>
-						  <p className="blog-post-meta">At {{time}} by {{authorName}}</p>
-					  </div>
+							<div className="blog-post">
+								<h2 className="page-header">{this.data.project}</h2>
+								<div>{this.data.project}</div>
+								<p className="blog-post-meta">At {this.data.project} by {this.data.project}</p> 
+							</div>				 
 					</div>
 				);
 			}
 		}),
 
-		Dashboard = React.createClass({
+		Header = React.createClass({
 		  render() {
-		    return <div>Welcome to the app!</div>
+		    return (
+				<div className="blog-header">
+					<h1><a className="blog-title" href="./">The Very Personal Blogolio</a></h1>
+					<p className="lead blog-description">This is a portfolio blog about some projects i did.</p>
+				</div>
+			)
 		  }
+		}),
+		
+		SideBar = React.createClass({
+			render() {
+				return (
+					<div id="sidebar-info" className="col-sm-3 col-sm-offset-1 blog-sidebar">
+						<div className="widget sidebar-module sidebar-module-inset">
+							<h2 className="widget-title">About Timo Obereder</h2>
+							<div>
+								<img className="me" src="assets/avatar.png" alt="Avatar Icon" scale="0" />
+								<div>
+									<p><em>Hi! My name is Timo and i'm Software Developer with over 4 years of experience designing and developing mobile 
+									(mostly Android) applications. Follow me on Twitter </em><a target="_blank" href="https://twitter.com/defuex">here</a></p>
+								</div>
+							</div>
+						</div>
+						<div className="sidebar-module">
+							<h4>Archives</h4>
+							<ul className="list-unstyled">
+								<li><a href="#">Dezember 2015</a></li>
+								<li><a href="#">November 2015</a></li>
+							</ul>
+						</div>
+						<div className="sidebar-module">
+							<h4>Elsewhere</h4>
+							<ol className="list-unstyled">
+								<li><a className="btn btn-social-icon btn-github" target="_blank" href="https://github.com/DeFuex"><span className="fa fa-github"></span></a></li>
+								<li><a className="btn btn-social-icon btn-twitter" target="_blank" href="https://twitter.com/defuex"><span className="fa fa-twitter"></span></a></li>
+								<li><a className="btn btn-social-icon btn-linkedin" target="_blank" href="https://at.linkedin.com/in/timo-obereder-11b65167"><span className="fa fa-linkedin"></span></a></li>
+							</ol>
+						</div>
+					</div>
+				)
+			}
+
+		}),
+		
+		Footer = React.createClass({
+			render() {
+				return (
+				<div>
+					<footer className="blog-footer">
+					  <p>© 2015 Timo Obereder</p>
+					  <p>
+						<a href="#">Back to top</a>
+					  </p>
+					</footer>
+				</div>
+				)
+			}
 		}),
 
 		App = React.createClass({
 			render(){
 				return (
-					<div className="blog-masthead">
-				      	<div className="container">
-					        <nav className="nav">
-					        <ul>
-					        	<li><IndexLink className="blog-nav-item transition" to="/">Home</IndexLink></li>
-					            <li><Link className="blog-nav-item transition" to="/about">About</Link></li>
-					            <li><Link className="blog-nav-item transition" to="/projects">Projects</Link></li>        	  
-					        	<li><Link className="blog-nav-item transition" to="/contact">Contact</Link></li>
-					            <li><Link className="blog-nav-item transition" to="/admin">Admin</Link></li>
-					        </ul>
-					    	</nav>
-				    	</div>
-				    </div>
+					<div>
+					<Header />
+						<div className="blog-masthead">
+							<div className="container">
+								<nav className="nav">
+								<ul>
+									<li><IndexLink className="blog-nav-item transition" to="/">Home</IndexLink></li>
+									<li><Link className="blog-nav-item transition" to="/about">About</Link></li>
+									<li><Link className="blog-nav-item transition" to="/projects">Projects</Link></li>        	  
+									<li><Link className="blog-nav-item transition" to="/contact">Contact</Link></li>
+									<li><Link className="blog-nav-item transition" to="/admin">Admin</Link></li>
+								</ul>
+								
+								</nav>
+								
+							</div>
+						</div>
+						{ /*this.props.children renders every View underneath the Links navigation bar defined inside the top <div> of the App class.*/ }
+						<div id="blog-home" className="container">
+							<div id="blog-row" className="row">
+								<div id="blog-container" className="col-sm-7 blog-main">
+									<div>{this.props.children}</div>
+								</div>
+								<SideBar />
+							</div>
+						</div>
+					<Footer />
+					</div>
+				)
+			}
+		}),
+		
+		Home = React.createClass({
+			render(){
+				return(
+					<Blogs />
 				)
 			}
 		}),
@@ -224,25 +291,25 @@ $(function() {
 					<div className="contact-content">
 						<h2 className="page-header">About</h2>
 						<div className="blog-content">
-							"I'm a web/mobile (mostly Android) developer from Austria and I always look for ways to improve my skills in certain technologies."
+							I'm a web/mobile (mostly Android) developer from Austria and I always look for ways to improve my skills in certain technologies.
 							<br/>
 							<br/>
-							"I recently finished my masters degree and I'm currently working at Ebcont Technologies GmbH, a consulting company which develops many customer based services in the fields of software, mobile and web development."
+							I recently finished my masters degree and I'm currently working at Ebcont Technologies GmbH, a consulting company which develops many customer based services in the fields of software, mobile and web development.
 							<br/>
 							<br/>
-							'During my time as student i had the chance to study abroad in South Korea at Korea University for 1 semester. I could get an insight on some cultural differences and travel to nearby areas, different places and also Japan. Overall, it was a nice experience and my stopover in Japan gave me motivation to finally enroll myself into a japanese language course back in my hometown Vienna. Learning a third language never '"can't be that bad actually..."
+							During my time as student i had the chance to study abroad in South Korea at Korea University for 1 semester. I could get an insight on some cultural differences and travel to nearby areas, different places and also Japan. Overall, it was a nice experience and my stopover in Japan gave me motivation to finally enroll myself into a japanese language course back in my hometown Vienna. Learning a third language never can't be that bad actually...
 							<br/>
 							<br/>
-							'Besides my little adventures, my passions are -'
+							Besides my little adventures, my passions are -
 							<br/>
 							<br/>
 							<ul>
-								<li>'Developing Android applications.'</li>
-								<li>'Drawing and a little bit 3D modelling to it.'</li>
-								<li>"I'm also interested in the field of Computer Graphic programming."</li>
-								<li>'Sometimes I play Counter Strike Global Offensive with friends.'</li>
-								<li>'If the time allows it i do sports like endurance and strength training or skiing in winter.'</li>
-								<li>'And of course, learning Japanese'</li>
+								<li>Developing Android applications.</li>
+								<li>Drawing and a little bit 3D modelling to it.</li>
+								<li>I'm also interested in the field of Computer Graphic programming.</li>
+								<li>Sometimes I play Counter Strike Global Offensive with friends.</li>
+								<li>If the time allows it i do sports like endurance and strength training or skiing in winter.</li>
+								<li>And of course, learning Japanese</li>
 							</ul>
 						</div>
 					</div>
@@ -254,7 +321,7 @@ $(function() {
 			render(){
 				return(
 					<div className="contact-content">
-					  <h2 className="page-header" >{{form_title}}</h2>
+					  <h2 className="page-header" >Contact</h2>
 					  <p className="contact-description">
 						I love hearing from people landing on my site, so use the little form below
 						should you have a question, recommendation, or request for me. I will try my best
@@ -311,25 +378,21 @@ $(function() {
 					</div>
 				)
 			}
-		}),
+		});
 
 		ReactDom.render((
 			<Router>
 				<Route path="/" component={App}>
-					<Route path="blog/:id" component={Blogs} />
-					</Route>
-					<IndexRoute component={Dashboard} />	
+					<IndexRoute component={Home} />
 					<Route path="about" component={About} />	
-					<Route path="projects" component={Projects} >
-						<Route path="project/:id" component={ProjectView} />
-					</Route>
+					<Route path="projects" component={Projects} />
+					<Route path="project/:id" component={ProjectView} />
 					<Route path="contact" component={Contact} />
 					<Route path="admin" component={Admin} />
-				
+				</Route>
 			</Router>
-		), document.getElementById('header'))
-
-		ReactDom.render(<Blogs />, document.getElementById('main-container'))
+		), document.getElementById('app'))
+		
 
 		// '': 'index',
 		// 'blog/:id': 'blog',
@@ -764,27 +827,11 @@ $(function() {
 		// blogRouter = new BlogRouter();
 	 
 		// blogRouter.start(); 
-		
-	$(document).ready(function(){
-
-		//Fade in/out functionalities.
-		$('.main-container').css("display", "none");
-	 
-	    $('.main-container').fadeIn(300);
-	 
-	    $('a.transition').click(function(event){
-	        event.preventDefault();
-	        var linkLocation = this.href;
-	        console.log(linkLocation);
-	        $('.main-container').fadeOut(300, function(){
-	        	window.location = linkLocation;
-	        	$('.main-container').fadeIn(300);
-	        });      
-	    });
-
-	    //Contact Formular functionalities
-		var CommentObject = Parse.Object.extend("CommentObject");
 	
+	$(document).ready(function(){
+		//Contact Formular functionalities
+		var CommentObject = Parse.Object.extend("CommentObject");
+
 		$("#contactForm").on("submit", function(e) {
 			e.preventDefault();			
 			console.log("Handling the submit");
@@ -811,6 +858,26 @@ $(function() {
 				}
 			});
 		});
+	});	
+
+
+});
+
+$(document).ready(function(){
+
+	//Fade in/out functionalities.
+	$('.blog-main').css("display", "none");
+ 
+	$('.blog-main').fadeIn(300);
+ 
+	$('a.transition').click(function(event){
+		event.preventDefault();
+		var linkLocation = this.href;
+		console.log(linkLocation);
+		$('.blog-main').fadeOut(300, function(){
+			window.location = linkLocation;
+			$('.blog-main').fadeIn(700);
+		});      
 	});
 
 });
