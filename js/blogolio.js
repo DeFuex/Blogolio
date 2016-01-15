@@ -168,14 +168,22 @@ $(function() {
 				};
 			},
 			render: function(){
-				console.log(project)
+				console.log(this.data.project);
 				return(
-					<div className="contact-content">
-							<div className="blog-post">
-								<h2 className="page-header">{this.data.project}</h2>
-								<div>{this.data.project}</div>
-								<p className="blog-post-meta">At {this.data.project} by {this.data.project}</p> 
-							</div>				 
+					<div>
+					{
+						this.data.project.map(function(p) {
+							return(
+								<div className="contact-content">
+										<div className="blog-post">
+											<h2 className="page-header">{p.title}</h2>
+											<div dangerouslySetInnerHTML={{__html: p.content}}></div>
+											<p className="blog-post-meta">At {p.time} by {p.authorName}</p> 
+										</div>				 
+								</div>
+							);
+						})
+					}
 					</div>
 				);
 			}
@@ -202,7 +210,7 @@ $(function() {
 								<img className="me" src="assets/avatar.png" alt="Avatar Icon" scale="0" />
 								<div>
 									<p><em>Hi! My name is Timo and i'm Software Developer with over 4 years of experience designing and developing mobile 
-									(mostly Android) applications. Follow me on Twitter </em><a target="_blank" href="https://twitter.com/defuex">here</a></p>
+									(mostly Android) applications. Follow me on Twitter </em><a target="_blank" href="https://twitter.com/defuex">here'</a></p>
 								</div>
 							</div>
 						</div>
@@ -329,23 +337,23 @@ $(function() {
 					  </p>
 					  <form id="contactForm" className="contact-form" role="form">
 						<p>
-						  <label for="title">First Name</label><br/>
+						  <label htmlFor="title">First Name</label><br/>
 						  <input id="contactFirstName" name="firstname" type="text" />
 						</p>
 						<p>			
-						  <label for="title">Last Name</label><br/>
+						  <label htmlFor="title">Last Name</label><br/>
 						  <input id="contactLastName" name="firstname" type="text" />
 						</p>
 						<p>
-						  <label for="email">Email</label><br/>
+						  <label htmlFor="email">Email</label><br/>
 						  <input id="email" name="email" type="email" />
 						</p>
 						<p>
-						  <label for="subject">Subject</label><br/>
+						  <label htmlFor="subject">Subject</label><br/>
 						  <input id="subject" name="subject" type="text" />
 						</p>
 						<p>
-						  <label for="content">Content</label><br/>
+						  <label htmlFor="content">Content</label><br/>
 						  <textarea id="content" name="content" rows="10" ></textarea>
 						</p>
 						<p>
