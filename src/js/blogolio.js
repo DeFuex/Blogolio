@@ -207,7 +207,7 @@ $(function() {
 						<div className="widget sidebar-module sidebar-module-inset">
 							<h2 className="widget-title">About Timo Obereder</h2>
 							<div>
-								<img className="me" src="assets/avatar.png" alt="Avatar Icon" scale="0" />
+								<img className="me" src="src/assets/avatar.jpg" alt="Avatar Icon" scale="0" />
 								<div>
 									<p><em>Hi! My name is Timo and i'm Software Developer with over 4 years of experience designing and developing mobile 
 									(mostly Android) applications. Follow me on Twitter </em><a target="_blank" href="https://twitter.com/defuex">here'</a></p>

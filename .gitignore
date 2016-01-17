@@ -27,8 +27,13 @@ build/Release
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules
 
+#compiled
+dist
+
 # Optional npm cache directory
 .npm
 
 # Optional REPL history
 .node_repl_history
+
+.DS_Store
