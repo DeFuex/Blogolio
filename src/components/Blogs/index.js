@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
 import Parse from 'parse';
 import ParseReact from 'parse-react';
-import Blog from '../utils/Parse/blog.js';
+import Blog from '../../utils/Parse/blog.js';
+
+var ParseComponent = ParseReact.Component(React);
 
 //Connection to the Parse Database Webserver.
 Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
 
-export default class Blogs extends Component {
-	// mixins: [ParseReact.Mixin],
-	observe: function(){
+export default class Blogs extends ParseComponent {
+	
+	constructor() {
+		super();
+		//Initialize SomeComponent
+		//do stuff
+	}
+	
+	observe(props, state){
 		return{
-			blogs: (new Parse.Query(Blog)).descending('createdAt')
+			blogs: new Parse.Query('Blog').descending('createdAt')
 		};
-	},
-	render: function(){
+	}
+	
+	render(){
 		return (
 			<div className="contact-content">
 			{

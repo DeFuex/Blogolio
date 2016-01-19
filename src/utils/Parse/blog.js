@@ -3,7 +3,7 @@ import Parse from 'parse';
 //Connection to the Parse Database Webserver.
 Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
 
-export default const Blog = Parse.Object.extend('Blog', {
+export var Blog = Parse.Object.extend('Blog', {
 	update: function(data) {
 		// Only set ACL if the blog doesn't have it
 		if ( !this.get('ACL') ) {

@@ -3,7 +3,7 @@ import Parse from 'parse';
 //Connection to the Parse Database Webserver.
 Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
 
-export default const Project = Parse.Object.extend('Project', {
+export var Project = Parse.Object.extend('Project', {
 	update: function(data) {
 		if ( !this.get('ACL') ) {
 			var projectACL = new Parse.ACL(Parse.User.current());

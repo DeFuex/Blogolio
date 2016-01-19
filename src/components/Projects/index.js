@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import Parse from 'parse';
 import ParseReact from 'parse-react';
+import { Link } from 'react-router';
 
-export default class Projects extends Component {
-	mixins: [ParseReact.Mixin],
-	observe: function(){
+var ParseComponent = ParseReact.Component(React);
+
+export default class Projects extends ParseComponent {
+
+	constructor() {
+		super();
+		//Initialize SomeComponent
+		//do stuff
+	}
+
+	observe(props, state){
 		return{
-			projects: (new Parse.Query(Project)).descending('createdAt')
+			projects: new Parse.Query('Project').descending('createdAt')
 		};
-	},
-	render: function(){
+	}
+	
+	render(){
 		return(
 			<div className="contact-content">
 					<div className="row">
@@ -26,9 +36,9 @@ export default class Projects extends Component {
         					<div className="col-lg-12">
 								<h2 className="page-header" ><Link to={'/project/' + p.objectId}>{p.title}</Link></h2>
           						<div className="col-lg-3 col-md-4 col-xs-6 thumb">
-	              					<Link className="thumbnail" to={'/project/' + p.objectId }>
+	              					<a className="thumbnail" to={'/project/' + p.objectId }>
 	                					<img className="img-responsive" src={ img } alt="" />
-	              					</Link>
+	              					</a>
           						</div>
   		    					<p>{p.summary}</p>
         					</div>

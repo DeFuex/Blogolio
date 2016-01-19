@@ -1,4 +1,11 @@
 import React, { Component } from 'react';
+import { Link, IndexLink } from 'react-router';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Header from '../Header';
+import SideBar from '../SideBar';
+import Footer from '../Footer';
+// import './animation.css';
+// import css from 'css!./animation.css';
 
 export default class NavBar extends Component {
   	render() {
@@ -18,13 +25,26 @@ export default class NavBar extends Component {
 						
 						</nav>
 						
+
+						
 					</div>
 				</div>
 				{ /*this.props.children renders every View underneath the Links navigation bar defined inside the top <div> of the App class.*/ }
 				<div id="blog-home" className="container">
 					<div id="blog-row" className="row">
 						<div id="blog-container" className="col-sm-7 blog-main">
-							<div>{this.props.children}</div>
+																
+								<ReactCSSTransitionGroup
+								component="div"
+								transitionName="example"
+								transitionEnterTimeout={500}
+								transitionLeaveTimeout={500}
+								>
+									{ React.cloneElement(this.props.children, {
+										key: this.props.location.pathname
+									})}
+								</ReactCSSTransitionGroup>
+							
 						</div>
 						<SideBar />
 					</div>
