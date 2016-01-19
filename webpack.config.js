@@ -19,14 +19,18 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-	new webpack.NoErrorsPlugin(),
-	devFlagPlugin
+    new webpack.NoErrorsPlugin(),
+    devFlagPlugin
   ],
   module: {
     loaders: [{
       test: /\.js$/,
       loaders: ['react-hot', 'babel'],
       include: path.join(__dirname, 'src')
+    },
+    {
+      test: /\.css$/,
+      loader: 'style-loader!css-loader?modules&importLoaders=1&sourceMap'
     }]
   }
 };
