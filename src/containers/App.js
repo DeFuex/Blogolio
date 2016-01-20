@@ -20,7 +20,7 @@ export default class App extends Component {
 						<IndexRoute component={Home} />
 						<Route path="about" component={About} />	
 						<Route path="projects" component={Projects} />
-						<Route path="project:id" component={ProjectView} />	
+						<Route path="project/:id" component={ProjectView} />	
 						<Route path="contact" component={Contact} />
 						<Route path="admin" component={Admin} />
 					</Route>
@@ -28,10 +28,6 @@ export default class App extends Component {
 			</div>
 		);
 	}
-	
-	// componentDidMount(){
-
-	// }
 }
 
 // $(document).ready(function(){

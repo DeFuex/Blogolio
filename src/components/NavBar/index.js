@@ -33,18 +33,17 @@ export default class NavBar extends Component {
 				<div id="blog-home" className="container">
 					<div id="blog-row" className="row">
 						<div id="blog-container" className="col-sm-7 blog-main">
-																
-								<ReactCSSTransitionGroup
-								component="div"
-								transitionName="example"
-								transitionEnterTimeout={500}
-								transitionLeaveTimeout={500}
-								>
-									{ React.cloneElement(this.props.children, {
-										key: this.props.location.pathname
-									})}
-								</ReactCSSTransitionGroup>
 							
+						<ReactCSSTransitionGroup
+							component="div"
+							transitionName="example"
+							transitionEnterTimeout={500}
+							transitionLeaveTimeout={300}
+							>
+								{ React.cloneElement(this.props.children, {
+									key: this.props.location.pathname
+								})}
+							</ReactCSSTransitionGroup>					
 						</div>
 						<SideBar />
 					</div>

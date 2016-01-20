@@ -169,7 +169,7 @@ li {
 
 .blog-main {
   font-size: 18px;
-  line-height: 1.5;
+  /*line-height: 1.5;*/
 }
 
 /* Sidebar modules for boxing content */
@@ -482,23 +482,20 @@ input, textarea, keygen, select, button, meter, progress {
 
 .example-enter {
   opacity: 0.01;
-  transition: opacity .5s ease-in;
+  /*transition: opacity .4s ease-in;*/
 }
 
 .example-enter.example-enter-active {
   opacity: 1;
+  transition: opacity 500ms ease-in;
 }
 
 .example-leave {
   opacity: 1;
-  transition: opacity .5s ease-in;
+  /*transition: opacity .2s ease-in;*/
 }
 
 .example-leave.example-leave-active {
-  opacity: 0;
-}
-
-.link-active {
-  color: #bbbbbb;
-  text-decoration: none;
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }
