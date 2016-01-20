@@ -11,11 +11,13 @@ import ProjectView from '../components/ProjectView';
 import Contact from '../components/Contact';
 import Admin from '../components/Admin';
 
+//history={browserHistory} only if necessary
+
 export default class App extends Component {
 	render(){
 		return(
 			<div>
-				<Router history={browserHistory}>
+				<Router> 
 					<Route path="/" component={NavBar}>
 						<IndexRoute component={Home} />
 						<Route path="about" component={About} />	

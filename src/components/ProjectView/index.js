@@ -19,7 +19,7 @@ export default class ProjectView extends ParseComponent {
 		var projectId = this.props.params.id;
 		console.log(projectId);
 		return {
-			project: (new Parse.Query('Project')).equalTo("objectId", this.props.params.id)
+			project: new Parse.Query('Project').equalTo("objectId", this.props.params.id)
 		};
 	}
 	
@@ -30,7 +30,7 @@ export default class ProjectView extends ParseComponent {
 			{
 				this.data.project.map(function(p) {
 					return(
-						<div className="contact-content">
+						<div className="contact-content" key={"projectview-post-" + p.title}>
 								<div className="blog-post">
 									<h2 className="page-header">{p.title}</h2>
 									<div dangerouslySetInnerHTML={{__html: p.content}}></div>
