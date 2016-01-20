@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Parse from 'parse';
 import ParseReact from 'parse-react';
 import { Link } from 'react-router';
+import { Project } from '../../utils/Parse/project.js';
 
 var ParseComponent = ParseReact.Component(React);
 
@@ -15,7 +16,7 @@ export default class Projects extends ParseComponent {
 
 	observe(props, state){
 		return{
-			projects: new Parse.Query('Project').descending('createdAt')
+			projects: new Parse.Query(Project).descending('createdAt')
 		};
 	}
 	

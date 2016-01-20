@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Parse from 'parse';
 import ParseReact from 'parse-react';
-import Blog from '../../utils/Parse/blog.js';
+import { Blog } from '../../utils/Parse/blog.js';
 
 var ParseComponent = ParseReact.Component(React);
 
@@ -18,7 +18,7 @@ export default class Blogs extends ParseComponent {
 
 	observe(props, state){
 		return{
-			blogs: new Parse.Query('Blog').descending('createdAt')
+			blogs: new Parse.Query(Blog).descending('createdAt')
 		};
 	}
 

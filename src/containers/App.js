@@ -11,18 +11,16 @@ import ProjectView from '../components/ProjectView';
 import Contact from '../components/Contact';
 import Admin from '../components/Admin';
 
-//history={browserHistory} only if necessary
-
 export default class App extends Component {
 	render(){
 		return(
 			<div>
-				<Router> 
+				<Router history={browserHistory}> 
 					<Route path="/" component={NavBar}>
 						<IndexRoute component={Home} />
 						<Route path="about" component={About} />	
 						<Route path="projects" component={Projects} />
-						<Route path="project/:id" component={ProjectView} />
+						<Route path="project:id" component={ProjectView} />	
 						<Route path="contact" component={Contact} />
 						<Route path="admin" component={Admin} />
 					</Route>
