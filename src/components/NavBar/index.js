@@ -4,8 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Header from '../Header';
 import SideBar from '../SideBar';
 import Footer from '../Footer';
-// import './animation.css';
-// import css from 'css!./animation.css';
+
 
 export default class NavBar extends Component {
   	render() {
@@ -24,16 +23,11 @@ export default class NavBar extends Component {
 						</ul>
 						
 						</nav>
-						
-
-						
 					</div>
 				</div>
 				{ /*this.props.children renders every View underneath the Links navigation bar defined inside the top <div> of the App class.*/ }
 				<div id="blog-home" className="container">
-					<div id="blog-row" className="row">
 						<div id="blog-container" className="col-sm-7 blog-main">
-							
 						<ReactCSSTransitionGroup
 							component="div"
 							transitionName="example"
@@ -46,7 +40,6 @@ export default class NavBar extends Component {
 							</ReactCSSTransitionGroup>					
 						</div>
 						<SideBar />
-					</div>
 				</div>
 			<Footer />
 			</div>

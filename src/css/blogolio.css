@@ -416,10 +416,6 @@ input, textarea, keygen, select, button, meter, progress {
     -webkit-writing-mode: horizontal-tb;
 }
 
-.toshow {
-	display: none;
-}
-
 
 /*
  * Footer
