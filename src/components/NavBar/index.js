@@ -15,18 +15,14 @@ export default class NavBar extends Component {
 				<div className="blog-masthead">
 					<div className="container">
 						<nav className="nav">
-						<ul>
-							<li><IndexLink className="blog-nav-item transition" to="/">Home</IndexLink></li>
-							<li><Link className="blog-nav-item transition" to="/about">About</Link></li>
-							<li><Link className="blog-nav-item transition" to="/projects">Projects</Link></li>        	  
-							<li><Link className="blog-nav-item transition" to="/contact">Contact</Link></li>
-							<li><Link className="blog-nav-item transition" to="/admin">Admin</Link></li>
-						</ul>
-						
+							<ul>
+								<li><IndexLink className="blog-nav-item transition" to="/">Home</IndexLink></li>
+								<li><Link className="blog-nav-item transition" to="/about">About</Link></li>
+								<li><Link className="blog-nav-item transition" to="/projects">Projects</Link></li>        	  
+								<li><Link className="blog-nav-item transition" to="/contact">Contact</Link></li>
+								<li><Link className="blog-nav-item transition" to="/admin">Admin</Link></li>
+							</ul>
 						</nav>
-						
-
-						
 					</div>
 				</div>
 				{ /*this.props.children renders every View underneath the Links navigation bar defined inside the top <div> of the App class.*/ }
