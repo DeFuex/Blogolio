@@ -66,10 +66,10 @@ export default class Contact extends Component {
 				success:function() {
 					console.log("Success");
 					//Alerts are lame - but quick and easy
-					alert("Thanks for filling the form! Email has been send!");
+					alert("Thanks for filling out the form! Email has been send!");
 				},
 				error:function(e) {
-					alert("Something went wrong! Try sending the email again!");
+					alert("Something went wrong! Try to send the email again!");
 					console.dir(e);
 				}
 			});
