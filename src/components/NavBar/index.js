@@ -31,7 +31,9 @@ export default class NavBar extends Component {
 							component="div"
 							transitionName="example"
 							transitionAppear={true}
-
+							transitionAppearTimeout={500}
+							transitionEnterTimeout={500}
+							transitionLeaveTimeout={50}
 							>
 								{ React.cloneElement(this.props.children, {
 									key: this.props.location.pathname
