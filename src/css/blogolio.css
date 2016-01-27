@@ -478,11 +478,9 @@ input, textarea, keygen, select, button, meter, progress {
 
 
 
-
-
 .example-enter {
   opacity: 0.01;
-  /*transition: opacity .4s ease-in;*/
+  transition: opacity .5s ease-in;
 }
 
 .example-enter.example-enter-active {
@@ -492,10 +490,19 @@ input, textarea, keygen, select, button, meter, progress {
 
 .example-leave {
   opacity: 1;
-  /*transition: opacity .2s ease-in;*/
+  /*transition: opacity .5s ease-in;*/
+  transition: opacity 500ms ease-in;
 }
 
 .example-leave.example-leave-active {
   opacity: 0.01;
-  transition: opacity 300ms ease-in;
+}
+
+.example-appear {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
 }
