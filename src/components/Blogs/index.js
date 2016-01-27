@@ -27,11 +27,6 @@ export default class Blogs extends ParseComponent {
 			<div className="contact-content">
 			{
 				this.data.blogs.map(function(b) {
-					// var htmlInput = b.content;
-					// var htmlToReactParser = new HtmlToReact.Parser(React);
-					// var reactComponent = htmlToReactParser.parse(htmlInput);
-					// var reactHtml = ReactDomServer.renderToStaticMarkup(reactComponent);
-					// var clean = DOMPurify.sanitize(b.content, {ALLOWED_TAGS: ['b', 'a', 'div', '&nbsp;', '&gt;']});
 					return (
 						<div className="blog-post" key={"blog-post-" + b.title}>
 							<h2 className="page-header"><a href="#">{b.title}</a></h2>
