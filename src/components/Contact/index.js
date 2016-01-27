@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Parse from 'parse';
 import './contact.css';
 
 export default class Contact extends Component {
@@ -38,5 +39,40 @@ export default class Contact extends Component {
 			  </form>
 			</div>
 		)
+	}
+
+	componentDidMount(){
+		//Connection to the Parse Database Webserver.
+		Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
+
+		//Contact Formular functionalities
+		var CommentObject = Parse.Object.extend("CommentObject");
+
+		$("#contactForm").on("submit", function(e) {
+			e.preventDefault();			
+			console.log("Handling the submit");
+			//add error handling here
+			//gather the form data
+
+			var data = {};
+			data.firstname = $("#contactFirstName").val();
+			data.lastname = $("#contactLastName").val();
+			data.email = $("#email").val();
+			data.subject = $("#subject").val();
+			data.content = $("#content").val();
+			
+			var comment = new CommentObject();
+			comment.save(data, {
+				success:function() {
+					console.log("Success");
+					//Alerts are lame - but quick and easy
+					alert("Thanks for filling the form! Email has been send!");
+				},
+				error:function(e) {
+					alert("Something went wrong! Try sending the email again!");
+					console.dir(e);
+				}
+			});
+		});	
 	}
 }
