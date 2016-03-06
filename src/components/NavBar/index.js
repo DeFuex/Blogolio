@@ -5,6 +5,8 @@ import Header from '../Header';
 import SideBar from '../SideBar';
 import Footer from '../Footer';
 
+import './navbar.css';
+
 
 export default class NavBar extends Component {
   	render() {
@@ -17,7 +19,7 @@ export default class NavBar extends Component {
 							<ul>
 								<li><IndexLink className="blog-nav-item transition" to="/">Home</IndexLink></li>
 								<li><Link className="blog-nav-item transition" to="/about">About</Link></li>
-								<li><Link className="blog-nav-item transition" to="/projects">Projects</Link></li>        	  
+								<li><Link className="blog-nav-item transition" to="/projects">Projects</Link></li>
 								<li><Link className="blog-nav-item transition" to="/contact">Contact</Link></li>
 								<li><Link className="blog-nav-item transition" to="/admin">Admin</Link></li>
 							</ul>
@@ -38,7 +40,7 @@ export default class NavBar extends Component {
 								{ React.cloneElement(this.props.children, {
 									key: this.props.location.pathname
 								})}
-							</ReactCSSTransitionGroup>					
+							</ReactCSSTransitionGroup>
 						</div>
 						<SideBar />
 				</div>

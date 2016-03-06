@@ -13,9 +13,9 @@ module.exports = {
     './src/index'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/static/'
+    path: path.join(__dirname, 'build'),
+    filename: 'js/bundle.js',
+    //publicPath: '/static/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -26,11 +26,13 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loaders: ['react-hot', 'babel'],
-      include: path.join(__dirname, 'src')
+      include: path.join(__dirname, 'src'),
+      exclude: path.join(__dirname, '/node_modules/')
     },
     {
       test: /\.css$/,
       loader: 'style-loader!css-loader?modules&importLoaders=1&sourceMap'
+      //include: path.join(__dirname, 'css')
     }]
   }
 };

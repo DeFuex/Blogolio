@@ -22,6 +22,21 @@ export default class ProjectView extends ParseComponent {
 			project: new Parse.Query('Project').equalTo("objectId", this.props.params.id)
 		};
 	}
+
+	componentDidMount() {
+    	this.setState({
+      		// route components are rendered with useful information, like URL params
+      		project: new Parse.Query('Project').equalTo("objectId", this.props.params.id)
+    	})
+  	}
+
+  	refresh() {
+        Router.dispatch(location.getCurrentPath(), null);
+    }
+
+    getCurrentPath() {
+    	return "http://localhost:3000/projects/" + project.id;
+    }
 	
 	render(){
 		console.log(this.data.project);

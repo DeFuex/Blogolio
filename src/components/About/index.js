@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import './about.css';
 
 export default class About extends Component {
 	render(){
 		return (
-			<div className="contact-content">
+			<div className="about-content-main">
 				<h2 className="page-header">About</h2>
-				<div className="blog-content">
+				<div className="about-content">
 					I'm a web/mobile (mostly Android) developer from Austria and I always look for ways to improve my skills in certain technologies.
 					<br/>
 					<br/>

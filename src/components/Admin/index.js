@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './admin.css';
 
 export default class Login extends Component {
 	render(){
@@ -14,5 +15,5 @@ export default class Login extends Component {
 			</div>
 			</div>
 		)
-	}	
+	}
 }

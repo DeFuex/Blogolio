@@ -17,7 +17,7 @@ export default class Contact extends Component {
 				  <label htmlFor="title">First Name</label><br/>
 				  <input id="contactFirstName" name="firstname" type="text" />
 				</p>
-				<p>			
+				<p>
 				  <label htmlFor="title">Last Name</label><br/>
 				  <input id="contactLastName" name="firstname" type="text" />
 				</p>
@@ -39,6 +39,8 @@ export default class Contact extends Component {
 			  </form>
 			</div>
 		)
+
+		//style={{color: 'blue'}}
 	}
 
 	componentDidMount(){
@@ -49,7 +51,7 @@ export default class Contact extends Component {
 		var CommentObject = Parse.Object.extend("CommentObject");
 
 		$("#contactForm").on("submit", function(e) {
-			e.preventDefault();			
+			e.preventDefault();
 			console.log("Handling the submit");
 			//add error handling here
 			//gather the form data
@@ -60,7 +62,7 @@ export default class Contact extends Component {
 			data.email = $("#email").val();
 			data.subject = $("#subject").val();
 			data.content = $("#content").val();
-			
+
 			var comment = new CommentObject();
 			comment.save(data, {
 				success:function() {
@@ -73,6 +75,6 @@ export default class Contact extends Component {
 					console.dir(e);
 				}
 			});
-		});	
+		});
 	}
 }

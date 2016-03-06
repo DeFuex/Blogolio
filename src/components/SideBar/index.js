@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './sidebar.css';
 
 export default class SideBar extends Component {
 	render() {
@@ -9,7 +10,7 @@ export default class SideBar extends Component {
 					<div>
 						<img className="me" src="src/assets/avatar.jpg" alt="Avatar Icon" scale="0" />
 						<div>
-							<p><em>Hi! My name is Timo and i'm Software Developer with over 4 years of experience designing and developing mobile 
+							<p><em>Hi! My name is Timo and i'm Software Developer with over 4 years of experience designing and developing mobile
 							(mostly Android) applications. Follow me on Twitter </em><a target="_blank" href="https://twitter.com/defuex">here</a>.</p>
 						</div>
 					</div>
@@ -17,8 +18,10 @@ export default class SideBar extends Component {
 				<div className="sidebar-module">
 					<h4>Archives</h4>
 					<ul className="list-unstyled">
-						<li><a href="#">Dezember 2015</a></li>
-						<li><a href="#">November 2015</a></li>
+						<li className="gray"><a href="#">February 2016</a></li>
+						<li className="gray"><a href="#">January 2016</a></li>
+						<li className="gray"><a href="#">December 2015</a></li>
+						<li className="gray"><a href="#">November 2015</a></li>
 					</ul>
 				</div>
 				<div className="sidebar-module">
