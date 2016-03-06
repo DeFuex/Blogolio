@@ -18,6 +18,7 @@ export default class SideBar extends Component {
 				<div className="sidebar-module">
 					<h4>Archives</h4>
 					<ul className="list-unstyled">
+						<li className="gray"><a href="#">March 2016</a></li>
 						<li className="gray"><a href="#">February 2016</a></li>
 						<li className="gray"><a href="#">January 2016</a></li>
 						<li className="gray"><a href="#">December 2015</a></li>
