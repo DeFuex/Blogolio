@@ -55,14 +55,36 @@ module.exports = function(options){
 			cssLoaders = 'style-loader!css-loader';
 
 			plugins = [
-				new webpack.HotModuleReplacementPlugin(), //for hot reloading
+				new webpack.optimize.UglifyJsPlugin({
+					compress: {
+						warnings: false
+					}
+				}),
+				// new webpack.HotModuleReplacementPlugin(), //for hot reloading
 				new HtmlWebpackPlugin({
 					template: 'index.html',
+					minify: {
+						removeComments: true,
+								collapseWhitespace: true,
+								removeRedundantAttributes: true,
+								useShortDoctype: true,
+								removeEmptyAttributes: true,
+								removeStyleLinkTypeAttributes: true,
+								keepClosingSlash: true,
+								minifyJS: true,
+								minifyCSS: true,
+								minifyURLs: true
+					},
 					inject: true
 				}),
 				new webpack.ProvidePlugin({
 					$: 'jquery',
 					jQuery: 'jquery'
+				}),
+				new webpack.DefinePlugin({
+					"process.env": {
+						NODE_ENV: JSON.stringify('production')
+					}
 				})
 			]
 		}
@@ -75,7 +97,7 @@ module.exports = function(options){
 			entry: entry,
 			output: {
 				path: path.resolve(__dirname, 'build'),
-				filename: 'js/bundle.js'
+				filename: 'static/bundle.js'
 			},
 			module: {
 		        loaders: [{
