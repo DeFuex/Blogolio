@@ -12,7 +12,7 @@ module.exports = function(options){
 		entry = [
 			path.resolve(__dirname, 'src/index.js')
 		];
-		cssLoaders = ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader');
+		cssLoaders = ExtractTextPlugin.extract('style-loader', 'css-loader'); //!postcss-loader
 
 		//Plugins
 		plugins = [
@@ -55,36 +55,14 @@ module.exports = function(options){
 			cssLoaders = 'style-loader!css-loader';
 
 			plugins = [
-				new webpack.optimize.UglifyJsPlugin({
-					compress: {
-						warnings: false
-					}
-				}),
-				// new webpack.HotModuleReplacementPlugin(), //for hot reloading
+				new webpack.HotModuleReplacementPlugin(), //for hot reloading
 				new HtmlWebpackPlugin({
 					template: 'index.html',
-					minify: {
-						removeComments: true,
-								collapseWhitespace: true,
-								removeRedundantAttributes: true,
-								useShortDoctype: true,
-								removeEmptyAttributes: true,
-								removeStyleLinkTypeAttributes: true,
-								keepClosingSlash: true,
-								minifyJS: true,
-								minifyCSS: true,
-								minifyURLs: true
-					},
 					inject: true
 				}),
 				new webpack.ProvidePlugin({
 					$: 'jquery',
 					jQuery: 'jquery'
-				}),
-				new webpack.DefinePlugin({
-					"process.env": {
-						NODE_ENV: JSON.stringify('production')
-					}
 				})
 			]
 		}
