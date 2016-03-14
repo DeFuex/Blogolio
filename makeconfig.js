@@ -16,7 +16,7 @@ module.exports = function(options){
 
 		//Plugins
 		plugins = [
-			new webpack.optimize.UlgifyJsPlugin({
+			new webpack.optimize.UglifyJsPlugin({
 				compress: {
 					warnings: false
 				}
@@ -75,30 +75,30 @@ module.exports = function(options){
 			entry: entry,
 			output: {
 				path: path.resolve(__dirname, 'build'),
-				filename: 'js/bundle.js'
+				filename: 'bundle.js'
 			},
 			module: {
 		        loaders: [{
 			    	test: /\.js$/, // Transform all .js files required somewhere within an entry point...
 			        loader: 'babel', // ...with the specified loaders...
 			        exclude: path.join(__dirname, '/node_modules/') // ...except for the node_modules folder.
-			    }, 
+			    },
 			    {
 			    	test:   /\.css$/, // Transform all .css files required somewhere within an entry point...
 			        loader: cssLoaders // ...with PostCSS (if used)
-			    }, 
-				{ 	test: /\.woff(\?\S*)?$/, 
+			    },
+				{ 	test: /\.woff(\?\S*)?$/,
 					loader: "url-loader?limit=10000&mimetype=application/font-woff&name=[path][name].[ext]"
 				},
 				{
       				test: /\.woff2(\?\S*)?$/,
       				loader: "url-loader?limit=10000&mimetype=application/font-woff2&name=[path][name].[ext]"
     			},
-				{ 	test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, 
-					loader: "url?limit=10000&mimetype=application/octet-stream" 
+				{ 	test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+					loader: "url?limit=10000&mimetype=application/octet-stream"
 				},
-				{ 	test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, 
-					loader: "url?limit=10000&mimetype=image/svg+xml" 
+				{ 	test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+					loader: "url?limit=10000&mimetype=image/svg+xml"
 				},
 				{
       				test: /\.(eot|ttf|svg|gif|png)(\?\S*)?$/,

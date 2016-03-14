@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development node server.dev.js",
-    "prod": "cross-env NODE_ENV=production node server.prod.js",
+    "serve": "cross-env NODE_ENV=production node server.prod.js",
     "build": "npm run test && cross-env NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors -p",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:watch": "npm test -- --watch",
