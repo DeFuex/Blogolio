@@ -12,7 +12,7 @@ module.exports = function(options){
 		entry = [
 			path.resolve(__dirname, 'src/index.js')
 		];
-		cssLoaders = ExtractTextPlugin.extract('style-loader', 'css-loader'); //!postcss-loader
+		cssLoaders = ExtractTextPlugin.extract('style-loader!css-loader'); //!postcss-loader
 
 		//Plugins
 		plugins = [
@@ -24,16 +24,16 @@ module.exports = function(options){
 			new HtmlWebpackPlugin({
 				template: 'index.html',
 				minify: {
-					removeComments: true,
-		        	collapseWhitespace: true,
-		        	removeRedundantAttributes: true,
-		        	useShortDoctype: true,
-		        	removeEmptyAttributes: true,
-		        	removeStyleLinkTypeAttributes: true,
-		        	keepClosingSlash: true,
-		        	minifyJS: true,
-		        	minifyCSS: true,
-		        	minifyURLs: true
+						removeComments: true,
+	        	collapseWhitespace: true,
+	        	removeRedundantAttributes: true,
+	        	useShortDoctype: true,
+	        	removeEmptyAttributes: true,
+	        	removeStyleLinkTypeAttributes: true,
+	        	keepClosingSlash: true,
+	        	minifyJS: true,
+	        	minifyCSS: true,
+	        	minifyURLs: true
 				},
 				inject: true
 			}),
@@ -125,7 +125,7 @@ module.exports = function(options){
 			 //    	];
 				// },
 			target: "web", // Make web variables accessible to webpack, e.g. window
-			stats: false, // Don't show stats in the console
+			stats: true, // Don't show stats in the console
 			progress: true
 		}
 }

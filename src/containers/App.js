@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { render } from 'react-dom';
+import { match, Router, Route, IndexRoute, browserHistory } from 'react-router';
+import AsyncProps from 'async-props';
 import Parse from 'parse';
 // import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux'
@@ -17,14 +19,16 @@ import bootstrap from 'bootstrap';
 import '../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../../node_modules/bootstrap-social/bootstrap-social.css';
-import '../../node_modules/bootstrap-social/node_modules/font-awesome/fonts/fontawesome-webfont.woff2';
-import '../../node_modules/bootstrap-social/node_modules/font-awesome/css/font-awesome.css';
+import '../../node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.woff2';
+import '../../node_modules/bootstrap-social/assets/css/font-awesome.css';
 
 export default class App extends Component {
 	render(){
 		return(
 			<div>
-				<Router history={browserHistory}>
+				<Router
+					render={ props => <AsyncProps {...props} /> }
+					history={browserHistory}>
 					<Route path="/" component={NavBar}>
 						<IndexRoute component={Home} />
 						<Route path="about" component={About} />

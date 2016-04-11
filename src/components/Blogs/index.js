@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import Parse from 'parse';
-import ParseReact from 'parse-react';
+// import ParseReact from 'parse-react';
 import { Blog } from '../../utils/Parse/blog.js';
 import './blogs.css';
 
-var ParseComponent = ParseReact.Component(React);
+// var ParseComponent = ParseReact.Component(React);
 
 //Connection to the Parse Database Webserver.
 Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
 
-export default class Blogs extends ParseComponent {
+export default class Blogs extends Component {// extends ParseComponent {
 
 	constructor() {
 		super();

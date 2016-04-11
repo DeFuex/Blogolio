@@ -37,7 +37,7 @@ export default class ProjectView extends ParseComponent {
     getCurrentPath() {
     	return "http://localhost:3000/projects/" + project.id;
     }
-	
+
 	render(){
 		console.log(this.data.project);
 		return(
@@ -49,8 +49,8 @@ export default class ProjectView extends ParseComponent {
 								<div className="blog-post">
 									<h2 className="page-header">{p.title}</h2>
 									<div dangerouslySetInnerHTML={{__html: p.content}}></div>
-									<p className="blog-post-meta">At {p.time} by {p.authorName}</p> 
-								</div>				 
+									<p className="blog-post-meta">At {p.time} by {p.authorName}</p>
+								</div>
 						</div>
 					);
 				})

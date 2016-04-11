@@ -7,7 +7,10 @@ import './projects.css';
 
 var ParseComponent = ParseReact.Component(React);
 
-export default class Projects extends ParseComponent {
+//Connection to the Parse Database Webserver.
+Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
+
+export default class Projects extends ParseComponent { //extends Component {
 
 	constructor() {
 		super();
@@ -17,18 +20,16 @@ export default class Projects extends ParseComponent {
 
 	observe(props, state){
 		return{
-			projects: new Parse.Query(Project).descending('createdAt')
+			projects: (new Parse.Query(Project).descending('createdAt'))
 		};
 	}
-
-
 
 	render(){
 		return(
 			<div className="contact-content">
 					<div className="row">
 					{
-						console.log(this.data),
+						console.log(this),
 
 	  					this.data.projects.map(function(p) {
 
