@@ -12,7 +12,7 @@ module.exports = function(options){
 		entry = [
 			path.resolve(__dirname, 'src/index.js')
 		];
-		cssLoaders = ExtractTextPlugin.extract('style-loader!css-loader'); //!postcss-loader
+		cssLoaders = ExtractTextPlugin.extract('style-loader', 'css-loader'); //!postcss-loader
 
 		//Plugins
 		plugins = [
@@ -125,7 +125,7 @@ module.exports = function(options){
 			 //    	];
 				// },
 			target: "web", // Make web variables accessible to webpack, e.g. window
-			stats: true, // Don't show stats in the console
+			stats: false, // Don't show stats in the console
 			progress: true
 		}
 }

@@ -29,7 +29,7 @@ export default class App extends Component {
 				<Router
 					render={ props => <AsyncProps {...props} /> }
 					history={browserHistory}>
-					<Route path="/" component={NavBar}>
+					<Route path="/Blogolio" component={NavBar}>
 						<IndexRoute component={Home} />
 						<Route path="about" component={About} />
 						<Route path="projects" component={Projects} />
