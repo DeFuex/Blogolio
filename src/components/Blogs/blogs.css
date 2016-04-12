@@ -9,14 +9,13 @@
 
 .page-header.gray a:hover,
 .page-header.gray a:focus {
-	  /* color: #fff; */
   color: #c9c9c9;
   text-decoration: none;
 }
 
 .blog-main {
-  font-size: 17px;
-  /*line-height: 1.5;*/
+  font-family: 'Roboto';
+  font-size: 15px;
 }
 
 .blog-content-main {
@@ -33,9 +32,6 @@
 }
 
 .blog-post-meta {
-/*   margin-bottom: 20px;
-  color: #999; */
-    font-family: inherit;
     letter-spacing: 0px;
     font-family: "Georgia","serif";
     line-height: 0.5em;
