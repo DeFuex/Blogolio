@@ -17,11 +17,11 @@ export default class NavBar extends Component {
 					<div className="container">
 						<nav className="nav">
 							<ul>
-								<li><IndexLink className="blog-nav-item transition" to="/">Home</IndexLink></li>
-								<li><Link className="blog-nav-item transition" to="/about">About</Link></li>
-								<li><Link className="blog-nav-item transition" to="/projects">Projects</Link></li>
-								<li><Link className="blog-nav-item transition" to="/contact">Contact</Link></li>
-								<li><Link className="blog-nav-item transition" to="/admin">Admin</Link></li>
+								<li><IndexLink className="blog-nav-item transition" to="/Blogolio">Home</IndexLink></li>
+								<li><Link className="blog-nav-item transition" to="/Blogolio/about">About</Link></li>
+								<li><Link className="blog-nav-item transition" to="/Blogolio/projects">Projects</Link></li>
+								<li><Link className="blog-nav-item transition" to="/Blogolio/contact">Contact</Link></li>
+								<li><Link className="blog-nav-item transition" to="/Blogolio/admin">Admin</Link></li>
 							</ul>
 						</nav>
 					</div>

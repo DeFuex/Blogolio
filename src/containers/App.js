@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { match, Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { match, Router, Route, IndexRoute, IndexRedirect, browserHistory } from 'react-router';
 import AsyncProps from 'async-props';
 import Parse from 'parse';
 // import { connect } from 'react-redux';
