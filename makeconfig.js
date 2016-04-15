@@ -75,55 +75,35 @@ module.exports = function(options){
 			entry: entry,
 			output: {
 				path: path.resolve(__dirname, 'build'),
+				publicPath: '/',
 				filename: 'static/bundle.js'
 			},
 			module: {
-		        loaders: [{
-			    	test: /\.js$/, // Transform all .js files required somewhere within an entry point...
+		    	loaders: [{
+			    		test: /\.(es6|js|jsx)$/, // Transform all .js files required somewhere within an entry point...
 			        loader: 'babel', // ...with the specified loaders...
-			        exclude: path.join(__dirname, '/node_modules/') // ...except for the node_modules folder.
+							query: {compact: false},
+			        exclude: /node_modules/ // ...except for the node_modules folder.
 			    },
 			    {
-			    	test:   /\.css$/, // Transform all .css files required somewhere within an entry point...
+			    		test:   /\.css$/, // Transform all .css files required somewhere within an entry point...
 			        loader: cssLoaders // ...with PostCSS (if used)
 			    },
-				{ 	test: /\.woff(\?\S*)?$/,
-					loader: "url-loader?limit=10000&mimetype=application/font-woff&name=[path][name].[ext]"
-				},
-				{
-      				test: /\.woff2(\?\S*)?$/,
-      				loader: "url-loader?limit=10000&mimetype=application/font-woff2&name=[path][name].[ext]"
-    			},
-				{ 	test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-					loader: "url?limit=10000&mimetype=application/octet-stream"
-				},
-				{ 	test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-					loader: "url?limit=10000&mimetype=image/svg+xml"
-				},
-				{
-      				test: /\.(eot|ttf|svg|gif|png)(\?\S*)?$/,
-      				loader: "file-loader"
+					{ 	test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+							loader: "url?limit=10000&mimetype=application/octet-stream"
+					},
+					{
+							test: /\.(jpg|jpeg|gif|png)$/,
+    					loader:'url-loader?limit=10000',
+							exclude: /node_modules/
+					},
+					{
+							test: /\.(eot|woff|woff2|svg)(\?\S*)?$/,
+      				loader: "file-loader?limit=10000&mimetype=image&name=[path][name].[ext]"
+							//don't exclude node_modules since file loader takes .eot files from bootstrap in node_modules
     			}]
-		    },
-		    plugins: plugins,
-			 //    postcss: function() {
-			 //    	return [
-			 //        	require('postcss-import')({ // Import all the css files...
-			 //          		glob: true,
-			 //          		onImport: function (files) {
-			 //              		files.forEach(this.addDependency); // ...and add dependecies from the main.css files to the other css files...
-			 //          		}.bind(this) // ...so they get hot–reloaded when something changes...
-			 //        	}),
-			 //        	require('postcss-simple-vars')(), // ...then replace the variables...
-			 //        	require('postcss-focus')(), // ...add a :focus to ever :hover...
-			 //        	require('autoprefixer')({ // ...and add vendor prefixes...
-			 //          		browsers: ['last 2 versions', 'IE > 8'] // ...supporting the last 2 major browser versions and IE 8 and up...
-			 //        	}),
-			 //        	require('postcss-reporter')({ // This plugin makes sure we get warnings in the console
-			 //          		clearMessages: true
-				//     	})
-			 //    	];
-				// },
+		  },
+		  plugins: plugins,
 			target: "web", // Make web variables accessible to webpack, e.g. window
 			stats: false, // Don't show stats in the console
 			progress: true

@@ -10,7 +10,7 @@ var ParseComponent = ParseReact.Component(React);
 //Connection to the Parse Database Webserver.
 Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
 
-export default class Projects extends ParseComponent { //extends Component {
+export default class Projects extends Component {//extends ParseComponent
 
 	constructor() {
 		super();
@@ -18,49 +18,60 @@ export default class Projects extends ParseComponent { //extends Component {
 		//do stuff
 	}
 
-	observe(props, state){
-		return{
-			projects: (new Parse.Query(Project).descending('createdAt'))
-		};
-	}
+	// observe(props, state){
+	// 	return{
+	// 		projects: (new Parse.Query(Project).descending('createdAt'))
+	// 	};
+	// }
 
 	render(){
 		return(
 			<div className="contact-content">
 					<div className="row">
-					{
-						console.log(this),
-
-	  					this.data.projects.map(function(p) {
-
-	  						var imgSource;
-
-	  						if (p.title === "Project Tire(d)") {
-	  							imgSource = "src/assets/tired.jpg";
-	  						} else {
-	  							imgSource = "src/assets/not_available.jpeg";
-	  						}
-
-	  						return (
-	        					<div className="col-lg-12" key={"project-post-" + p.title}>
-									<h2 className="page-header" ><Link to={'/projects/' + p.objectId}>{p.title}</Link></h2>
-	          						<div className="col-lg-3 col-md-4 col-xs-6 thumb">
-		              					<Link className="thumbnail" to={'/projects/' + p.objectId }>
-		              						<img className="img-responsive" src={imgSource} alt="no image" />
-		              					</Link>
-	          						</div>
-	  		    					<p>{p.summary}</p>
-	        					</div>
-        					);
-        				})
-	  				}
+						{
+							<div className="col-lg-12">
+									<h2 className="page-header">Project Tire(d)</h2>
+										<div className="col-lg-3 col-md-4 col-xs-6 thumb">
+												<Link className="thumbnail" to="/Blogolio/projects/{1}">
+													<img className="img-responsive" src={require('../../assets/tired.jpg')}  alt="no image available!" />
+												</Link>
+										</div>
+										<p>Development of an Engine with basic implementations to control a virtual 3D Tire. C++ and OpenGL were used in this project.</p>
+							</div>
+						}
 					</div>
 			</div>
 		);
 	}
 }
 
-{ /* <div className="row">
+{ /*
+
+	this.data.projects.map(function(p) {
+
+		var imgSource;
+
+		if (p.title === "Project Tire(d)") {
+			imgSource = "src/assets/tired.jpg";
+		} else {
+			imgSource = "src/assets/not_available.jpeg";
+		}
+
+		return (
+				<div className="col-lg-12" key={"project-post-" + p.title}>
+			<h2 className="page-header" ><Link to={'/projects/' + p.objectId}>{p.title}</Link></h2>
+						<div className="col-lg-3 col-md-4 col-xs-6 thumb">
+								<Link className="thumbnail" to={'/projects/' + p.objectId }>
+									<img className="img-responsive" src={imgSource} alt="no image" />
+								</Link>
+						</div>
+					<p>{p.summary}</p>
+				</div>
+			);
+		})
+
+
+	<div className="row">
 {
 	<div className="col-lg-12">
 		<h2 className="page-header">Project Tire(d)</h2>

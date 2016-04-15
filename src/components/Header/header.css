@@ -2,6 +2,16 @@
  * Header
  */
 
+.headerin{
+
+  -moz-box-sizing: border-box;
+
+  background: url(/../../src/assets/header.jpg) no-repeat;
+  width: 180px; /* Width of new image */
+  height: 236px; /* Height of new image */
+  /*padding-left: 180px; /* Equal to width of new image */
+}
+
 .blog-header {
   padding-top: 40px;
   padding-bottom: 20px;

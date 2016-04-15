@@ -16,6 +16,7 @@ import Example from '../components/Example';
 
 import bootstrap from 'bootstrap';
 
+// var tinymce = require('../../src/js/tinymce.min.js')
 import '../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../../node_modules/bootstrap-social/bootstrap-social.css';
@@ -33,7 +34,7 @@ export default class App extends Component {
 						<IndexRoute component={Home} />
 						<Route path="about" component={About} />
 						<Route path="projects" component={Projects} />
-						<Route path="projects/:id" component={ProjectView} />
+						<Route path="projects/?:id?" component={ProjectView} />
 						<Route path="contact" component={Contact} />
 						<Route path="admin" component={Admin} />
 						<Route path="Example" component={Example} />
