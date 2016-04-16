@@ -21,7 +21,9 @@ export default class NavBar extends Component {
 								<li><Link className="blog-nav-item transition" to="/Blogolio/about">About</Link></li>
 								<li><Link className="blog-nav-item transition" to="/Blogolio/projects">Projects</Link></li>
 								<li><Link className="blog-nav-item transition" to="/Blogolio/contact">Contact</Link></li>
-								<li><Link className="blog-nav-item transition" to="/Blogolio/admin">Admin</Link></li>
+								{
+                  //<li><Link className="blog-nav-item transition" to="/Blogolio/admin">Admin</Link></li>
+                }
 							</ul>
 						</nav>
 					</div>

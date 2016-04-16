@@ -10,13 +10,17 @@ import Home from '../components/Home';
 import About from '../components/About';
 import Projects from '../components/Projects';
 import ProjectView from '../components/ProjectView';
+import Tired from '../components/Projects/Tired';
+import Dinger from '../components/Projects/Dinger';
+import BackOffice from '../components/Projects/BackOffice';
+import SWEChan from '../components/Projects/SWEChan';
 import Contact from '../components/Contact';
 import Admin from '../components/Admin';
 import Example from '../components/Example';
 
 import bootstrap from 'bootstrap';
 
-// var tinymce = require('../../src/js/tinymce.min.js')
+//import '../../src/js/tinymce.min.js';
 import '../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../../node_modules/bootstrap-social/bootstrap-social.css';
@@ -34,9 +38,13 @@ export default class App extends Component {
 						<IndexRoute component={Home} />
 						<Route path="about" component={About} />
 						<Route path="projects" component={Projects} />
-						<Route path="projects/?:id?" component={ProjectView} />
+						<Route path="projects/projectTired" component={Tired} />
+						<Route path="projects/backOffice" component={BackOffice} />
+						<Route path="projects/sweChan" component={SWEChan} />
+						<Route path="projects/projectDinger" component={Dinger} />
 						<Route path="contact" component={Contact} />
-						<Route path="admin" component={Admin} />
+						{//<Route path="admin" component={Admin} />
+					  }
 						<Route path="Example" component={Example} />
 					</Route>
 				</Router>
