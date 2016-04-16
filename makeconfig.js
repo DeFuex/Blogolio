@@ -75,7 +75,7 @@ module.exports = function(options){
 			entry: entry,
 			output: {
 				path: path.resolve(__dirname, 'build'),
-				publicPath: '/',
+				publicPath: '/Blogolio/',
 				filename: 'static/bundle.js'
 			},
 			module: {
