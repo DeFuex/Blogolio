@@ -1,0 +1,22 @@
+CACHE MANIFEST
+# da8e3b78d8bdbc54db62
+
+/node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot
+/node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg
+/node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff
+/node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2
+/e18bbf611f2a2e43afc071aa2f4e1512.ttf
+/node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.eot
+/node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.svg
+/node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.woff2
+/node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.woff
+/a3de2170e4e9df77161ea5d3f31b2668.ttf
+/639c7c691652f7c9c128d17722c8dabe.jpg
+/965424424564d659cadb32ad60a475b3.jpg
+/5c8c162bea49826ce6d98fa5ed44b37c.jpg
+/static/bundle.js
+/src/css/blogolio.css
+/index.html
+
+NETWORK:
+*
