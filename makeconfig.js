@@ -3,6 +3,16 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var AppCachePlugin = require('appcache-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
+
+var locals = {
+  paths: [
+		'/Blogolio',
+		'/Blogolio/about/',
+		'/Blogolio/projects',
+		'/Blogolio/contact'
+  ]
+}
 
 module.exports = function(options){
 	var entry, jsLoaders, plugins, cssLoaders;
@@ -42,7 +52,12 @@ module.exports = function(options){
 				"process.env": {
 					NODE_ENV: JSON.stringify('production')
 				}
-			})
+			}),
+			// new StaticSiteGeneratorPlugin('static/bundle.js', locals.paths, locals),
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery'
+      })
 		];
 
 		//if option is false then change to development settings
@@ -60,6 +75,7 @@ module.exports = function(options){
 					template: 'index.html',
 					inject: true
 				}),
+        // new StaticSiteGeneratorPlugin('static/bundle.js', locals.paths, locals),
 				new webpack.ProvidePlugin({
 					$: 'jquery',
 					jQuery: 'jquery'
@@ -75,8 +91,9 @@ module.exports = function(options){
 			entry: entry,
 			output: {
 				path: path.resolve(__dirname, 'build'),
-				publicPath: '/Blogolio/',
+				publicPath: '/',
 				filename: 'static/bundle.js'
+        // libraryTarget: 'umd'
 			},
 			module: {
 		    	loaders: [{

@@ -7,7 +7,7 @@ import './blogs.css';
 // var ParseComponent = ParseReact.Component(React);
 
 //Connection to the Parse Database Webserver.
-Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
+//Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
 
 export default class Blogs extends Component {// extends ParseComponent {
 
@@ -17,11 +17,11 @@ export default class Blogs extends Component {// extends ParseComponent {
 		//do stuff
 	}
 
-	observe(props, state){
-		return{
-			blogs: new Parse.Query(Blog).descending('createdAt')
-		};
-	}
+	// observe(props, state){
+	// 	return{
+	// 		blogs: new Parse.Query(Blog).descending('createdAt')
+	// 	};
+	// }
 
 	render(){
 		return (

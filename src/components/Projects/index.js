@@ -32,7 +32,7 @@ export default class Projects extends Component {//extends ParseComponent
 							<div className="col-lg-12">
 									<h2 className="page-header">Project Tire(d)</h2>
 										<div className="col-lg-3 col-md-4 col-xs-6 thumb">
-												<Link className="thumbnail" to="/projects/projectTired">
+												<Link className="thumbnail" to="/Blogolio/projects/projectTired">
 													<img className="img-responsive" src={require('../../assets/tired.jpg')}  alt="no image available!" />
 												</Link>
 										</div>
