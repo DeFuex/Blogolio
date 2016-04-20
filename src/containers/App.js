@@ -27,7 +27,7 @@ const NotFound = () => <h4>Not Found :( </h4>;
 
 export const routes = (
 	//<Provider store={store}>
-	<Route path='/' title='App' component={NavBar}>
+	<Route path='/Blogolio' title='App' component={NavBar}>
 		<IndexRoute component={Home} />
 		<Route path='about' title='App - About' component={About} />
 		<Route path='projects' title='App - Projects' component={Projects} />
