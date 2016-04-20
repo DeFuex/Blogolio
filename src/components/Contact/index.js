@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Parse from 'parse';
 import './contact.css';
 
+// window.jQuery = require("jquery");
+
 export default class Contact extends Component {
 	render(){
 		return(
@@ -44,6 +46,8 @@ export default class Contact extends Component {
 	}
 
 	componentDidMount(){
+		// var $ = require("jquery");
+
 		//Connection to the Parse Database Webserver.
 		Parse.initialize("EvmOpxAGXkDDS9IOETIptyHZAJDn3Ax7Af3v7VQQ", "doRuBShVrZ9hP6d5lHYWd00SYvxmHVnIBBwm7OxI");
 

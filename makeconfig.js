@@ -3,16 +3,17 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var AppCachePlugin = require('appcache-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
+var StaticSitePlugin = require('react-static-webpack-plugin');
+// var StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 
-var locals = {
-  paths: [
-		'/Blogolio',
-		'/Blogolio/about/',
-		'/Blogolio/projects',
-		'/Blogolio/contact'
-  ]
-}
+// var locals = {
+//   paths: [
+// 		'/Blogolio',
+// 		'/Blogolio/about/',
+// 		'/Blogolio/projects',
+// 		'/Blogolio/contact'
+//   ]
+// }
 
 module.exports = function(options){
 	var entry, jsLoaders, plugins, cssLoaders;
@@ -22,42 +23,52 @@ module.exports = function(options){
 		entry = [
 			path.resolve(__dirname, 'src/index.js')
 		];
+
 		cssLoaders = ExtractTextPlugin.extract('style-loader', 'css-loader'); //!postcss-loader
 
 		//Plugins
 		plugins = [
+			new webpack.optimize.OccurrenceOrderPlugin(),
 			new webpack.optimize.UglifyJsPlugin({
+				screw_ie8: true,
 				compress: {
 					warnings: false
 				}
 			}),
-			new HtmlWebpackPlugin({
-				template: 'index.html',
-				minify: {
-						removeComments: true,
-	        	collapseWhitespace: true,
-	        	removeRedundantAttributes: true,
-	        	useShortDoctype: true,
-	        	removeEmptyAttributes: true,
-	        	removeStyleLinkTypeAttributes: true,
-	        	keepClosingSlash: true,
-	        	minifyJS: true,
-	        	minifyCSS: true,
-	        	minifyURLs: true
-				},
-				inject: true
-			}),
+			// new HtmlWebpackPlugin({
+			// 	template: 'index.html',
+			// 	minify: {
+			// 			removeComments: true,
+	    //     	collapseWhitespace: true,
+	    //     	removeRedundantAttributes: true,
+	    //     	useShortDoctype: true,
+	    //     	removeEmptyAttributes: true,
+	    //     	removeStyleLinkTypeAttributes: true,
+	    //     	keepClosingSlash: true,
+	    //     	minifyJS: true,
+	    //     	minifyCSS: true,
+	    //     	minifyURLs: true
+			// 	},
+			// 	inject: true
+			// }),
 			new ExtractTextPlugin('src/css/blogolio.css'),
 			new webpack.DefinePlugin({
 				"process.env": {
 					NODE_ENV: JSON.stringify('production')
 				}
 			}),
-			// new StaticSiteGeneratorPlugin('static/bundle.js', locals.paths, locals),
-      new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery'
+      new StaticSitePlugin({
+        src: 'app',
+        //bundle: '/static/bundle.js',
+        stylesheet: '/src/css/blogolio.css',
+        favicon: '/favicon.ico',
+        template: path.join(__dirname, 'index.html.js')
       })
+      // new webpack.ProvidePlugin({
+      //   $: "jquery",
+      //   jQuery: "jquery",
+      //   "window.jQuery": "jquery"
+      // })
 		];
 
 		//if option is false then change to development settings
@@ -75,7 +86,6 @@ module.exports = function(options){
 					template: 'index.html',
 					inject: true
 				}),
-        // new StaticSiteGeneratorPlugin('static/bundle.js', locals.paths, locals),
 				new webpack.ProvidePlugin({
 					$: 'jquery',
 					jQuery: 'jquery'
@@ -88,15 +98,17 @@ module.exports = function(options){
 		}));
 
 		return {
-			entry: entry,
+			entry: {app: entry},
 			output: {
-				path: path.resolve(__dirname, 'build'),
-				publicPath: '/Blogolio/',
-				filename: 'static/bundle.js'
-        // libraryTarget: 'umd'
+				path: path.join(__dirname, 'build'),
+				publicPath: '/',
+				filename: 'static/bundle.js',
+        libraryTarget: 'umd'
 			},
 			module: {
-		    	loaders: [{
+		    	loaders: [
+					// { test: /bootstrap\/js\//, loader: 'imports?jQuery=jquery' },
+					{
 			    		test: /\.(es6|js|jsx)$/, // Transform all .js files required somewhere within an entry point...
 			        loader: 'babel', // ...with the specified loaders...
 							query: {compact: false},
@@ -118,7 +130,8 @@ module.exports = function(options){
 							test: /\.(eot|woff|woff2|svg)(\?\S*)?$/,
       				loader: "file-loader?limit=10000&mimetype=image&name=[path][name].[ext]"
 							//don't exclude node_modules since file loader takes .eot files from bootstrap in node_modules
-    			}]
+    			}
+				]
 		  },
 		  plugins: plugins,
 			target: "web", // Make web variables accessible to webpack, e.g. window
