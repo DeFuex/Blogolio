@@ -12,14 +12,14 @@ module.exports = (props) => {
       <meta property="og:title" content="Blogolio - A simple Blog page build with React" />
       <title>Blogolio - A simple Blog page build with React</title>
       <!-- stylesheets -->
-      <link rel="stylesheet" href="/src/css/blogolio.css"/>
+      <link rel="stylesheet" href="/Blogolio/src/css/blogolio.css"/>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
       <link rel="stylesheet" href="/src/css/bootstrap-social.css" />
-      <link href="/src/fonts/fontawesome-webfont.woff2" />
-      <link href="/src/fonts/fontawesome-webfont.woff" />
-      <link href="/src/fonts/fontawesome-webfont.eot" />
-      <link href="/src/fonts/fontawesome-webfont.svg" />
-      <link rel="stylesheet" href="/src/css/font-awesome.css" />
+      <link href="/Blogolio/src/fonts/fontawesome-webfont.woff2" />
+      <link href="/Blogolio/src/fonts/fontawesome-webfont.woff" />
+      <link href="/Blogolio/src/fonts/fontawesome-webfont.eot" />
+      <link href="/Blogolio/src/fonts/fontawesome-webfont.svg" />
+      <link rel="stylesheet" href="/Blogolio/src/css/font-awesome.css" />
       <!-- favicon.ico -->
       <link rel='shortcut icon' href='favicon.ico' type='image/x-icon' >
       <!-- Google Roboto Fonts for text -->
@@ -32,7 +32,7 @@ module.exports = (props) => {
       <!-- Latest compiled and minified JavaScript -->
       <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-      <script src="/static/blogolio.js"></script>
+      <script src="/Blogolio/static/blogolio.js"></script>
     </body>
   </html>`;
   return template.trim();
