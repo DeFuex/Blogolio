@@ -14,7 +14,7 @@ module.exports = (props) => {
       <!-- stylesheets -->
       <link rel="stylesheet" href="/Blogolio/src/css/blogolio.css"/>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-      <link rel="stylesheet" href="/src/css/bootstrap-social.css" />
+      <link rel="stylesheet" href="/Blogolio/src/css/bootstrap-social.css" />
       <link href="/Blogolio/src/fonts/fontawesome-webfont.woff2" />
       <link href="/Blogolio/src/fonts/fontawesome-webfont.woff" />
       <link href="/Blogolio/src/fonts/fontawesome-webfont.eot" />
@@ -32,7 +32,7 @@ module.exports = (props) => {
       <!-- Latest compiled and minified JavaScript -->
       <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-      <script src="/Blogolio/static/blogolio.js"></script>
+      <script src="/Blogolio/static/bundle.js"></script>
     </body>
   </html>`;
   return template.trim();
