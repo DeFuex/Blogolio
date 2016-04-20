@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Parse from 'parse';
 import './contact.css';
 
-// window.jQuery = require("jquery");
-
 export default class Contact extends Component {
 	render(){
 		return(

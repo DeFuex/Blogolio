@@ -5,8 +5,6 @@ export default class BackOffice extends Component {
 
 	  constructor() {
 		  super();
-		  //Initialize SomeComponent
-		  //do stuff
 	  }
 
 	render(){

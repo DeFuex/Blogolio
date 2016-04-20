@@ -5,8 +5,6 @@ export default class SWEChan extends Component {
 
 	  constructor() {
 		  super();
-		  //Initialize SomeComponent
-		  //do stuff
 	  }
 
 	render(){

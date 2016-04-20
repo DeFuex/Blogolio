@@ -4,16 +4,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var AppCachePlugin = require('appcache-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var StaticSitePlugin = require('react-static-webpack-plugin');
-// var StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
-
-// var locals = {
-//   paths: [
-// 		'/Blogolio',
-// 		'/Blogolio/about/',
-// 		'/Blogolio/projects',
-// 		'/Blogolio/contact'
-//   ]
-// }
 
 module.exports = function(options){
 	var entry, jsLoaders, plugins, cssLoaders;
@@ -64,11 +54,6 @@ module.exports = function(options){
         favicon: '/favicon.ico',
         template: path.join(__dirname, 'index.html.js')
       })
-      // new webpack.ProvidePlugin({
-      //   $: "jquery",
-      //   jQuery: "jquery",
-      //   "window.jQuery": "jquery"
-      // })
 		];
 
 		//if option is false then change to development settings

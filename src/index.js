@@ -1,7 +1,6 @@
 import React from 'react'
 import { Router, browserHistory } from 'react-router'
 import { render } from 'react-dom'
-import { Provider } from 'react-redux'
 import configureStore from './store/configureStore'
 
 import routes from './containers/App.js'
