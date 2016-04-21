@@ -9,7 +9,7 @@ import Home from '../components/Home';
 import About from '../components/About';
 import Projects from '../components/Projects';
 import Tired from '../components/Projects/Tired';
-import Dinger from '../components/Projects/Dinger';
+//import Dinger from '../components/Projects/Dinger';
 import BackOffice from '../components/Projects/BackOffice';
 import SWEChan from '../components/Projects/SWEChan';
 import Contact from '../components/Contact';
@@ -18,6 +18,10 @@ import Example from '../components/Example';
 
 import configureStore from '../store/configureStore';
 const store = configureStore();
+
+//use the bootstrap imports for development only, else do comment them out!
+// import '../../node_modules/bootstrap/dist/js/bootstrap.min.js';
+// import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 import '../../node_modules/bootstrap-social/bootstrap-social.css';
 import '../../node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.woff2';
@@ -34,7 +38,6 @@ export const routes = (
 		<Route path='projects/projectTired' title='App - Projects - Tired' component={Tired} />
 		<Route path='projects/backOffice' title='App - Projects - BackOffice' component={BackOffice} />
 		<Route path='projects/sweChan' title='App - Projects - SWEChan' component={SWEChan} />
-		<Route path='projects/projectDinger' title='App - Projects - Dinger' component={Dinger} />
 		<Route path='contact' title='App - Contact' component={Contact} />
 		<Route path='*' title='404: Not Found' component={NotFound} />
 	</Route>

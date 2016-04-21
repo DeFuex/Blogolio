@@ -12,6 +12,8 @@ export default class SideBar extends Component {
 						<div>
 							<p><em>Hi! My name is Timo and i'm Software Developer with over 4 years of experience designing and developing mobile
 							(mostly Android) applications. Follow me on Twitter </em><a target="_blank" href="https://twitter.com/defuex">here</a>.</p>
+							<br />
+							<p>Banner art made by Panda (Contact artist at panda@grim.moe)</p>
 						</div>
 					</div>
 				</div>
