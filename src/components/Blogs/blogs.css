@@ -13,6 +13,12 @@
   text-decoration: none;
 }
 
+.gray:hover,
+.gray:focus {
+  color: #c9c9c9;
+  text-decoration: none;
+}
+
 .blog-main {
   font-family: 'Roboto';
   font-size: 15px;

@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 // import { bindActionCreators } from 'redux'
 import NavBar from '../components/NavBar';
 import Home from '../components/Home';
+import ReactTutPart1 from '../components/Blogs/BlogReactTutorial/PartOne';
 import About from '../components/About';
 import Projects from '../components/Projects';
 import Tired from '../components/Projects/Tired';
@@ -20,8 +21,8 @@ import configureStore from '../store/configureStore';
 const store = configureStore();
 
 //use the bootstrap imports for development only, else do comment them out!
-// import '../../node_modules/bootstrap/dist/js/bootstrap.min.js';
-// import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../../node_modules/bootstrap/dist/js/bootstrap.min.js';
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 import '../../node_modules/bootstrap-social/bootstrap-social.css';
 import '../../node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.woff2';
@@ -33,6 +34,7 @@ export const routes = (
 	//<Provider store={store}>
 	<Route path='/Blogolio' title='App' component={NavBar}>
 		<IndexRoute component={Home} />
+		<Route path='reactTutPart1' title='App - React Tutorial Chapter 1' component={ReactTutPart1} />
 		<Route path='about' title='App - About' component={About} />
 		<Route path='projects' title='App - Projects' component={Projects} />
 		<Route path='projects/projectTired' title='App - Projects - Tired' component={Tired} />

@@ -9,7 +9,18 @@ import './navbar.css';
 
 
 export default class NavBar extends Component {
-  	render() {
+
+    constructor() {
+      super()
+      this.hideSideBar = this.hideSideBar.bind(this)
+      this.state = { showSideBar: true}
+    }
+
+    hideSideBar() {
+      this.setState({ showSideBar: false});
+    }
+
+    render() {
 		return (
 			<div>
 			<Header />
@@ -39,12 +50,13 @@ export default class NavBar extends Component {
 							transitionEnterTimeout={500}
 							transitionLeaveTimeout={50}
 							>
-								{ React.cloneElement(this.props.children, {
-									key: this.props.location.pathname
+								{ this.props.children && React.cloneElement(this.props.children, {
+									key: this.props.location.pathname,
+                  onHideSideBar: this.hideSideBar
 								})}
 							</ReactCSSTransitionGroup>
 						</div>
-						<SideBar />
+						{ this.state.showSideBar ? <SideBar /> : null }
 				</div>
 			<Footer />
 			</div>
