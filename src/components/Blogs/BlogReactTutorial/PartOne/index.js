@@ -3,15 +3,21 @@ import '../../blogs.css';
 
 export default class Part1 extends Component {
 
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.hideSideBar = this.hideSideBar.bind(this)
+		this.showSideBar = this.showSideBar.bind(this)
+		//this.componentWillUnmount = this.componentWillUnmount.bind(this)
 		//this.componentWillUpdate = this.componentWillUpdate.bind(this)
 		//this.componentDidMount = this.componentDidMount.bind(this)
 	}
 
 	hideSideBar(){
 		this.props.onHideSideBar;
+	}
+
+	showSideBar(){
+		this.props.onShowSideBar;
 	}
 
 	render(){
@@ -21,7 +27,9 @@ export default class Part1 extends Component {
 					  <h2>React Tutorial Part 1 - Project Structure, Webpack, Hot-Reloading, Module Loaders, Plugins</h2>
 						<div className="blog-content">
 							Stuff
-							<button onClick={this.props.onHideSideBar}>remove SideBar</button>
+							{ //<button onClick={this.props.onHideSideBar}>remove SideBar</button>
+							  //<button onClick={this.props.onShowSideBar}>show SideBar</button>
+							}
 						</div>
 						<p className="blog-post-meta">At Wed April 27 2016 by Timo Obereder</p>
 					</div>
@@ -29,10 +37,14 @@ export default class Part1 extends Component {
 		);
 	}
 
-	componentWillReceiveProps(){
-		this.hideSideBar
+	componentWillUnmount(){
+		this.showSideBar;
 	}
 
+	// componentWillReceiveProps(){
+	// 	this.hideSideBar
+	// }
+  //
 	// componentWillMount() {
 	// 	this.props.onHideSideBar
 	// }

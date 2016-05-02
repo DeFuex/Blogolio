@@ -13,11 +13,16 @@ export default class NavBar extends Component {
     constructor() {
       super()
       this.hideSideBar = this.hideSideBar.bind(this)
+      this.showSideBar = this.showSideBar.bind(this)
       this.state = { showSideBar: true}
     }
 
     hideSideBar() {
-      this.setState({ showSideBar: false});
+      this.setState({ showSideBar: false });
+    }
+
+    showSideBar() {
+      this.setState({ showSideBar: true });
     }
 
     render() {
@@ -28,10 +33,10 @@ export default class NavBar extends Component {
 					<div className="container">
 						<nav className="nav">
 							<ul>
-								<li><IndexLink className="blog-nav-item transition" to="/Blogolio">Home</IndexLink></li>
-								<li><Link className="blog-nav-item transition" to="/Blogolio/about">About</Link></li>
-								<li><Link className="blog-nav-item transition" to="/Blogolio/projects">Projects</Link></li>
-								<li><Link className="blog-nav-item transition" to="/Blogolio/contact">Contact</Link></li>
+								<li><IndexLink className="blog-nav-item transition" onClick={this.showSideBar} to="/Blogolio">Home</IndexLink></li>
+								<li><Link className="blog-nav-item transition" onClick={this.showSideBar} to="/Blogolio/about">About</Link></li>
+								<li><Link className="blog-nav-item transition" onClick={this.showSideBar} to="/Blogolio/projects">Projects</Link></li>
+								<li><Link className="blog-nav-item transition" onClick={this.showSideBar} to="/Blogolio/contact">Contact</Link></li>
 								{
                   //<li><Link className="blog-nav-item transition" to="/Blogolio/admin">Admin</Link></li>
                 }
@@ -52,7 +57,8 @@ export default class NavBar extends Component {
 							>
 								{ this.props.children && React.cloneElement(this.props.children, {
 									key: this.props.location.pathname,
-                  onHideSideBar: this.hideSideBar
+                  onHideSideBar: this.hideSideBar,
+                  onShowSideBar: this.showSideBar
 								})}
 							</ReactCSSTransitionGroup>
 						</div>

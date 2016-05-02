@@ -7,7 +7,7 @@ export default class Home extends Component {
 
 	render(){
 		return(
-			<Blogs />
+			<Blogs hideSideBar={this.props.onHideSideBar} showSideBar={this.props.onShowSideBar} />
 		)
 	}
 }

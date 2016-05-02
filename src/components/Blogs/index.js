@@ -6,19 +6,14 @@ export default class Blogs extends Component {
 
 	constructor(){
 		super();
-		this.hideSideBar = this.hideSideBar.bind(this)
 		this.render = this.render.bind(this);
-	}
-
-	hideSideBar(){
-		this.props.onHideSideBar
 	}
 
 	render(){
 		return (
 			<div className="row">
 					<div className="blog-content-main">
-						<Link className="page-header gray" onClick={this.onHideSideBar} to="/Blogolio/reactTutPart1">
+						<Link className="page-header gray" onClick={this.props.hideSideBar} to="/Blogolio/reactTutPart1">
 							<h2>React Tutorial Part 1</h2>
 						</Link>
 							<div className="blog-content">
@@ -26,7 +21,7 @@ export default class Blogs extends Component {
 								my tutorial series you will learn how to set up your project properly. It includes
 								topics about the project structure, webpack and its configuration files, hot-reloading,
 								what plugins and loaders are and how to define them and furthermore. Have fun with this
-								first part.<Link className="gray" to="/Blogolio/reactTutPart1"><p> read more...</p></Link>
+								first part.<Link className="gray" onClick={this.props.hideSideBar} to="/Blogolio/reactTutPart1"><p> read more...</p></Link>
 							</div>
 							<p className="blog-post-meta">At Wed April 27 2016 by Timo Obereder</p>
 					</div>
