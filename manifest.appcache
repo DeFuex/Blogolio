@@ -1,29 +1,29 @@
 CACHE MANIFEST
-# 7649bab4f72407cfa748
+# a59bb0ffdd0bff83442e
 
-/be8c67a579f5181e298a18589ce3c348.jpg
-/node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.eot
-/node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.svg
-/node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.woff2
-/node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.woff
-/a3de2170e4e9df77161ea5d3f31b2668.ttf
-/965424424564d659cadb32ad60a475b3.jpg
-/4a8380113927d6b45132b7ba89c10bcd.jpg
-/4a127a006a33ff44a147f05d220204d3.png
-/01c9c905d1bebbd348072dbbd238b8fe.png
-/3d54e833ba00976d9f34c83a29c8b884.png
-/5c8c162bea49826ce6d98fa5ed44b37c.jpg
-/static/bundle.js
-/src/css/blogolio.css
-/Blogolio.html
-/Blogolio/reactTutPart1.html
-/Blogolio/about.html
-/Blogolio/projects.html
-/Blogolio/projects/projectTired.html
-/Blogolio/projects/backOffice.html
-/Blogolio/projects/sweChan.html
-/Blogolio/contact.html
-/Blogolio/404.html
+be8c67a579f5181e298a18589ce3c348.jpg
+node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.eot
+node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.svg
+node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.woff2
+node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.woff
+a3de2170e4e9df77161ea5d3f31b2668.ttf
+965424424564d659cadb32ad60a475b3.jpg
+4a8380113927d6b45132b7ba89c10bcd.jpg
+4a127a006a33ff44a147f05d220204d3.png
+01c9c905d1bebbd348072dbbd238b8fe.png
+3d54e833ba00976d9f34c83a29c8b884.png
+5c8c162bea49826ce6d98fa5ed44b37c.jpg
+static/bundle.js
+src/css/blogolio.css
+Blogolio.html
+Blogolio/reactTutPart1.html
+Blogolio/about.html
+Blogolio/projects.html
+Blogolio/projects/projectTired.html
+Blogolio/projects/backOffice.html
+Blogolio/projects/sweChan.html
+Blogolio/contact.html
+Blogolio/404.html
 
 NETWORK:
 *
