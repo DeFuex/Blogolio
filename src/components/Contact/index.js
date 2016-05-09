@@ -5,6 +5,7 @@ import './contact.css';
 export default class Contact extends Component {
 	render(){
 		return(
+			<div className="col-sm-7 blog-main">
 			<div className="contact-content">
 			  <h2 className="page-header" >Contact</h2>
 			  <p className="contact-description">
@@ -37,6 +38,7 @@ export default class Contact extends Component {
 					<input type="submit" value="Submit" className="contactButton" />
 				</p>
 			  </form>
+			</div>
 			</div>
 		)
 

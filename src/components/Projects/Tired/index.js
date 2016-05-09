@@ -9,6 +9,7 @@ export default class Tired extends Component {
 
 	render(){
 		return(
+			<div className="col-sm-7 blog-main">
 						<div className="contact-content" >
 								<div className="blog-post">
 									<h2 className="page-header">Project Tire(d)</h2>
@@ -28,6 +29,7 @@ export default class Tired extends Component {
 									<p className="blog-post-meta">At Thu Apr 21 2016 by Timo Obereder</p>
 								</div>
 						</div>
+			</div>
 					);
 	}
 }

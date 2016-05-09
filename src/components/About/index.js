@@ -4,6 +4,7 @@ import './about.css';
 export default class About extends Component {
 	render(){
 		return (
+			<div className="col-sm-7 blog-main">
 			<div className="about-content-main">
 				<h2 className="page-header">About</h2>
 				<div className="about-content">
@@ -28,6 +29,7 @@ export default class About extends Component {
 						<li>And of course, learning Japanese</li>
 					</ul>
 				</div>
+			</div>
 			</div>
 		)
 	}

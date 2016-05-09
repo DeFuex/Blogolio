@@ -91,6 +91,7 @@ module.exports = function(options){
         libraryTarget: 'umd'
 			},
 			module: {
+					noParse: [/autoit.js/],
 		    	loaders: [
 					// { test: /bootstrap\/js\//, loader: 'imports?jQuery=jquery' },
 					{

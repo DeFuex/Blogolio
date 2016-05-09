@@ -10,6 +10,7 @@ export default class Projects extends Component {
 
 	render(){
 		return(
+			<div className="col-sm-7 blog-main">
 			<div className="contact-content">
 					<div className="row">
 						{
@@ -73,6 +74,7 @@ export default class Projects extends Component {
 							// </div>
 						}
 					</div>
+			</div>
 			</div>
 		);
 	}

@@ -45,8 +45,9 @@ export default class NavBar extends Component {
 					</div>
 				</div>
 				{ /*this.props.children renders every View underneath the Links navigation bar defined inside the top <div> of the App class.*/ }
-				<div id="blog-home" className="container">
-						<div id="blog-container" className="col-sm-7 blog-main">
+				<div className="container">
+						{ //<div id="blog-container" className="col-sm-7 blog-main">
+            }
 						<ReactCSSTransitionGroup
 							component="div"
 							transitionName="example"
@@ -61,7 +62,9 @@ export default class NavBar extends Component {
                   onShowSideBar: this.showSideBar
 								})}
 							</ReactCSSTransitionGroup>
-						</div>
+						{
+              //</div>
+            }
 						{ this.state.showSideBar ? <SideBar /> : null }
 				</div>
 			<Footer />

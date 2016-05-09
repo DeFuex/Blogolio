@@ -1,6 +1,11 @@
 /*
  * Footer
  */
+ p.footer {
+     text-align: center;
+     font-family: sans-serif;
+     font-size: 14px;
+ }
 
 .blog-footer {
   padding: 40px 0;
