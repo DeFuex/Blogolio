@@ -45,6 +45,22 @@ span.code {
     font-family: "Source Code Pro","Courier New",Menlo,Courier,monospace;
 }
 
+@media all and (min-width: 441px) and (max-width: 1023px) {
+  img.resize {
+      max-width: 80%;
+      height: auto;
+      width: auto\9; /* ie8 */
+  }
+}
+
+@media all and (min-width: 0px) and (max-width: 440px) {
+  img.resize {
+      max-width: 80%;
+      height: auto;
+      width: auto\9; /* ie8 */
+  }
+}
+
 @media all and (min-width: 901px) {
   h2.autoresize {
       text-align: center;
@@ -62,6 +78,12 @@ span.code {
   p {
     text-align: left;
     font-family: "Source Serif Pro",serif;
+    font-size: 16px;
+  }
+
+  .code-box-resize {
+    margin-left: 10%;
+    margin-right: 10%;
     font-size: 16px;
   }
 }
@@ -86,6 +108,12 @@ span.code {
     font-family: "Source Serif Pro",serif;
     font-size: 16px;
   }
+
+  .code-box-resize {
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 13px;
+  }
 }
 
 @media all and (min-width: 441px) and (max-width: 600px) {
@@ -108,6 +136,12 @@ span.code {
     font-family: "Source Serif Pro",serif;
     font-size: 14px;
   }
+
+  .code-box-resize {
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 12px;
+  }
 }
 
 @media all and (min-width: 0px) and (max-width: 440px) {
@@ -129,5 +163,11 @@ span.code {
     text-align: left;
     font-family: "Source Serif Pro",serif;
     font-size: 12px;
+  }
+
+  .code-box-resize {
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 10px;
   }
 }

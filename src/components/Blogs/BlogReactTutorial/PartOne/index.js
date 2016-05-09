@@ -39,7 +39,7 @@ export default class Part1 extends Component {
 		return (
 			<div className="row">
 					<div className="entry-content-main">
-					  <h2 className="autoresize">Tutorial - Part 1</h2>
+					  <h2 className="autoresize">React Tutorial - Part 1</h2>
 						<div className="entry-content">
 						<br/>
 						<h3 className="autoresize">New vs. „Old“ Web Development</h3>
@@ -56,35 +56,9 @@ You may have read about new web development structures based almost entirely on 
 </p>
 <br/>
 <br/>
-<p>
-/Blogolio
-favicon.ico
-index.html
-index.html.js
-LICENSE
-makeconfig.js
-package.json
-README.md
-server.dev.js
-server.prod.js
-webpack.dev.config.js
-webpack.prod.config.js
-		|
-		 – src
-			index.js
-|
- – assets
-|
- – components
-|
- – containers
-|
- – reducers
-|
- – store
-|
- – utils
-</p>
+<img className="resize" src={require('../../../../assets/part1_image1.png')} width="40%" />
+<br/>
+<br/>
 <br/>
 <br/>
 <p>
@@ -105,13 +79,13 @@ For the „old“ web development folks out there, you are probably going to not
 <p>
 As I said, we’re going to have a node server to test our development environment. Therefore we are going to need something which creates our test dev node server. We need to use npm to create our project dependency file, which is called package.json. To do that, open your project folder in the terminal and type in the following command.
 </p>
-<SyntaxHighlighter language='json' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='json' style={rainbow} >
 npm init
 </SyntaxHighlighter>
 <p>
 For a faster configuration type in
 </p>
-<SyntaxHighlighter language='json' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
 npm init –y
 </SyntaxHighlighter>
 <p>
@@ -120,14 +94,14 @@ After finishing the process you will have a package.json file where we define ev
 <p>
 We are going to start building up our local node server by adding our first dependencies.
 </p>
-<SyntaxHighlighter language='json' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
 npm install --save-dev webpack
 npm install --save-dev webpack-dev-server
 </SyntaxHighlighter>
 <p>
 or simply
 </p>
-<SyntaxHighlighter language='json' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
 npm install --save-dev webpack webpack-dev-server
 </SyntaxHighlighter>
 <p>
@@ -137,42 +111,16 @@ Also, just to see how it looks, open up your package.json file in any editor if 
 <br/>
 Something you may still be wondering about - now that we’ve installed the packages and added them as dependencies to our project, how does the project know how to build itself? It doesn’t, therefore we create some new files. Look at the project structure and add the missing files
 </p>
-<p>
-/Blogolio
-favicon.ico
-index.html
-index.html.js
-LICENSE
-makeconfig.js
-package.json
-README.md
-server.dev.js
-server.prod.js
-webpack.dev.config.js
-webpack.prod.config.js
-		|
-		 – src
-			index.js
-|
- – assets
-|
- – components
-|
- – containers
-|
- – reducers
-|
- – store
-|
- – utils
-</p>
+<br/>
+<img className="resize" src={require('../../../../assets/part1_image2.png')} width="40%" />
+<br/>
 <br/>
 <p>
 The reason why we do not have one master configuration file for everything is simple. We need to use npm in order to run different script commands. This includes building for development or production. We haven’t added configurations for production yet and will only focus on the development part for now. Please be patient and read every step carefully in this tutorial. Open up your package.json file and update its content to look like the following script commands in the scripts section.
 </p>
 <br/>
 <br/>
-<SyntaxHighlighter language='json' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
 {`"scripts": {
     "start": "cross-env NODE_ENV=development node server.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors",
@@ -184,7 +132,7 @@ The reason why we do not have one master configuration file for everything is si
 </SyntaxHighlighter>
 <br/>
 <p>You can call all the script commands via npm, e.g.:</p>
-<SyntaxHighlighter language='json' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
 {
 `npm start
 npm test
@@ -194,7 +142,7 @@ npm test
 <p>
 or
 </p>
-<SyntaxHighlighter language='json' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
 {
 `npm run build
 npm run clean
@@ -217,7 +165,7 @@ Back to the topic. On the right side of every script call are your own defined c
 <p>
 In unix systems the variable is set e.g.:
 </p>
-<SyntaxHighlighter language='json' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
 {
 	`export NODE_ENV=production`
 }
@@ -225,13 +173,13 @@ In unix systems the variable is set e.g.:
 <p>
 while in windows systems it is set e.g.:
 </p>
-<SyntaxHighlighter language='json' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
 set NODE_ENV=production
 </SyntaxHighlighter>
 <p>
 Since cross-env comes from package, install it through the following npm command.
 </p>
-<SyntaxHighlighter language='json' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
 npm install --save-dev cross-env
 </SyntaxHighlighter>
 <p>
@@ -242,7 +190,7 @@ Be sure to have cross-env installed so that you can develop without problems if 
 <p>
 You may have recognized that we have set the development option to the npm start script command. There is also a command called node, which tries to call a node server from a javascript file called server.dev.js. This means that we have to define our development node server inside of this file. Open server.dev.js and copy the following code.
 </p>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 `// Gets called when running npm start
 
@@ -276,7 +224,7 @@ As you can see, this is the first time we „require“ one of our package depen
 <p>
 Let’s put some code into webpack.dev.config!
 </p>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 `module.exports = require("./makeconfig")({
   prod: false
@@ -296,7 +244,7 @@ Let’s put some more code into our config (makeconfig.js) file!
 <p>
 First, we will start to add more packages to our dependency list.
 </p>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 `npm install --save-dev path html-webpack-plugin appcache-webpack-plugin extract-text-webpack-plugin`
 }
@@ -333,7 +281,7 @@ It is important to know that you do not need to use this plugin for css componen
 <p>
 Open your makeconfig.js file and add the first lines of code:
 </p>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 `var path = require('path');
 var webpack = require('webpack');
@@ -346,7 +294,7 @@ var StaticSitePlugin = require('react-static-webpack-plugin');`
 <p>
 Now that we defined our plugin variables we need to create some configurations with them. To let the webpack build process know that theses are needed configurations, we start to write a function declaration with the module.exports command.
 </p>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
   `module.exports = function(options){
   var entry, jsLoaders, plugins, cssLoaders;`
@@ -355,7 +303,7 @@ Now that we defined our plugin variables we need to create some configurations w
 <p>
 Then we need to decide if we are in production or development. Remember that we gave the makeconfig.js file a boolean parameter from webpack.dev.conf to let the configuration know that we are in development.
 </p>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {`//If production flag is set to true
 if (options.prod) {
 
@@ -367,7 +315,7 @@ if (options.prod) {
 <p>
 since we call webpack.dev.conf later on, the options.prod will be false, which means that we need to define our development settings in the else part.
 </p>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 `else {
 	entry = [
@@ -399,7 +347,7 @@ Of course we need to define an entry point for our application to start up. Sinc
 <p>
 Right after the module.exports function, we set up some variables that we will use to load different package content.
 </p>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 	`cssLoaders = 'style-loader!css-loader';`
 }
@@ -414,7 +362,7 @@ It took me some time to understand how loaders work exactly and it is probably b
 <p>
 The above loaders named style-loader and css-loader are packages and need to be added to our dependency list. Install them.
 </p>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 	`npm install --save-dev style-loader css-loader`
 }
@@ -422,7 +370,7 @@ The above loaders named style-loader and css-loader are packages and need to be 
 <p>
 The next thing we need to do is add and configure the plugins we use.
 </p>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 `plugins = [
 		new webpack.HotModuleReplacementPlugin(), //for hot reloading
@@ -446,7 +394,7 @@ Now the only thing left is to define our return method and explicitly tell where
 </p>
 <br/>
 <h3 className='autoresize'>How to define the build output</h3>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 	`return {
         entry: entry,
@@ -477,7 +425,7 @@ To declare and build our output webpack bundle.js, which contains our web page c
 That’s all for the output.
 </p>
 <h3 className='autoresize'>Module Loader Configurations</h3>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 	`module: {
       loaders: [
@@ -527,7 +475,7 @@ That’s all for the output.
 <p>
 As you can see, the test attribute needs regex-related syntax to define file types. (I personally think that the name here is a little bit misleading and should be changed to something else). The first loader we define is Babel. It is a very important part in react development, because babel is also used to define pre versions of ES e.g.: ES5. You probably wonder where the definition for ES5 is. It is inside a file called .babelrc, but we get to that in a moment. Use the npm install command to install babel.
 </p>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 npm install babel-core babel-loader --save-dev
 </SyntaxHighlighter>
 <p>
@@ -544,7 +492,7 @@ We use the <span className='code'>url-loader</span> for images, since javascript
 <p>
 Last but not least, there are some attributes left before the configuration for our development settings is finished.
 </p>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 	`plugins: plugins,
   target: "web", // Make web variables accessible to webpack, e.g. window
@@ -572,7 +520,7 @@ Don’t forget to close module.exports here.
 <p>
 If you set up everything correctly you should have a makeconfig.js file that looks like the following content:
 </p>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 	`var path = require('path');
 	var webpack = require('webpack');
@@ -663,40 +611,13 @@ If you set up everything correctly you should have a makeconfig.js file that loo
 I nearly forgot the <b>ES5 definitions</b> we need to set. So let’s go ahead.
 </p>
 <br/>
-<p>
-/Blogolio
-	.babelrc
-favicon.ico
-index.html
-index.html.js
-LICENSE
-makeconfig.js
-package.json
-README.md
-server.dev.js
-server.prod.js
-webpack.dev.config.js
-webpack.prod.config.js
-		|
-		 – src
-			index.js
-|
- – assets
-|
- – components
-|
- – containers
-|
- – reducers
-|
- – store
-|
- – utils
-</p>
+<img className="resize" src={require('../../../../assets/part1_image3.png')} width="40%" />
+<br/>
+<br/>
 <p>
 Create your own <b>.babelrc</b> file in your project root and open it. Add the following content.
 </p>
-<SyntaxHighlighter language='javascript' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 	`{
     "presets": ["es2015", "stage-0", "react"],
@@ -714,7 +635,7 @@ To activate ES5 you have to specify it in the presets attribute. To allow hot mo
 <p>
 Since the defined attributes contain node_module dependencies you have to add them via npm install again.
 </p>
-<SyntaxHighlighter language='json' style={rainbow}>
+<SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
 npm install babel-preset-es2015 babel-preset-react babel-preset-react-hmre babel-preset-stage-0
 </SyntaxHighlighter>
 <p>
