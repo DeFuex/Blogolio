@@ -21,8 +21,8 @@ import configureStore from '../store/configureStore';
 const store = configureStore();
 
 //use the bootstrap imports for development only, else do comment them out!
-import '../../node_modules/bootstrap/dist/js/bootstrap.min.js';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+// import '../../node_modules/bootstrap/dist/js/bootstrap.min.js';
+// import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 import '../../node_modules/bootstrap-social/bootstrap-social.css';
 import '../../node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.woff2';
