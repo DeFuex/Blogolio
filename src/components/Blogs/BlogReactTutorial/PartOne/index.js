@@ -77,7 +77,7 @@ Npm and webpack together are a good way to handle things on their own, but if yo
 For the „old“ web development folks out there, you are probably going to notice that there is no xampp, no mampp, or any other server test deployment tool involved. Neither is the project structure directly for static websites. Welcome to the new way of web development. At the end of this tutorial series we’re going to be more dynamic to create the content we want, specified as configuration in production.
 </p>
 <p>
-As I said, we’re going to have a node server to test our development environment. Therefore we are going to need something which creates our test dev node server. We need to use npm to create our project dependency file, which is called package.json. To do that, open your project folder in the terminal and type in the following command.
+As I said, we’re going to have a node server to test our development environment. Therefore we are going to need something which creates our <b>test dev node server</b>. We need to use npm to create our project dependency file, which is called <b>package.json</b>. To do that, open your project folder in the terminal and type in the following command.
 </p>
 <SyntaxHighlighter className='code-box-resize' language='json' style={rainbow} >
 npm init
@@ -95,19 +95,23 @@ After finishing the process you will have a package.json file where we define ev
 We are going to start building up our local node server by adding our first dependencies.
 </p>
 <SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
-npm install --save-dev webpack
-npm install --save-dev webpack-dev-server
+{
+	`npm install --save-dev webpack
+npm install --save-dev webpack-dev-server`
+}
 </SyntaxHighlighter>
 <p>
 or simply
 </p>
 <SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
-npm install --save-dev webpack webpack-dev-server
+{
+	`npm install --save-dev webpack webpack-dev-server`
+}
 </SyntaxHighlighter>
 <p>
-We added webpack and webpack-dev-server, which are independent components. Webpack is our building tool we are going to use to decide if we want to build in development or in production and webpack-dev-server is our package we will use to configure our local node server which is used in the development build phase inside of webpack.
+We added <b>webpack</b> and <b>webpack-dev-server</b>, which are independent components. Webpack is our building tool we are going to use to decide if we want to build in development or in production and webpack-dev-server is our package we will use to configure our local node server which is used in the development build phase inside of webpack.
 <br/>
-Also, just to see how it looks, open up your package.json file in any editor if you haven’t done so already. I recommend using Atom for web development. Add the whole project folder to your editor of choice. If you look at the root folder of your project you will also notice a folder named node_modules. It was created downloading and adding our first „library“ dependencies. The npm install command does not only add dependencies to the package.json file, but also downloads them into a common folder named node_modules.
+Also, just to see how it looks, open up your package.json file in any editor if you haven’t done so already. I recommend using Atom ( <a target='_blank' href='https://atom.io/'>https://atom.io/</a> ) for web development. Add the whole project folder to your editor of choice. If you look at the root folder of your project you will also notice a folder named node_modules. It was created downloading and adding our first „library“ dependencies. The npm install command does not only add dependencies to the package.json file, but also downloads them into a common folder named node_modules.
 <br/>
 Something you may still be wondering about - now that we’ve installed the packages and added them as dependencies to our project, how does the project know how to build itself? It doesn’t, therefore we create some new files. Look at the project structure and add the missing files
 </p>
@@ -116,7 +120,7 @@ Something you may still be wondering about - now that we’ve installed the pack
 <br/>
 <br/>
 <p>
-The reason why we do not have one master configuration file for everything is simple. We need to use npm in order to run different script commands. This includes building for development or production. We haven’t added configurations for production yet and will only focus on the development part for now. Please be patient and read every step carefully in this tutorial. Open up your package.json file and update its content to look like the following script commands in the scripts section.
+The reason why we do not have one master configuration file for everything is simple. We need to use npm in order to run different <b>script commands</b>. This includes building for development or production. We haven’t added configurations for production yet and will only focus on the development part for now. Please be patient and read every step carefully in this tutorial. Open up your package.json file and update its content to look like the following script commands in the scripts section.
 </p>
 <br/>
 <br/>
@@ -217,7 +221,7 @@ new WebpackDevServer(webpack(config), { // Start a server
 }
 </SyntaxHighlighter>
 <p>
-As you can see, this is the first time we „require“ one of our package dependencies instead of having a global script tag inside an .html file. We practically define a variable and use all package methods with it. Everything seems to be set up now, right? Wrong. If we call npm start it will fail. We require webpack and webpack-dev-server, but we also require some file that isn’t in our npm package dependencies.
+As you can see, this is the first time we <b>„require“</b> one of our package dependencies instead of having a global script tag inside an .html file. We practically define a variable and use all package methods with it. Everything seems to be set up now, right? Wrong. If we call npm start it will fail. We require webpack and webpack-dev-server, but we also require some file that isn’t in our npm package dependencies.
 </p>
 <br/>
 <h3 className='autoresize'>Webpack config for development</h3>
@@ -246,7 +250,7 @@ First, we will start to add more packages to our dependency list.
 </p>
 <SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
-`npm install --save-dev path html-webpack-plugin appcache-webpack-plugin extract-text-webpack-plugin`
+	`npm install --save-dev path html-webpack-plugin appcache-webpack-plugin extract-text-webpack-plugin`
 }
 </SyntaxHighlighter>
 <p>
@@ -257,8 +261,6 @@ To explain everything I will tell you why we need to include those package depen
 <span className='code'>path</span> = is a copy of the NodeJS path module and is used to find paths inside our project. Nothing more, nothing less.
 ( <a target='_blank' href='https://www.npmjs.com/package/path'>https://www.npmjs.com/package/path</a> )
 </p>
-<br/>
-<br/>
 <p>
 <span className='code'>Html-webpack-plugin</span> = at some point we will need an entry point to host our website. This plugin is used to create an html5 template file ( index.html ) that includes all webpack bundles that are build. This means that every javascript file will be automatically added inside a {'<script>'} tag.
 ( <a target='_blank' href='https://www.npmjs.com/package/html-webpack-plugin'>https://www.npmjs.com/package/html-webpack-plugin</a> )
@@ -638,6 +640,23 @@ Since the defined attributes contain node_module dependencies you have to add th
 <SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
 npm install babel-preset-es2015 babel-preset-react babel-preset-react-hmre babel-preset-stage-0
 </SyntaxHighlighter>
+<p>
+If everything is set up try to use the following command to start your development server.
+</p>
+<SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
+npm start
+</SyntaxHighlighter>
+<p>
+Open your favourite browser and type in the following adress
+</p>
+<SyntaxHighlighter className='code-box-resize' language='json' style={rainbow}>
+{
+	`localhost:3000`
+}
+</SyntaxHighlighter>
+<p>
+Since we do not have any react content yet, you will probably see a white screen at first. To be sure that everything went right, you can check your developer console for more information.
+</p>
 <p>
 That’s all for the first part of this tutorial! I hope everything went fine for you and that you could keep up. The second part of this series will include the first steps for adding web content with react.
 </p>
