@@ -10,8 +10,8 @@ export default class SideBar extends Component {
 					<div>
 						<img className="me" src={require('../../assets/new_avatar.jpg')} alt="Avatar Icon" scale="0" />
 						<div>
-							<p className='sidebar'><em>Hi! My name is Timo and i'm'' Software Developer with over 4 years of experience designing and developing mobile'
-							'(mostly Android) applications. Follow me on Twitter </em><a target="_blank" href="https://twitter.com/defuex">here</a>.</p>
+							<p className='sidebar'><em>Hi! My name is Timo and i'm a Software Developer with over 4 years of experience designing and developing mobile (mostly Android) as well as
+							web applications. Follow me on Twitter </em><a className='gray' target="_blank" href="https://twitter.com/defuex">here</a>.</p>
 							<br />
 							<p className='sidebar'>Banner art made by Panda (Contact artist at panda@grim.moe)</p>
 						</div>

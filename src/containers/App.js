@@ -31,7 +31,6 @@ import '../../node_modules/bootstrap-social/assets/css/font-awesome.css';
 const NotFound = () => <h4>Not Found :( </h4>;
 
 export const routes = (
-	//<Provider store={store}>
 	<Route path='/Blogolio' title='App' component={NavBar}>
 		<IndexRoute component={Home} />
 		<Route path='reactTutPart1' title='App - React Tutorial Chapter 1' component={ReactTutPart1} />
@@ -43,7 +42,6 @@ export const routes = (
 		<Route path='contact' title='App - Contact' component={Contact} />
 		<Route path='*' title='404: Not Found' component={NotFound} />
 	</Route>
-	//</Provider>
 );
 
 export default routes;

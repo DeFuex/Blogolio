@@ -86,7 +86,7 @@ module.exports = function(options){
 			entry: {app: entry},
 			output: {
 				path: path.join(__dirname, 'build'),
-				publicPath: '/Blogolio/',
+				publicPath: '/Blogolio/', //set publicPath: '/Blogolio/' for production else publicPath: '/'
 				filename: 'static/bundle.js',
         libraryTarget: 'umd'
 			},

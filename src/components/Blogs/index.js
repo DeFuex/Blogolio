@@ -21,9 +21,9 @@ export default class Blogs extends Component {
 								my tutorial series you will learn how to set up your project properly. It includes
 								topics about the project structure, webpack and its configuration files, hot-reloading,
 								what plugins and loaders are and how to define them and furthermore. Have fun with this
-								first part.<Link className="gray" onClick={this.props.hideSideBar} to="/Blogolio/reactTutPart1"><p> read more...</p></Link>
+								first part.<Link className='gray' onClick={this.props.hideSideBar} to="/Blogolio/reactTutPart1"><p className='text-size-link'> read more...</p></Link>
 							</div>
-							<p className="blog-post-meta">At Wed April 27 2016 by Timo Obereder</p>
+							<p className="blog-post-meta">At Mon May 09 2016 by Timo Obereder</p>
 					</div>
 
 
@@ -41,7 +41,7 @@ export default class Blogs extends Component {
 							<br />
 							<br />
 							Until everything is set up, you can follow the project development on github =>
-							<a target="_blank" rel="nofollow" href="https://github.com/DeFuex/Blogolio/tree/develop">
+							<a target='_blank' rel='nofollow' className='gray' href="https://github.com/DeFuex/Blogolio/tree/develop">
 							https://github.com/DeFuex/Blogolio/tree/develop</a>.
 						</div>
 						<p className="blog-post-meta">At Wed April 20 2016 by Timo Obereder</p>

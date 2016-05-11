@@ -7,6 +7,16 @@ body {
   color: #555;
 }
 
+p.text-size {
+  font-family: 'Roboto';
+  font-size: 15px;
+}
+
+p.text-size-link {
+  font-family: 'Roboto';
+  font-size: 18px;
+}
+
 h1, .h1,
 h2, .h2,
 h3, .h3,

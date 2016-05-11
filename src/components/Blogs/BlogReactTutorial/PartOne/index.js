@@ -11,20 +11,6 @@ export default class Part1 extends Component {
 		super(props);
 		this.hideSideBar = this.hideSideBar.bind(this)
 		this.showSideBar = this.showSideBar.bind(this)
-
-		const initialCodeString = `const woah = fun => fun + 1;
-															const dude = woah(2) + 3;
-															function thisIsAFunction() {
-															return [1,2,3].map(n => n + 1).filter(n !== 3);
-															}
-															console.log('making up fake code is really hard');
-															function itIs() {
-															return 'no seriously really it is';
-															}
-															`;
-		this.state = {
-			code: initialCodeString
-		}
 	}
 
 	hideSideBar(){
@@ -52,7 +38,7 @@ You may also have read my first blog entry, which is a hint as to what’s still
 <br/>
 <h3 className="autoresize">Project Structure (Flux architecture)</h3>
 <p>
-You may have read about new web development structures based almost entirely on pure javascript files instead of on html. The only thing you need to know at the moment is that we will use the so called flux architecture to build first steps, since this tutorial should be more of a practical guide than a theoretical one, but feel free to read the following page if you really want to know why the flux architecture is a commonly used way to structure your react projects => <a target="_blank" href="https://facebook.github.io/flux/docs/overview.html">{"https://facebook.github.io/flux/docs/overview.html"}</a> . The following structure illustrates the whole blog web page in development within the flux architecture.
+You may have read about new web development structures based almost entirely on pure javascript files instead of on html. The only thing you need to know at the moment is that we will use the so called flux architecture to build first steps, since this tutorial should be more of a practical guide than a theoretical one, but feel free to read the following page if you really want to know why the flux architecture is a commonly used way to structure your react projects => <a className='gray' target="_blank" href="https://facebook.github.io/flux/docs/overview.html">{"https://facebook.github.io/flux/docs/overview.html"}</a> . The following structure illustrates the whole blog web page in development within the flux architecture.
 </p>
 <br/>
 <br/>
@@ -67,15 +53,23 @@ Since we are building the project step by step, create your project folder named
 <br/>
 <h3 className="autoresize">npm</h3>
 <p>
-We will use a node server to run and test our development project. That means we will need to install npm (node package manager). If you don’t have it, get it here => <a target="_blank" href="https://www.npmjs.com/">"https://www.npmjs.com/"</a> , it’s essential for handling all dependencies in our project and also includes every script call we need to build our web app. We are not going to use grunt or any other build tools since we do not need them. Don’t come back to this tutorial until you’ve set up npm properly. It’s really important!
+We will use a node server to run and test our development project. That means we will need to install npm <del>(node package manager)</del>.
+<br/>
+<br/>
+<b>EDIT (11.05.2016)</b> - Thanks to my friend Patrick who pointed out that npm actually doesn't stand for node package manager. It is indeed used to manage package dependencies, but it is a common mistake that the believed akronym is actually a backronym ( <a className='gray' target='_blank' href='https://en.wikipedia.org/wiki/Backronym'>https://en.wikipedia.org/wiki/Backronym</a> ) and is just a command, which, i would say, sarcastically gets used to define random akronyms it may stand for. Since December 2014 possible expansions of the letters n, p and m are gathered in a Github project called npm-expansion, which includes a method used to return random n-p-m expansions. You can also see possible random expansions in the upper left corner of npm's webpage ( <a className='gray' target='_blank' href='https://www.npmjs.com'>https://www.npmjs.com</a> ). Alright, now that i've ruined the joke lets go on.
+<br/>
+<br/>
+If you don’t have npm, get it by installing node.js => <a className='gray' target="_blank" href='https://docs.npmjs.com/getting-started/installing-node'>https://docs.npmjs.com/getting-started/installing-node</a>, it’s essential for handling all dependencies in our project and also includes all script calls that we need to build our web app. Don’t come back to this tutorial until you’ve set up npm properly. It’s really important!
 </p>
 <p>
+<br/>
 Npm and webpack together are a good way to handle things on their own, but if you still feel the need to use a build tool like grunt, I don’t mind.
 </p>
 <br/>
 <p>
 For the „old“ web development folks out there, you are probably going to notice that there is no xampp, no mampp, or any other server test deployment tool involved. Neither is the project structure directly for static websites. Welcome to the new way of web development. At the end of this tutorial series we’re going to be more dynamic to create the content we want, specified as configuration in production.
 </p>
+<br/>
 <p>
 As I said, we’re going to have a node server to test our development environment. Therefore we are going to need something which creates our <b>test dev node server</b>. We need to use npm to create our project dependency file, which is called <b>package.json</b>. To do that, open your project folder in the terminal and type in the following command.
 </p>
@@ -111,7 +105,7 @@ or simply
 <p>
 We added <b>webpack</b> and <b>webpack-dev-server</b>, which are independent components. Webpack is our building tool we are going to use to decide if we want to build in development or in production and webpack-dev-server is our package we will use to configure our local node server which is used in the development build phase inside of webpack.
 <br/>
-Also, just to see how it looks, open up your package.json file in any editor if you haven’t done so already. I recommend using Atom ( <a target='_blank' href='https://atom.io/'>https://atom.io/</a> ) for web development. Add the whole project folder to your editor of choice. If you look at the root folder of your project you will also notice a folder named node_modules. It was created downloading and adding our first „library“ dependencies. The npm install command does not only add dependencies to the package.json file, but also downloads them into a common folder named node_modules.
+Also, just to see how it looks, open up your package.json file in any editor if you haven’t done so already. I recommend using Atom ( <a className='gray' target='_blank' href='https://atom.io/'>https://atom.io/</a> ) for web development. Add the whole project folder to your editor of choice. If you look at the root folder of your project you will also notice a folder named node_modules. It was created downloading and adding our first „library“ dependencies. The npm install command does not only add dependencies to the package.json file, but also downloads them into a common folder named node_modules.
 <br/>
 Something you may still be wondering about - now that we’ve installed the packages and added them as dependencies to our project, how does the project know how to build itself? It doesn’t, therefore we create some new files. Look at the project structure and add the missing files
 </p>
@@ -130,8 +124,7 @@ The reason why we do not have one master configuration file for everything is si
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf build"
-  }
-	`
+  }`
 }
 </SyntaxHighlighter>
 <br/>
@@ -202,21 +195,21 @@ var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.dev.config');
 
-console.log('Starting server...\n');
+console.log('Starting server...');
 
 new WebpackDevServer(webpack(config), { // Start a server
-  publicPath: config.output.publicPath,
-  hot: true, // With hot reloading
-  inline: false,
-  historyApiFallback: true,
-  quiet: true // Without logging
+    publicPath: config.output.publicPath,
+    hot: true, // With hot reloading
+    inline: false,
+    historyApiFallback: true,
+    quiet: true // Without logging
 }).listen(3000, 'localhost', function (err, result) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('Server started');
-    console.log('Listening at localhost:3000');
-  }
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Server started');
+      console.log('Listening at localhost:3000');
+    }
 });`
 }
 </SyntaxHighlighter>
@@ -259,26 +252,26 @@ To explain everything I will tell you why we need to include those package depen
 <br/>
 <p>
 <span className='code'>path</span> = is a copy of the NodeJS path module and is used to find paths inside our project. Nothing more, nothing less.
-( <a target='_blank' href='https://www.npmjs.com/package/path'>https://www.npmjs.com/package/path</a> )
+( <a className='gray' target='_blank' href='https://www.npmjs.com/package/path'>https://www.npmjs.com/package/path</a> )
 </p>
 <p>
 <span className='code'>Html-webpack-plugin</span> = at some point we will need an entry point to host our website. This plugin is used to create an html5 template file ( index.html ) that includes all webpack bundles that are build. This means that every javascript file will be automatically added inside a {'<script>'} tag.
-( <a target='_blank' href='https://www.npmjs.com/package/html-webpack-plugin'>https://www.npmjs.com/package/html-webpack-plugin</a> )
+( <a className='gray' target='_blank' href='https://www.npmjs.com/package/html-webpack-plugin'>https://www.npmjs.com/package/html-webpack-plugin</a> )
 </p>
 <p>
 <span className='code'>Extract-text-webpack-plugin</span> = this plugin will be used to add a css file inside our template index.html via {'<link>'} tag. It kind of works together with the html-webpack-plugin.
-( <a target='_blank' href='https://www.npmjs.com/package/extract-text-webpack-plugin'>https://www.npmjs.com/package/extract-text-webpack-plugin</a> )
+( <a className='gray' target='_blank' href='https://www.npmjs.com/package/extract-text-webpack-plugin'>https://www.npmjs.com/package/extract-text-webpack-plugin</a> )
 </p>
 <p>
 It is important to know that you do not need to use this plugin for css components. In general every css definition will be added as inlined into the javascript bundle file that is created during the build process. In most cases though, it is better practice to add the extract-text-webpack-plugin to produce a main .css file and load the content parallel to the bundle.js file. Your build process will be faster since the bundle.js does not need to load every css definition on its own and is linked to css definition instead.
 </p>
 <p>
 <span className='code'>Appcache-webpack-plugin</span> = a plugin to cache assets and create a manifest.appcache file.
-( <a target='_blank' href='https://www.npmjs.com/package/appcache-webpack-plugin'>https://www.npmjs.com/package/appcache-webpack-plugin</a> )
+( <a className='gray' target='_blank' href='https://www.npmjs.com/package/appcache-webpack-plugin'>https://www.npmjs.com/package/appcache-webpack-plugin</a> )
 </p>
 <p>
 <span className='code'>react-static-webpack-plugin</span> = this plugin will help to build our static web page content. More about this plugin later.
-( <a target='_blank' href='https://www.npmjs.com/package/react-static-webpack-plugin'>https://www.npmjs.com/package/react-static-webpack-plugin</a> )
+( <a className='gray' target='_blank' href='https://www.npmjs.com/package/react-static-webpack-plugin'>https://www.npmjs.com/package/react-static-webpack-plugin</a> )
 </p>
 <p>
 Open your makeconfig.js file and add the first lines of code:
@@ -320,20 +313,20 @@ since we call webpack.dev.conf later on, the options.prod will be false, which m
 <SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 `else {
-	entry = [
-		'webpack-dev-server/client?http://localhost:3000', //Needed for hot reloading
-		'webpack/hot/only-dev-server',
-		path.resolve(__dirname, 'src/index.js')
-	];
-	cssLoaders = 'style-loader!css-loader';
+    entry = [
+        'webpack-dev-server/client?http://localhost:3000', //Needed for hot reloading
+        'webpack/hot/only-dev-server',
+        path.resolve(__dirname, 'src/index.js')
+    ];
+    cssLoaders = 'style-loader!css-loader';
 
-	plugins = [
-	new webpack.HotModuleReplacementPlugin(), //for hot reloading
-		new HtmlWebpackPlugin({
-		template: 'index.html',
-		inject: true
-	})
-	]
+    plugins = [
+        new webpack.HotModuleReplacementPlugin(), //for hot reloading
+        new HtmlWebpackPlugin({
+            template: 'index.html',
+            inject: true
+        })
+    ]
 }`
 }
 </SyntaxHighlighter>
@@ -357,7 +350,7 @@ Right after the module.exports function, we set up some variables that we will u
 <br/>
 <h3 className='autoresize'>Webpack config and loader modules</h3>
 <p>
-Loaders will be used to load content which is not typically compatible with javascript code, e.g.: images, css files etc. If you define a loader, the whole project will be searched for loader specific file types and „required.“ Since i cannot explain it better than the official documentation, you better read about it here => <a target='_blank' href='https://webpack.github.io/docs/loaders.html'>https://webpack.github.io/docs/loaders.html</a>.
+Loaders will be used to load content which is not typically compatible with javascript code, e.g.: images, css files etc. If you define a loader, the whole project will be searched for loader specific file types and „required.“ Since i cannot explain it better than the official documentation, you better read about it here => <a className='gray' target='_blank' href='https://webpack.github.io/docs/loaders.html'>https://webpack.github.io/docs/loaders.html</a>.
 It took me some time to understand how loaders work exactly and it is probably best if you find out details on your own. This way, you may have an easier time understanding subject matter.
 </p>
 <br/>
@@ -375,12 +368,12 @@ The next thing we need to do is add and configure the plugins we use.
 <SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 `plugins = [
-		new webpack.HotModuleReplacementPlugin(), //for hot reloading
-			new HtmlWebpackPlugin({
-			template: 'index.html',
-			inject: true
-		})
-	]
+    new webpack.HotModuleReplacementPlugin(), //for hot reloading
+    new HtmlWebpackPlugin({
+        template: 'index.html',
+        inject: true
+    })
+  ]
 }`
 }
 </SyntaxHighlighter>
@@ -399,11 +392,11 @@ Now the only thing left is to define our return method and explicitly tell where
 <SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 	`return {
-        entry: entry,
-            output: {
-                path: path.join(__dirname, 'build'),
-                publicPath: '/',
-                filename: 'static/bundle.js'
+    entry: entry,
+        output: {
+            path: path.join(__dirname, 'build'),
+            publicPath: '/',
+            filename: 'static/bundle.js'
 },
 `
 }
@@ -430,33 +423,33 @@ That’s all for the output.
 <SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 	`module: {
-      loaders: [
-          {
-              test: /\.(es6|js|jsx)$/, // Transform all .js files required somewhere within an entry point...
-              loader: 'babel', // ...with the specified loaders...
-              query: {compact: false},
-              exclude: /node_modules/ // ...except for the node_modules folder.
-          },
-          {
-			        test:   /\.css$/, // Transform all .css files required somewhere within an entry point...
-			        loader: cssLoaders // ...with normal css or PostCSS (if used)
-          },
-          {
-              test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-			        loader: "url?limit=10000&mimetype=application/octet-stream"
-          },
-          {
-              test: /\.(jpg|jpeg|gif|png)$/,
-              loader:'url-loader?limit=10000',
-              exclude: /node_modules/
-          },
-          {
-              test: /\.(eot|woff|woff2|svg)(\?\S*)?$/,
-              loader: "file-loader?limit=10000&mimetype=image&name=[path][name].[ext]"
-              //don’t exclude node_modules since file loader takes .eot files from bootstrap in node_modules
-          }
-      ]
-  },`
+    loaders: [
+        {
+            test: /\.(es6|js|jsx)$/, // Transform all .js files required somewhere within an entry point...
+            loader: 'babel', // ...with the specified loaders...
+            query: {compact: false},
+            exclude: /node_modules/ // ...except for the node_modules folder.
+        },
+        {
+            test:   /\.css$/, // Transform all .css files required somewhere within an entry point...
+            loader: cssLoaders // ...with normal css or PostCSS (if used)
+        },
+        {
+            test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+            loader: "url?limit=10000&mimetype=application/octet-stream"
+        },
+				{
+            test: /\.(jpg|jpeg|gif|png)$/,
+            loader:'url-loader?limit=10000',
+            exclude: /node_modules/
+        },
+        {
+            test: /\.(eot|woff|woff2|svg)(\?\S*)?$/,
+            loader: "file-loader?limit=10000&mimetype=image&name=[path][name].[ext]"
+            //don’t exclude node_modules since file loader takes .eot files from bootstrap in node_modules
+        }
+    ]
+},`
 }
 </SyntaxHighlighter>
 <p>
@@ -496,11 +489,11 @@ Last but not least, there are some attributes left before the configuration for 
 </p>
 <SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
-	`plugins: plugins,
-  target: "web", // Make web variables accessible to webpack, e.g. window
-  stats: false, // Don’t show stats in the console
-  progress: true
-  }
+	`        plugins: plugins,
+        target: "web", // Make web variables accessible to webpack, e.g. window
+        stats: false, // Don’t show stats in the console
+        progress: true
+    }
 }`
 }
 </SyntaxHighlighter>
@@ -525,87 +518,74 @@ If you set up everything correctly you should have a makeconfig.js file that loo
 <SyntaxHighlighter className='code-box-resize' language='javascript' style={rainbow}>
 {
 	`var path = require('path');
-	var webpack = require('webpack');
-	var HtmlWebpackPlugin = require('html-webpack-plugin');
-	var AppCachePlugin = require('appcache-webpack-plugin');
-	var ExtractTextPlugin = require('extract-text-webpack-plugin');
-	var StaticSitePlugin = require('react-static-webpack-plugin');
+    var webpack = require('webpack');
+    var HtmlWebpackPlugin = require('html-webpack-plugin');
+    var AppCachePlugin = require('appcache-webpack-plugin');
+    var ExtractTextPlugin = require('extract-text-webpack-plugin');
+    var StaticSitePlugin = require('react-static-webpack-plugin');
 
-	module.exports = function(options){
-		var entry, jsLoaders, plugins, cssLoaders;
+    module.exports = function(options){
+    var entry, jsLoaders, plugins, cssLoaders;
 
 
-	if (options.prod) {
+    if (options.prod) {
 
-	} else {
-		entry = [
-			'webpack-dev-server/client?http://localhost:3000', //Needed for hot reloading
-			'webpack/hot/only-dev-server',
-			path.resolve(__dirname, 'src/index.js')
-		];
-		cssLoaders = 'style-loader!css-loader';
+    } else {
+        entry = [
+            'webpack-dev-server/client?http://localhost:3000', //Needed for hot reloading
+            'webpack/hot/only-dev-server',
+            path.resolve(__dirname, 'src/index.js')
+        ];
+        cssLoaders = 'style-loader!css-loader';
 
-		plugins = [
-		new webpack.HotModuleReplacementPlugin(), //for hot reloading
-			new HtmlWebpackPlugin({
-			template: 'index.html',
-			inject: true
-		})
-		]
-	}
+        plugins = [
+            new webpack.HotModuleReplacementPlugin(), //for hot reloading
+            new HtmlWebpackPlugin({
+                template: 'index.html',
+                inject: true
+            })
+        ]
+    }
 
-	cssLoaders = 'style-loader!css-loader';
-
-	plugins = [
-	new webpack.HotModuleReplacementPlugin(), //for hot reloading
-		new HtmlWebpackPlugin({
-		template: 'index.html',
-		inject: true
-	})
-	]
-	}
-
-	return {
-		entry: entry,
-		output: {
-			path: path.join(__dirname, 'build'),
-			publicPath: '/',
-			filename: 'static/bundle.js'
-	},
-
-	module: {
-	loaders: [
-			{
-				test: /\.(es6|js|jsx)$/, // Transform all .js files required somewhere within an entry point...
-			loader: 'babel', // ...with the specified loaders...
-				query: {compact: false},
-				exclude: /node_modules/ // ...except for the node_modules folder.
-			},
-	{
-				test:   /\.css$/, // Transform all .css files required somewhere within an entry point...
-				loader: cssLoaders // ...with normal css or PostCSS (if used)
-			},
-			{
-	test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-				loader: "url?limit=10000&mimetype=application/octet-stream"
-						},
-	{
-				test: /\.(jpg|jpeg|gif|png)$/,
-	    			loader:'url-loader?limit=10000',
-				exclude: /node_modules/
-			},
-			{
-				test: /\.(eot|woff|woff2|svg)(\?\S*)?$/,
-	      			loader: "file-loader?limit=10000&mimetype=image&name=[path][name].[ext]"
-	//don’t exclude node_modules since file loader takes .eot files from bootstrap in node_modules
-	    		}
-		]
-	 },
-	plugins: plugins,
-	target: "web", // Make web variables accessible to webpack, e.g. window
-	stats: false, // Don’t show stats in the console
-	progress: true
-	}
+    return {
+        entry: entry,
+        output: {
+            path: path.join(__dirname, 'build'),
+            publicPath: '/',
+            filename: 'static/bundle.js'
+        },
+        module: {
+            loaders: [
+            {
+                test: /\.(es6|js|jsx)$/, // Transform all .js files required somewhere within an entry point...
+                loader: 'babel', // ...with the specified loaders...
+                query: {compact: false},
+                exclude: /node_modules/ // ...except for the node_modules folder.
+            },
+            {
+                test:   /\.css$/, // Transform all .css files required somewhere within an entry point...
+                loader: cssLoaders // ...with normal css or PostCSS (if used)
+            },
+            {
+                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "url?limit=10000&mimetype=application/octet-stream"
+            },
+				    {
+                test: /\.(jpg|jpeg|gif|png)$/,
+                loader:'url-loader?limit=10000',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.(eot|woff|woff2|svg)(\?\S*)?$/,
+                loader: "file-loader?limit=10000&mimetype=image&name=[path][name].[ext]"
+                //don’t exclude node_modules since file loader takes .eot files from bootstrap in node_modules
+            }]
+        },
+        plugins: plugins,
+        target: "web", // Make web variables accessible to webpack, e.g. window
+        stats: false, // Don’t show stats in the console
+        progress: true
+    }
 }`
 }
 </SyntaxHighlighter>

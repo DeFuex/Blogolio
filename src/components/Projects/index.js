@@ -21,9 +21,9 @@ export default class Projects extends Component {
 													<img className="img-responsive heighted" src={require('../../assets/tired.jpg')} alt="no image available!" />
 												</Link>
 										</div>
-										<p>Development of an Engine with basic implementations to control a virtual 3D Tire. C++ and OpenGL were used in this project.</p>
-										<Link to="/Blogolio/projects/projectTired">
-											<p>read more...</p>
+										<p className='text-size'>Development of an Engine with basic implementations to control a virtual 3D Tire. C++ and OpenGL were used in this project.</p>
+										<Link className='gray' to="/Blogolio/projects/projectTired">
+											<p className='text-size-link'>read more...</p>
 										</Link>
 										<br/>
 										<br/>
@@ -37,9 +37,9 @@ export default class Projects extends Component {
 													<img className="img-responsive heighted" src={require('../../assets/not_available.jpeg')}  alt="no image available!" />
 												</Link>
 										</div>
-										<p>Development of an MVC CMS application in C#.</p>
-										<Link to="/Blogolio/projects/backOffice">
-											<p>read more...</p>
+										<p className='text-size'>Development of an MVC CMS application in C#.</p>
+										<Link className='gray' to="/Blogolio/projects/backOffice">
+											<p className='text-size-link'>read more...</p>
 										</Link>
 										<br/>
 										<br/>
@@ -54,9 +54,9 @@ export default class Projects extends Component {
 													<img className="img-responsive heighted" src={require('../../assets/not_available.jpeg')}  alt="no image available!" />
 												</Link>
 										</div>
-										<p>Development of a simple content board (similar to 4chan.org) using the MVVM pattern in C#.</p>
-										<Link to="/Blogolio/projects/sweChan">
-											<p>read more...</p>
+										<p className='text-size'>Development of a simple content board (similar to 4chan.org) using the MVVM pattern in C#.</p>
+										<Link className='gray' to="/Blogolio/projects/sweChan">
+											<p className='text-size-link'>read more...</p>
 										</Link>
 										<br/>
 										<br/>
