@@ -2,21 +2,18 @@
   margin-bottom: 60px;
   padding: 0 10% 10%;
   padding-top: 0px;
-  padding-right: 15%;
+  padding-right: 12%;
   padding-bottom: 10%;
-  padding-left: 15%;
+  padding-left: 12%;
 }
 
-.entry-content{
-  word-break:break-word;
+.entry-content-main > div {
+  word-break: break-word;
 }
 
-.code {
+.entry-content-main > div > p > span {
+    font-family: "Source Code Pro","Courier New",Menlo,Courier,monospace;
     font-family: monospace, serif;
-    font-size: 1em;
-}
-
-span.code {
     text-align: left;
     padding: 0em .3em;
     font-size: 0.8em;
@@ -26,67 +23,33 @@ span.code {
     border-radius: 3px;
 }
 
-.pre {
-    display: block;
-    margin-top: 0;
-    margin-bottom: 1em;
-    padding: 1em;
-    font-size: .8em;
-    line-height: 1.4;
-    white-space: pre;
-    white-space: pre-wrap;
-    word-break: break-all;
-    word-wrap: break-word;
-    background-color: #f2f2f2;
-    border-radius: 3px;
-}
-
-.code, .pre {
-    font-family: "Source Code Pro","Courier New",Menlo,Courier,monospace;
-}
-
-@media all and (min-width: 0px) and (max-width: 440px) {
-  img.resize {
-      width: 70%;
-      height: 80%;
-      width: auto\9; /* ie8 */
-  }
-}
-
-@media all and (min-width: 441px) {
-  img.resize {
-      width: 70%;
-      height: 80%;
-      width: auto\9; /* ie8 */
-  }
-}
-
-@media all and (min-width: 900px) {
-  img.resize {
-      width: 50%;
-      height: 80%;
-      width: auto\9; /* ie8 */
-  }
-}
-
 @media all and (min-width: 901px) {
-  h2.autoresize {
+  .entry-content-main {
+    margin-bottom: 60px;
+    padding: 0 10% 10%;
+    padding-top: 0px;
+    padding-right: 8%;
+    padding-bottom: 10%;
+    padding-left: 8%;
+  }
+
+  .entry-content-main > h2 {
       text-align: center;
       font-family: "Source Sans Pro",sans-serif;
       font-weight: bold;
   }
 
-  h3.autoresize {
+  .entry-content-main > div > h3 {
       text-align: center;
       font-size: 27px;
       font-family: "Source Sans Pro",sans-serif;
       font-weight: bold;
   }
 
-  p {
+  .entry-content-main > div > p {
     text-align: left;
     font-family: "Source Serif Pro",serif;
-    font-size: 23px;
+    font-size: 21px;
     font-weight: 400;
     font-style: normal;
     letter-spacing: .01rem;
@@ -94,29 +57,36 @@ span.code {
     letter-spacing: -.003em;
   }
 
-  .code-box-resize {
+  .entry-content-main > div > SyntaxHighlighter {
     margin-left: 10%;
     margin-right: 10%;
     font-size: 16px;
   }
+
+  .entry-content-main > div > img {
+      width: 50%;
+      height: 80%;
+      width: auto\9; /* ie8 */
+  }
 }
 
 @media all and (min-width: 601px) and (max-width: 900px) {
-  h2.autoresize {
+
+  .entry-content-main > h2 {
       text-align: center;
       font-size: 27px;
       font-family: "Source Sans Pro",sans-serif;
       font-weight: bold;
   }
 
-  h3.autoresize {
+  .entry-content-main > div > h3 {
       text-align: center;
       font-size: 23px;
       font-family: "Source Sans Pro",sans-serif;
       font-weight: bold;
   }
 
-  p {
+  .entry-content-main > div > p {
     text-align: left;
     font-family: "Source Serif Pro",serif;
     font-size: 19px;
@@ -127,29 +97,44 @@ span.code {
     letter-spacing: -.004em;
   }
 
-  .code-box-resize {
+  .entry-content-main > div > SyntaxHighlighter {
     margin-left: 10%;
     margin-right: 10%;
     font-size: 13px;
   }
+
+  .entry-content-main > div > img {
+      width: 70%;
+      height: 80%;
+      width: auto\9; /* ie8 */
+  }
 }
 
 @media all and (min-width: 441px) and (max-width: 600px) {
-  h2.autoresize {
+  .entry-content-main {
+    margin-bottom: 60px;
+    padding: 0 10% 10%;
+    padding-top: 0px;
+    padding-right: 5%;
+    padding-bottom: 10%;
+    padding-left: 5%;
+  }
+
+  .entry-content-main > h2 {
       text-align: center;
       font-size: 23px;
       font-family: "Source Sans Pro",sans-serif;
       font-weight: bold;
   }
 
-  h3.autoresize {
+  .entry-content-main > div > h3 {
       text-align: center;
       font-size: 21px;
       font-family: "Source Sans Pro",sans-serif;
       font-weight: bold;
   }
 
-  p {
+  .entry-content-main > div > p {
     text-align: left;
     font-family: "Source Serif Pro",serif;
     font-size: 19px;
@@ -160,29 +145,44 @@ span.code {
     letter-spacing: -.004em;
   }
 
-  .code-box-resize {
+  .entry-content-main > div > SyntaxHighlighter {
     margin-left: 10%;
     margin-right: 10%;
     font-size: 12px;
   }
+
+  .entry-content-main > div > img {
+      width: 70%;
+      height: 80%;
+      width: auto\9; /* ie8 */
+  }
 }
 
 @media all and (min-width: 0px) and (max-width: 440px) {
-  h2.autoresize {
+  .entry-content-main {
+    margin-bottom: 60px;
+    padding: 0 10% 10%;
+    padding-top: 0px;
+    padding-right: 5%;
+    padding-bottom: 10%;
+    padding-left: 5%;
+  }
+
+  .entry-content-main > h2 {
       text-align: center;
       font-size: 19px;
       font-family: "Source Sans Pro",sans-serif;
       font-weight: bold;
   }
 
-  h3.autoresize {
+  .entry-content-main > div > h3 {
       text-align: center;
       font-size: 17px;
       font-family: "Source Sans Pro",sans-serif;
       font-weight: bold;
   }
 
-  p {
+  .entry-content-main > div > p {
     text-align: left;
     font-family: "Source Serif Pro",serif;
     font-size: 16px;
@@ -193,9 +193,15 @@ span.code {
     letter-spacing: -.004em;
   }
 
-  .code-box-resize {
+  .entry-content-main > div > SyntaxHighlighter {
     margin-left: 10%;
     margin-right: 10%;
     font-size: 10px;
+  }
+
+  .entry-content-main > div > img {
+      width: 70%;
+      height: 80%;
+      width: auto\9; /* ie8 */
   }
 }
