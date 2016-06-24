@@ -14,8 +14,8 @@ import Tired from '../components/Projects/Tired';
 import BackOffice from '../components/Projects/BackOffice';
 import SWEChan from '../components/Projects/SWEChan';
 import Contact from '../components/Contact';
-import Admin from '../components/Admin';
-import Example from '../components/Example';
+// import Admin from '../components/Admin';
+// import Example from '../components/Example';
 
 import FilterSideBar from '../containers/FilterSideBar';
 
@@ -23,18 +23,18 @@ import FilterSideBar from '../containers/FilterSideBar';
 // const store = configureStore();
 
 //use the bootstrap imports for development only, else do comment them out!
-import '../../node_modules/bootstrap/dist/js/bootstrap.min.js';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
-import '../../node_modules/bootstrap-social/bootstrap-social.css';
-import '../../node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.woff2';
-import '../../node_modules/bootstrap-social/assets/css/font-awesome.css';
+// import '../../node_modules/bootstrap/dist/js/bootstrap.min.js';
+// import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+//
+// import '../../node_modules/bootstrap-social/bootstrap-social.css';
+// import '../../node_modules/bootstrap-social/assets/fonts/fontawesome-webfont.woff2';
+// import '../../node_modules/bootstrap-social/assets/css/font-awesome.css';
 
 const NotFound = () => <h4>Not Found :( </h4>;
 
 export const routes = (
 	<Route path='/Blogolio' title='App' component={NavBar}>
-		<IndexRoute component={FilterSideBar} />
+		<IndexRoute component={Home} />
 		<Route path='reactTutPart1' title='App - React Tutorial Chapter 1' component={ReactTutPart1} />
 		<Route path='about' title='App - About' component={About} />
 		<Route path='projects' title='App - Projects' component={Projects} />

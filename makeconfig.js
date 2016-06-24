@@ -49,7 +49,6 @@ module.exports = function(options){
 			}),
       new StaticSitePlugin({
         src: 'app',
-        //bundle: '/static/bundle.js',
         stylesheet: '/src/css/blogolio.css',
         favicon: '/favicon.ico',
         template: path.join(__dirname, 'index.html.js')
@@ -82,11 +81,23 @@ module.exports = function(options){
 			exclude: ['.htaccess']
 		}));
 
+		// switch (process.env.npm_lifecycle_event) {
+		// 	case 'build':
+		//
+		// 	case 'stats':
+		// 		config = merge(
+		//
+		// 		);
+		// 		break;
+		// 	default:
+		//
+		// }
+
 		return {
 			entry: {app: entry},
 			output: {
 				path: path.join(__dirname, 'build'),
-				publicPath: '/', //set publicPath: '/Blogolio/' for production else publicPath: '/'
+				publicPath: '/Blogolio/', //set publicPath: '/Blogolio/' for production else publicPath: '/'
 				filename: 'static/bundle.js',
 				libraryTarget: 'umd'
 			},
@@ -123,5 +134,6 @@ module.exports = function(options){
 			target: "web", // Make web variables accessible to webpack, e.g. window
 			stats: false, // Don't show stats in the console
 			progress: true
+			// quiet: true
 		}
 }
